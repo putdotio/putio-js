@@ -1,4 +1,4 @@
-# @putdotio/api-client
+# Putio.js
 JavaScript wrapper for [Put.io API v2](https://api.put.io/v2).
 
 ## Installation
