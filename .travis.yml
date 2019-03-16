@@ -1,0 +1,14 @@
+dist: trusty
+language: node_js
+node_js:
+- '9'
+script: npm run build
+deploy:
+  provider: npm
+  email: altay.aydemir@gmail.com
+  skip_cleanup: true
+  api_key:
+    secure: ldIYZgfsujYJylXMkhRSRYXMpuekOATC6KFZq69E3Rg4MNR8VEXVvQpviddb48wQHB6yihgWoYVqmg/GxG/HnWvA7zwhzJ2N1LloUg5r3k7EH6HbFILz6KIlg3ZTXbm+Fe6MGCV2m2M+HjHyK/pHncZlwbSPII/ROpr70eTmu8CFPZFfflKnEAG3i8auIA7URCqNCi1rf97GuX8s5Cb7yvr3Kqnjyf5vNh2Qth6GfCRt1T5XK70g7TocodhL0/Q7FgIVPW3vMTLaJ3I6MoTwg2JK8nfLVqa6l16LBLCCdFEX2R00HE41ZkDAlplvL/JsHeBCSX21kiZ5aIMCQxHlAMdT4oANTeD5s0h64ZSdKyCO3AAAZN1EtA56XUn8zn/tbgay1Txtdy/n4SCY+32NrMj2AzWGcSdkAPah9KCgY0PwJ1go/k+hvSLYcaBcaC6wdolfslPjpUAFRz0leT4QZI7bvrHiJwO2fcsTPQomv7CA/5jsTUAPZFR244w9TK8EZTJn8fglr/TYWrAhhTgu+sTRkPkwjmqRUHo6vj5vla59JaCxdd/ictfpKeSqGSMX+GyMhkcub6abqD+ixIjKlsbcK1izz5NJzoVG1ruSp6dgFba+i+sSYagDnmlAkg7W8W7jvp1fnoaTcI1ZZvsigQLFlFhAvqaJ6x3Ea/xIzoM=
+  on:
+    tags: true
+    repo: aydieneue/putio.js

@@ -1,0 +1,36 @@
+{
+  "name": "@putdotio/api-client",
+  "version": "6.3.0",
+  "description": "JS client for Put.io API",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "browser": "dist/index.umd.js",
+  "jsnext:main": "dist/index.es.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "start": "rollup -c -w",
+    "prebuild": "npm run clean",
+    "build": "rollup -c"
+  },
+  "author": "Put.io <devs@put.io>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "deepmerge": "^3.2.0",
+    "urijs": "^1.19.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "event-emitter": "^0.3.5",
+    "rollup": "^0.68.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-resolve": "^4.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
