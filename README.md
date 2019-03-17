@@ -18,7 +18,7 @@ import PutioAPI from '@putdotio/api-client'
 const PutioAPI = require('@putdotio/api-client')
 
 // Browser
-const PutioAPI = window.PutioApiClient
+const PutioAPI = window.PutioAPI
 
 const Api = new PutioAPI({
   clientID: 'OAUTH_CLIENT_ID',
