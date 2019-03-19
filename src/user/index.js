@@ -29,6 +29,12 @@ export default class User {
     })
   }
 
+  ClearData(data = {}) {
+    return this.client.post('/account/clear', {
+      body: data,
+    })
+  }
+
   Destroy(password) {
     return this.client.post('/account/destroy', {
       body: {
