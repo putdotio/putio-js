@@ -104,8 +104,60 @@ class PutioApiClient {
     return formattedRequestOptions;
   }
 
-  end(url, options) {
-    const requestOptions = this.getFormattedRequestOptions(options);
+  sendXMLHTTPRequest(url, requestOptions) {
+    if (requestOptions.body) {
+      // eslint-disable-next-line
+      requestOptions.body = JSON.stringify(requestOptions.body);
+      // eslint-disable-next-line
+      requestOptions.headers['content-type'] = 'application/json';
+    }
+
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+
+      xhr.open(
+        requestOptions.method,
+        url,
+      );
+
+      Object.keys(requestOptions.headers).forEach((key) => {
+        xhr.setRequestHeader(key, requestOptions.headers[key]);
+      });
+
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState !== 4) {
+          return;
+        }
+
+        const response = {
+          status: xhr.status,
+        };
+
+        if (xhr.responseText) {
+          try {
+            response.body = JSON.parse(xhr.responseText);
+          } catch (error) {
+            response.body = xhr.responseText;
+          }
+        } else {
+          response.body = {};
+        }
+
+        if (xhr.status >= 200 && xhr.status <= 300) {
+          resolve(response);
+        } else {
+          this.emit(PutioApiClient.EVENTS.ERROR, response.body);
+          reject(response.body);
+        }
+      };
+
+      xhr.send(requestOptions.body);
+    });
+  }
+
+  end(url, requestOptions) {
+    // eslint-disable-next-line
+    requestOptions = this.getFormattedRequestOptions(requestOptions);
 
     if (requestOptions.query) {
       // eslint-disable-next-line
@@ -115,52 +167,7 @@ class PutioApiClient {
     }
 
     if (!this.options.isomorphic) {
-      if (requestOptions.body) {
-        requestOptions.body = JSON.stringify(requestOptions.body);
-        requestOptions.headers['content-type'] = 'application/json';
-      }
-
-      return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-
-        xhr.open(
-          requestOptions.method,
-          url,
-        );
-
-        Object.keys(requestOptions.headers).forEach((key) => {
-          xhr.setRequestHeader(key, requestOptions.headers[key]);
-        });
-
-        xhr.onreadystatechange = () => {
-          if (xhr.readyState !== 4) {
-            return;
-          }
-
-          const response = {
-            status: xhr.status,
-          };
-
-          if (xhr.responseText) {
-            try {
-              response.body = JSON.parse(xhr.responseText);
-            } catch (error) {
-              response.body = xhr.responseText;
-            }
-          } else {
-            response.body = {};
-          }
-
-          if (xhr.status >= 200 && xhr.status <= 300) {
-            resolve(response);
-          } else {
-            this.emit(PutioApiClient.EVENTS.ERROR, response.body);
-            reject(response.body);
-          }
-        };
-
-        xhr.send(requestOptions.body);
-      });
+      return this.sendXMLHTTPRequest(url, requestOptions);
     }
 
     return new Promise((resolve, reject) => {
