@@ -1,6 +1,6 @@
 export default class Friends {
   constructor(client) {
-    this.client = client
+    this.client = client;
   }
 
   Query() {
@@ -8,7 +8,7 @@ export default class Friends {
       query: {
         shared_info: 1,
       },
-    })
+    });
   }
 
   Search(phrase) {
@@ -16,35 +16,34 @@ export default class Friends {
       body: {
         name: phrase,
       },
-    })
+    });
   }
 
   WaitingRequests() {
-    return this.client.get('/friends/waiting-requests')
+    return this.client.get('/friends/waiting-requests');
   }
 
   WaitingRequestsCount() {
-    return this.client.get('/friends/waiting-requests-count')
+    return this.client.get('/friends/waiting-requests-count');
   }
 
   SendFrienshipRequest(username) {
-    return this.client.post(`/friends/${username}/request`)
+    return this.client.post(`/friends/${username}/request`);
   }
 
   Remove(username) {
-    return this.client.post(`/friends/${username}/unfriend`)
+    return this.client.post(`/friends/${username}/unfriend`);
   }
 
   Approve(username) {
-    return this.client.post(`/friends/${username}/approve`)
+    return this.client.post(`/friends/${username}/approve`);
   }
 
   Deny(username) {
-    return this.client.post(`/friends/${username}/deny`)
+    return this.client.post(`/friends/${username}/deny`);
   }
 
   SharedFolder(username) {
-    return this.client.get(`/friends/${username}/files`)
+    return this.client.get(`/friends/${username}/files`);
   }
 }
-

@@ -1,6 +1,6 @@
 export default class Trash {
   constructor(client) {
-    this.client = client
+    this.client = client;
   }
 
   List({ limit = 50 } = {}) {
@@ -8,7 +8,7 @@ export default class Trash {
       query: {
         per_page: limit,
       },
-    })
+    });
   }
 
   Continue(cursor, { limit = 50 } = {}) {
@@ -17,7 +17,7 @@ export default class Trash {
         cursor,
         per_page: limit,
       },
-    })
+    });
   }
 
   Restore({ useCursor, ids, cursor }) {
@@ -26,7 +26,7 @@ export default class Trash {
         file_ids: !useCursor ? ids.join(',') : undefined,
         cursor: useCursor ? cursor : undefined,
       },
-    })
+    });
   }
 
   Delete({ useCursor, ids, cursor }) {
@@ -35,11 +35,10 @@ export default class Trash {
         file_ids: !useCursor ? ids.join(',') : undefined,
         cursor: useCursor ? cursor : undefined,
       },
-    })
+    });
   }
 
   Empty() {
-    return this.client.post('/trash/empty')
+    return this.client.post('/trash/empty');
   }
 }
-

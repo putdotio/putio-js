@@ -1,6 +1,6 @@
 export default class Transfers {
   constructor(client) {
-    this.client = client
+    this.client = client;
   }
 
   Add({ url, saveTo, callbackUrl }) {
@@ -10,19 +10,19 @@ export default class Transfers {
         save_parent_id: saveTo,
         callback_url: callbackUrl,
       },
-    })
+    });
   }
 
   Get(id) {
-    return this.client.get(`/transfers/${id}`)
+    return this.client.get(`/transfers/${id}`);
   }
 
   Query() {
-    return this.client.get('/transfers/list')
+    return this.client.get('/transfers/list');
   }
 
   ClearAll() {
-    return this.client.post('/transfers/clean')
+    return this.client.post('/transfers/clean');
   }
 
   Cancel(ids = []) {
@@ -30,7 +30,7 @@ export default class Transfers {
       body: {
         transfer_ids: ids.join(','),
       },
-    })
+    });
   }
 
   Analysis(links = []) {
@@ -38,7 +38,7 @@ export default class Transfers {
       body: {
         urls: links.join('\n'),
       },
-    })
+    });
   }
 
   StartFetching(magnets) {
@@ -46,23 +46,23 @@ export default class Transfers {
       body: {
         urls: JSON.stringify(magnets),
       },
-    })
+    });
   }
 
   Retry(id) {
     return this.client.post('/transfers/retry', {
       body: { id },
-    })
+    });
   }
 
   Reannounce(id) {
     return this.client.post('/transfers/reannounce', {
       body: { id },
-    })
+    });
   }
 
   Count() {
-    return this.client.get('/transfers/count')
+    return this.client.get('/transfers/count');
   }
 
   CreateTorrent({
@@ -82,7 +82,6 @@ export default class Transfers {
         file_ids: ids.join(','),
         excludeIds: excludeIds.join(','),
       },
-    })
+    });
   }
 }
-

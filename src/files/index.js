@@ -1,6 +1,6 @@
 export default class Files {
   constructor(client) {
-    this.client = client
+    this.client = client;
   }
 
   Query(fileId, {
@@ -18,7 +18,7 @@ export default class Files {
     mp4StreamUrlParent = null,
     contentType = null,
     codecsParent = null,
-    mediaInfoParent = null
+    mediaInfoParent = null,
   } = {}) {
     return this.client.get(`/files/${(fileId === 'friends') ? 'items-shared-with-you' : 'list'}`, {
       query: {
@@ -38,8 +38,8 @@ export default class Files {
         content_type: contentType,
         codecs_parent: codecsParent,
         media_info_parent: mediaInfoParent,
-      }
-    })
+      },
+    });
   }
 
   Continue(cursor, { limit = null } = {}) {
@@ -48,15 +48,15 @@ export default class Files {
         cursor,
         per_page: limit,
       },
-    })
+    });
   }
 
   Search(phrase, page = 1) {
-    return this.client.get(`/files/search/${phrase}/page/${page}`)
+    return this.client.get(`/files/search/${phrase}/page/${page}`);
   }
 
   NewFolder(name, parentId = 0) {
-    return this.CreateFolder({ name, parentId })
+    return this.CreateFolder({ name, parentId });
   }
 
   CreateFolder({ path, name, parentId } = {}) {
@@ -66,7 +66,7 @@ export default class Files {
         name,
         parent_id: parentId,
       },
-    })
+    });
   }
 
   DeleteAll(cursor, excludeIds = []) {
@@ -78,7 +78,7 @@ export default class Files {
         cursor,
         exclude_ids: excludeIds.join(','),
       },
-    })
+    });
   }
 
   Delete(ids = [], options = {}) {
@@ -90,7 +90,7 @@ export default class Files {
       body: {
         file_ids: ids.join(','),
       },
-    })
+    });
   }
 
   Extract({
@@ -104,11 +104,11 @@ export default class Files {
         exclude_ids: excludeIds.join(','),
         cursor,
       },
-    })
+    });
   }
 
   ExtractStatus() {
-    return this.client.get('/files/extract')
+    return this.client.get('/files/extract');
   }
 
   Share({
@@ -124,7 +124,7 @@ export default class Files {
         file_ids: ids.length ? ids.join(',') : undefined,
         exclude_ids: excludeIds.length ? excludeIds.join(',') : undefined,
       },
-    })
+    });
   }
 
   Move(ids, to) {
@@ -133,7 +133,7 @@ export default class Files {
         file_ids: ids.join(','),
         parent_id: to,
       },
-    })
+    });
   }
 
   MoveAll({
@@ -147,7 +147,7 @@ export default class Files {
         parent_id: to,
         exclude_ids: excludeIds.join(','),
       },
-    })
+    });
   }
 
   Copy(ids, to = 0) {
@@ -156,13 +156,13 @@ export default class Files {
         file_ids: ids.join(','),
         parent_id: to,
       },
-    })
+    });
   }
 
   DownloadLinks({
     ids = [],
     cursor,
-    excludeIds = []
+    excludeIds = [],
   } = {}) {
     return this.client.post('/files/get-download-links', {
       body: {
@@ -170,7 +170,7 @@ export default class Files {
         exclude_ids: excludeIds.join(','),
         cursor,
       },
-    })
+    });
   }
 
   ConvertToMp4({
@@ -184,15 +184,15 @@ export default class Files {
         exclude_ids: excludeIds.join(','),
         cursor,
       },
-    })
+    });
   }
 
   SharedOnes() {
-    return this.client.get('/files/shared')
+    return this.client.get('/files/shared');
   }
 
   PublicShares() {
-    return this.client.get('/files/public/list')
+    return this.client.get('/files/public/list');
   }
 
   SetWatchStatus({
@@ -208,6 +208,6 @@ export default class Files {
         cursor,
         watched,
       },
-    })
+    });
   }
 }

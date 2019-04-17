@@ -1,16 +1,16 @@
 export default class Zips {
   constructor(client) {
-    this.client = client
+    this.client = client;
   }
 
   Query() {
-    return this.client.get('/zips/list')
+    return this.client.get('/zips/list');
   }
 
   Create({
     ids = [],
     cursor,
-    excludeIds = []
+    excludeIds = [],
   }) {
     return this.client.post('/zips/create', {
       body: {
@@ -18,20 +18,19 @@ export default class Zips {
         exclude_ids: excludeIds.join(','),
         cursor,
       },
-    })
+    });
   }
 
 
   Get(id) {
-    return this.client.get(`/zips/${id}`)
+    return this.client.get(`/zips/${id}`);
   }
 
   Retry(id) {
-    return this.client.get(`/zips/${id}/retry`)
+    return this.client.get(`/zips/${id}/retry`);
   }
 
   Cancel(id) {
-    return this.client.get(`/zips/${id}/cancel`)
+    return this.client.get(`/zips/${id}/cancel`);
   }
 }
-

@@ -1,14 +1,14 @@
 export default class Payment {
   constructor(client) {
-    this.client = client
+    this.client = client;
   }
 
   Info() {
-    return this.client.get('/payment/info')
+    return this.client.get('/payment/info');
   }
 
   Plans() {
-    return this.client.get('/payment/plans')
+    return this.client.get('/payment/plans');
   }
 
   History({ unReportedOnly = false } = {}) {
@@ -16,11 +16,11 @@ export default class Payment {
       query: {
         unreported_only: unReportedOnly,
       },
-    })
+    });
   }
 
   Invites() {
-    return this.client.get('/payment/invites')
+    return this.client.get('/payment/invites');
   }
 
   GetPlanChangeInfo({ planPath, paymentType, couponCode }) {
@@ -29,7 +29,7 @@ export default class Payment {
         coupon_code: couponCode,
         payment_type: paymentType,
       },
-    })
+    });
   }
 
   GetPlanChangeUrls({ planPath, paymentType, couponCode }) {
@@ -40,11 +40,11 @@ export default class Payment {
       body: {
         payment_type: paymentType,
       },
-    })
+    });
   }
 
   ChangePlan(args) {
-    return this.GetPlanChangeUrls(args)
+    return this.GetPlanChangeUrls(args);
   }
 
   CreateCoinbaseCharge(path) {
@@ -52,7 +52,7 @@ export default class Payment {
       body: {
         plan_fs_path: path,
       },
-    })
+    });
   }
 
   CreateCoinbaseCheckout(path) {
@@ -60,19 +60,19 @@ export default class Payment {
       body: {
         plan_fs_path: path,
       },
-    })
+    });
   }
 
   CancelSubscription() {
-    return this.client.post('/payment/stop_subscription')
+    return this.client.post('/payment/stop_subscription');
   }
 
   RedeemVoucher(code) {
-    return this.client.post(`/payment/redeem_voucher/${code}`)
+    return this.client.post(`/payment/redeem_voucher/${code}`);
   }
 
   VerifyFastspringPayment(reference) {
-    return this.client.get(`/payment/fs-confirm/${reference}`)
+    return this.client.get(`/payment/fs-confirm/${reference}`);
   }
 
   Report(paymentIds = []) {
@@ -80,12 +80,12 @@ export default class Payment {
       body: {
         payment_ids: paymentIds.join(','),
       },
-    })
+    });
   }
 
   AddWaitingPayment(data) {
     return this.client.post('/payment/paddle_waiting_payment', {
       body: data,
-    })
+    });
   }
 }

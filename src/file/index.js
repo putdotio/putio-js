@@ -1,6 +1,6 @@
 export default class File {
   constructor(client) {
-    this.client = client
+    this.client = client;
   }
 
   Public(oauthToken, {
@@ -18,20 +18,20 @@ export default class File {
         media_info_parent: mediaInfoParent,
         stream_url_parent: 1,
         mp4_stream_url_parent: 1,
-      }
-    })
+      },
+    });
   }
 
   Download(fileId) {
-    return this.client.get(`/files/${fileId}/download`)
+    return this.client.get(`/files/${fileId}/download`);
   }
 
   GetStorageURL(id) {
-    return this.client.get(`/files/${id}/url`)
+    return this.client.get(`/files/${id}/url`);
   }
 
   GetContent(id) {
-    return this.client.get(`/files/${id}/stream`)
+    return this.client.get(`/files/${id}/stream`);
   }
 
   Get(fileId, query = {
@@ -40,11 +40,11 @@ export default class File {
     stream_url: 1,
     breadcrumbs: 1,
     codecs: 1,
-    media_info: 1
+    media_info: 1,
   }) {
     return this.client.get(`/files/${fileId}`, {
       query,
-    })
+    });
   }
 
   Subtitles(fileId, oauthToken, languages) {
@@ -53,49 +53,51 @@ export default class File {
         oauth_token: oauthToken,
         languages,
       },
-    })
+    });
   }
 
   Delete(fileId) {
-    return this.client.post(`/files/${fileId}/delete`)
+    return this.client.post(`/files/${fileId}/delete`);
   }
 
   ConvertToMp4(id) {
-    return this.client.post(`/files/${id}/mp4`)
+    return this.client.post(`/files/${id}/mp4`);
   }
 
   ConvertStatus(id) {
-    return this.client.get(`/files/${id}/mp4`)
+    return this.client.get(`/files/${id}/mp4`);
   }
 
   DeleteMp4(id) {
-    return this.client.delete(`/files/${id}/mp4`)
+    return this.client.delete(`/files/${id}/mp4`);
   }
 
   SharedWith(id) {
-    return this.client.get(`/files/${id}/shared-with`)
+    return this.client.get(`/files/${id}/shared-with`);
   }
 
   Unshare(id, shareId) {
-    if (shareId) {
-      if (!Array.isArray(shareId)) {
-        shareId = [shareId.toString()]
+    let shares = shareId;
+
+    if (shares) {
+      if (!Array.isArray(shares)) {
+        shares = [shares.toString()];
       } else {
-        shareId = shareId.map(i => i.toString())
+        shares = shares.map(i => i.toString());
       }
 
-      shareId = shareId.join(',')
+      shares = shares.join(',');
     }
 
     return this.client.post(`/files/${id}/unshare`, {
       body: {
-        shares: shareId || 'everyone',
+        shares: shares || 'everyone',
       },
-    })
+    });
   }
 
   SaveAsMp4(id) {
-    return this.client.get(`/files/${id}/put-mp4-to-my-folders`)
+    return this.client.get(`/files/${id}/put-mp4-to-my-folders`);
   }
 
   Rename(id, name) {
@@ -104,7 +106,7 @@ export default class File {
         file_id: id,
         name,
       },
-    })
+    });
   }
 
   SetStartFrom(id, time) {
@@ -112,11 +114,11 @@ export default class File {
       body: {
         time: parseInt(time, 10),
       },
-    })
+    });
   }
 
   ResetStartFrom(id) {
-    return this.client.get(`/files/${id}/start-from/delete`)
+    return this.client.get(`/files/${id}/start-from/delete`);
   }
 
   Extract(id, password) {
@@ -125,7 +127,7 @@ export default class File {
         user_file_ids: [id.toString()],
         password,
       },
-    })
+    });
   }
 
   CreatePublicLink({
@@ -140,21 +142,20 @@ export default class File {
         sender_message: senderMessage,
         receiver_mail: receiverEmail,
       },
-    })
+    });
   }
 
   RevokePublicLink(id) {
-    return this.client.delete(`/files/public/list/${id}`)
+    return this.client.delete(`/files/public/list/${id}`);
   }
 
   FindNextFile(id, fileType) {
     return this.client.get(`/files/${id}/next-file`, {
       query: { file_type: fileType },
-    })
+    });
   }
 
   FindNextVideo(id) {
-    return this.client.get(`/files/${id}/next-video`)
+    return this.client.get(`/files/${id}/next-video`);
   }
 }
-

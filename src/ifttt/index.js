@@ -1,6 +1,6 @@
 export default class IFTTT {
   constructor(client) {
-    this.client = client
+    this.client = client;
   }
 
   SendEvent({ eventType, ingredients = {}, clientName = undefined }) {
@@ -10,7 +10,6 @@ export default class IFTTT {
         ingredients,
         client_name: clientName,
       },
-    })
+    });
   }
 }
-

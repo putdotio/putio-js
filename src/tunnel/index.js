@@ -1,10 +1,9 @@
 export default class Tunnel {
   constructor(client) {
-    this.client = client
+    this.client = client;
   }
 
   Routes() {
-    return this.client.get('/tunnel/routes')
+    return this.client.get('/tunnel/routes');
   }
 }
-

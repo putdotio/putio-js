@@ -1,8 +1,8 @@
-import URI from 'urijs'
+import URI from 'urijs';
 
 export default class Auth {
   constructor(client) {
-    this.client = client
+    this.client = client;
   }
 
   GetLoginURL({
@@ -13,7 +13,7 @@ export default class Auth {
     clientName = undefined,
   } = {}) {
     if (!redirectURI) {
-      throw new Error('Redirect URI is required.')
+      throw new Error('Redirect URI is required.');
     }
 
     const url = new URI('https://app.put.io/authenticate')
@@ -23,9 +23,9 @@ export default class Auth {
         response_type: responseType,
         redirect_uri: redirectURI,
         state,
-      })
+      });
 
-    return url.toString()
+    return url.toString();
   }
 
   Login({ username, password, app }) {
@@ -34,11 +34,11 @@ export default class Auth {
         headers: {
           Authorization: `Basic ${btoa(`${username}:${password}`)}`,
         },
-      })
+      });
   }
 
   Logout() {
-    return this.client.post('/oauth/grants/logout')
+    return this.client.post('/oauth/grants/logout');
   }
 
   Register(data) {
@@ -47,31 +47,31 @@ export default class Auth {
         client_id: this.client.options.clientID,
         ...data,
       },
-    })
+    });
   }
 
   Exists(key, value) {
     return this.client.get(`/registration/exists/${key}`, {
       query: { value },
-    })
+    });
   }
 
   GetVoucher(code) {
-    return this.client.get(`/registration/voucher/${code}`)
+    return this.client.get(`/registration/voucher/${code}`);
   }
 
   GetGiftCard(code) {
-    return this.client.get(`/registration/gift_card/${code}`)
+    return this.client.get(`/registration/gift_card/${code}`);
   }
 
   GetFamilyInvite(code) {
-    return this.client.get(`/registration/family/${code}`)
+    return this.client.get(`/registration/family/${code}`);
   }
 
   ForgotPassword(mail) {
     return this.client.post('/registration/password/forgot', {
-      body: { mail }
-    })
+      body: { mail },
+    });
   }
 
   ResetPassword(key, newPassword) {
@@ -79,51 +79,51 @@ export default class Auth {
       body: {
         key,
         password: newPassword,
-      }
-    })
+      },
+    });
   }
 
   GetCode(clientID, clientName = null) {
-    let url = `/oauth2/oob/code?app_id=${clientID}`
+    let url = `/oauth2/oob/code?app_id=${clientID}`;
 
     if (clientName) {
-      url = `${url}&client_name=${clientName}`
+      url = `${url}&client_name=${clientName}`;
     }
 
-    return this.client.get(url)
+    return this.client.get(url);
   }
 
   CheckCodeMatch(code) {
-    return this.client.get(`/oauth2/oob/code/${code}`)
+    return this.client.get(`/oauth2/oob/code/${code}`);
   }
 
   LinkDevice(code) {
     return this.client.post('/oauth2/oob/code', {
       body: { code },
-    })
+    });
   }
 
   Grants() {
-    return this.client.get('/oauth/grants/')
+    return this.client.get('/oauth/grants/');
   }
 
   RevokeApp(id) {
-    return this.client.post(`/oauth/grants/${id}/delete`)
+    return this.client.post(`/oauth/grants/${id}/delete`);
   }
 
   Clients() {
-    return this.client.get('/oauth/clients/')
+    return this.client.get('/oauth/clients/');
   }
 
   RevokeClient(id) {
-    return this.client.post(`/oauth/clients/${id}/delete`)
+    return this.client.post(`/oauth/clients/${id}/delete`);
   }
 
   RevokeAllClients() {
-    return this.client.post(`/oauth/clients/delete-all`)
+    return this.client.post('/oauth/clients/delete-all');
   }
 
   ValidateToken() {
-    return this.client.get('/oauth2/validate')
+    return this.client.get('/oauth2/validate');
   }
 }
