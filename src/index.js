@@ -21,7 +21,7 @@ import IFTTT from './ifttt';
 class PutioApiClient {
   constructor(options = {}) {
     EventEmitter(this);
-    this.options = Object.assign({}, PutioApiClient.DEFAULT_OPTIONS, options);
+    this.options = deepMerge(PutioApiClient.DEFAULT_OPTIONS, options);
     this.Auth = new Auth(this);
     this.Events = new Events(this);
     this.Files = new Files(this);
