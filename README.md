@@ -1,6 +1,6 @@
 # Putio.js
 
-[![Build Status](https://travis-ci.org/aydieneue/putio.js.svg?branch=master)](https://travis-ci.org/aydieneue/putio.js)
+[![Build Status](https://travis-ci.org/putdotio/putio.js.svg?branch=master)](https://travis-ci.org/putdotio/putio.js)
 
 JavaScript wrapper for [Put.io API v2](https://api.put.io/v2).
 
