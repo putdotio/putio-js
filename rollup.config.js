@@ -17,6 +17,7 @@ export default [
         globals: {
           'axios': 'axios',
         },
+        plugins: [terser()],
       },
       {
         file: pkg.main,
@@ -34,8 +35,7 @@ export default [
         preferBuiltins: true,
       }),
       json(),
-      commonjs({ include: 'node_modules/**' }),
-      terser()
+      commonjs({ include: 'node_modules/**' })
     ],
   },
 ];

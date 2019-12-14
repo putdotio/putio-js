@@ -20,7 +20,6 @@
     "axios": "^0.19.0"
   },
   "dependencies": {
-    "deepmerge": "^4.2.2",
     "event-emitter": "^0.3.5",
     "urijs": "^1.19.2"
   },
