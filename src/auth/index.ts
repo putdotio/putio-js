@@ -1,5 +1,6 @@
 import URI from "urijs";
 import PutioAPIClient from "../";
+import { IPutioOAuthApp } from "../types";
 
 export default class Auth {
   private client: PutioAPIClient;
@@ -14,11 +15,13 @@ export default class Auth {
     state,
     clientID,
     clientName
-  }) {
-    if (!redirectURI) {
-      throw new Error("Redirect URI is required.");
-    }
-
+  }: {
+    redirectURI: string;
+    responseType: string;
+    state: string;
+    clientID: string;
+    clientName?: string;
+  }): string {
     const url = new URI("https://app.put.io/authenticate").query({
       client_id: clientID || this.client.options.clientID,
       client_name: clientName,
@@ -30,7 +33,15 @@ export default class Auth {
     return url.toString();
   }
 
-  public Login({ username, password, app }) {
+  public Login({
+    username,
+    password,
+    app
+  }: {
+    username: string;
+    password: string;
+    app?: IPutioOAuthApp;
+  }) {
     return this.client.put(
       `/oauth2/authorizations/clients/${app.client_id}?client_secret=${app.client_secret}`,
       {
@@ -56,7 +67,7 @@ export default class Auth {
 
   public Exists(key: string, value: string) {
     return this.client.get(`/registration/exists/${key}`, {
-      params: { value },
+      params: { value }
     });
   }
 

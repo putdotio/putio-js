@@ -18,6 +18,11 @@ export interface IPutioAPIClientError {
   status_code: number,
 }
 
+export interface IPutioOAuthApp {
+  client_id: string,
+  client_secret: string,
+}
+
 export enum PutioAPIClientEventTypes {
   ERROR = 'ERROR'
 }
