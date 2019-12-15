@@ -3,6 +3,7 @@ import json from '@rollup/plugin-json';
 import commonjs from 'rollup-plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
 import { terser } from 'rollup-plugin-terser';
+import filesize from 'rollup-plugin-filesize';
 import pkg from './package.json';
 
 export default [
@@ -14,9 +15,7 @@ export default [
         name: 'PutioAPI',
         file: pkg.browser,
         format: 'umd',
-        globals: {
-          'axios': 'axios',
-        },
+        globals: { 'axios': 'axios' },
         plugins: [terser()],
       },
       {
@@ -35,7 +34,8 @@ export default [
         preferBuiltins: true,
       }),
       json(),
-      commonjs({ include: 'node_modules/**' })
+      commonjs({ include: 'node_modules/**' }),
+      filesize()
     ],
   },
 ];

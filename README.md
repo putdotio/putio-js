@@ -16,7 +16,7 @@ import PutioAPI from '@putdotio/api-client'
 
 ### CommonJS
 ```js
-const PutioAPI = require('@putdotio/api-client')
+const PutioAPI = require('@putdotio/api-client').default
 ```
 
 ### Browser
