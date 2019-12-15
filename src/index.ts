@@ -29,7 +29,7 @@ class PutioAPIClient {
   };
 
   public options: IPutioAPIClientOptions;
-  public Auth: any;
+  public Auth: Auth;
   public Events: any;
   public Files: any;
   public File: any;
@@ -79,19 +79,19 @@ class PutioAPIClient {
     return this;
   }
 
-  public get(url: string, config: AxiosRequestConfig) {
+  public get(url: string, config?: AxiosRequestConfig) {
     return this.http.get(url, config);
   }
 
-  public post(url: string, config: AxiosRequestConfig) {
+  public post(url: string, config?: AxiosRequestConfig) {
     return this.http.post(url, config);
   }
 
-  public put(url: string, config: AxiosRequestConfig) {
+  public put(url: string, config?: AxiosRequestConfig) {
     return this.http.put(url, config);
   }
 
-  public delete(url: string, config: AxiosRequestConfig) {
+  public delete(url: string, config?: AxiosRequestConfig) {
     return this.http.delete(url, config);
   }
 
