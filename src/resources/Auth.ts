@@ -1,6 +1,5 @@
 import URI from "urijs";
-import PutioAPIClient from "../";
-import { IPutioOAuthApp } from "../types";
+import PutioAPIClient from "../index";
 
 export default class Auth {
   private client: PutioAPIClient;
@@ -40,7 +39,10 @@ export default class Auth {
   }: {
     username: string;
     password: string;
-    app?: IPutioOAuthApp;
+    app?: {
+      client_id: string;
+      client_secret: string;
+    };
   }) {
     return this.client.put(
       `/oauth2/authorizations/clients/${app.client_id}?client_secret=${app.client_secret}`,
@@ -122,7 +124,7 @@ export default class Auth {
     return this.client.get("/oauth/grants/");
   }
 
-  public RevokeApp(id) {
+  public RevokeApp(id: number) {
     return this.client.post(`/oauth/grants/${id}/delete`);
   }
 

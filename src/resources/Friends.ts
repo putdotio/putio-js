@@ -1,49 +1,53 @@
+import PutioAPIClient from "../index";
+
 export default class Friends {
-  constructor(client) {
+  private client: PutioAPIClient
+
+  constructor(client: PutioAPIClient) {
     this.client = client;
   }
 
-  Query() {
+  public Query() {
     return this.client.get('/friends/list', {
-      query: {
+      params: {
         shared_info: 1,
       },
     });
   }
 
-  Search(phrase) {
+  public Search(phrase: string) {
     return this.client.post('/friends/user-search', {
-      body: {
+      params: {
         name: phrase,
       },
     });
   }
 
-  WaitingRequests() {
+  public WaitingRequests() {
     return this.client.get('/friends/waiting-requests');
   }
 
-  WaitingRequestsCount() {
+  public WaitingRequestsCount() {
     return this.client.get('/friends/waiting-requests-count');
   }
 
-  SendFrienshipRequest(username) {
+  public SendFrienshipRequest(username: string) {
     return this.client.post(`/friends/${username}/request`);
   }
 
-  Remove(username) {
+  public Remove(username: string) {
     return this.client.post(`/friends/${username}/unfriend`);
   }
 
-  Approve(username) {
+  public Approve(username: string) {
     return this.client.post(`/friends/${username}/approve`);
   }
 
-  Deny(username) {
+  public Deny(username: string) {
     return this.client.post(`/friends/${username}/deny`);
   }
 
-  SharedFolder(username) {
+  public SharedFolder(username: string) {
     return this.client.get(`/friends/${username}/files`);
   }
 }

@@ -1,49 +1,53 @@
+import PutioAPIClient from "../index";
+
 export default class RSS {
-  constructor(client) {
+  private client: PutioAPIClient;
+
+  constructor(client: PutioAPIClient) {
     this.client = client;
   }
 
-  Query() {
+  public Query() {
     return this.client.get('/rss/list');
   }
 
-  Get(id) {
+  public Get(id: number) {
     return this.client.get(`/rss/${id}`);
   }
 
-  Create(rss) {
+  public Create(rss: object) {
     return this.client.post('/rss/create', {
-      body: rss,
+      data: rss,
     });
   }
 
-  Update(id, rss) {
+  public Update(id: number, rss: object) {
     return this.client.post(`/rss/${id}`, {
-      body: rss,
+      data: rss,
     });
   }
 
-  Pause(id) {
+  public Pause(id: number) {
     return this.client.post(`/rss/${id}/pause`);
   }
 
-  Resume(id) {
+  public Resume(id: number) {
     return this.client.post(`/rss/${id}/resume`);
   }
 
-  Delete(id) {
+  public Delete(id: number) {
     return this.client.post(`/rss/${id}/delete`);
   }
 
-  Logs(id) {
+  public Logs(id: number) {
     return this.client.get(`/rss/${id}/items`);
   }
 
-  ClearLogs(id) {
+  public ClearLogs(id: number) {
     return this.client.post(`/rss/${id}/clear-log`);
   }
 
-  RetryItem(id, itemId) {
+  public RetryItem(id: number, itemId: number) {
     return this.client.post(`/rss/${id}/items/${itemId}/retry`);
   }
 }

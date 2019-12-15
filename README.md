@@ -33,8 +33,8 @@ const PutioAPI = window.PutioAPI
 const Api = new PutioAPI({ clientID: 'OAUTH_CLIENT_ID' }).setToken('XYZ')
 
 Api.User.Info()
-  .then(res => console.log('Fetched user info: ', res))
-  .catch(err => console.log('An error occured while fetching user info: ', err))
+  .then(response => console.log('Fetched user info: ', response))
+  .catch(error => console.log('An error occured while fetching user info: ', error))
 ```
 
 ## Options
@@ -52,4 +52,4 @@ Api.User.Info()
 ### Events
 | Value | Payload |  Description |
 | :---- |:-------------:| :------- |
-| **error** | IPutioAPIClientError | Fired when an HTTP request fails |
+| **error** | IPutioAPIClientErrorData | Fired when an HTTP request fails |
