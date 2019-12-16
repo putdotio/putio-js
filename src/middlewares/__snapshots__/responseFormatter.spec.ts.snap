@@ -59,7 +59,7 @@ Object {
 }
 `;
 
-exports[`middlewares/responseFormatter succesfull responses transforms as expected 1`] = `
+exports[`middlewares/responseFormatter successful responses transforms as expected 1`] = `
 Object {
   "body": Object {
     "hello": "world",

@@ -10,7 +10,7 @@ describe("middlewares/responseFormatter", () => {
   const API = new MockPutioAPIClient();
   const responseFormatter = create(API);
 
-  describe("succesfull responses", () => {
+  describe("successful responses", () => {
     it("transforms as expected", () => {
       expect(
         responseFormatter.onFulfilled(mockPutioAPIClientResponse)
