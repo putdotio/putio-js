@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`middlewares/responseFormatter failed responses sets error.data property correctly when the request failed with HTTP response but without Put.io API signature 1`] = `
+Object {
+  "config": Object {},
+  "data": Object {
+    "error_message": "Mock Error!",
+    "error_type": "ERROR",
+    "status_code": 502,
+  },
+  "isAxiosError": true,
+  "message": "Mock Error!",
+  "name": "MockError",
+  "response": Object {
+    "config": Object {},
+    "data": "Bad Gateway",
+    "headers": Object {},
+    "status": 502,
+    "statusText": "Bad Gateway",
+  },
+}
+`;
+
+exports[`middlewares/responseFormatter failed responses sets error.data property correctly when the request failed with Put.io API signature 1`] = `
+Object {
+  "config": Object {},
+  "data": Object {
+    "error_message": "Putio API Error",
+    "error_type": "API_ERROR",
+    "status_code": 400,
+  },
+  "isAxiosError": true,
+  "message": "Mock Error!",
+  "name": "MockError",
+  "response": Object {
+    "config": Object {},
+    "data": Object {
+      "error_message": "Putio API Error",
+      "error_type": "API_ERROR",
+    },
+    "headers": Object {},
+    "status": 400,
+    "statusText": "Error!",
+  },
+}
+`;
+
+exports[`middlewares/responseFormatter failed responses sets error.data property correctly when the request failed without Put.io API signature 1`] = `
+Object {
+  "config": Object {},
+  "data": Object {
+    "error_message": "Mock Error!",
+    "error_type": "ERROR",
+    "status_code": 0,
+  },
+  "isAxiosError": true,
+  "message": "Mock Error!",
+  "name": "MockError",
+}
+`;
+
+exports[`middlewares/responseFormatter successful responses transforms as expected 1`] = `
+Object {
+  "body": Object {
+    "hello": "world",
+  },
+  "config": Object {},
+  "data": Object {
+    "hello": "world",
+  },
+  "headers": Object {},
+  "status": 200,
+  "statusText": "ok",
+}
+`;

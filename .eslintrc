@@ -1,7 +1,0 @@
-{
-  "extends": "airbnb-base",
-  "globals": {
-    "btoa": true,
-    "XMLHttpRequest": true
-  }
-}

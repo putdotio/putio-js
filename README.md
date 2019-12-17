@@ -2,54 +2,56 @@
 
 [![Build Status](https://travis-ci.org/putdotio/putio.js.svg?branch=master)](https://travis-ci.org/putdotio/putio.js)
 
-JavaScript wrapper for [Put.io API v2](https://api.put.io/v2).
-
-## Installation
-```bash
-$ npm install @putdotio/api-client
-```
+JavaScript library for [Put.io API v2](https://api.put.io/v2).
 
 ## Usage
-```js
-// Modern Bundlers
-import PutioAPI from '@putdotio/api-client'
-
-// Node
-const PutioAPI = require('@putdotio/api-client')
-
-// Browser
-const PutioAPI = window.PutioAPI
-
-const Api = new PutioAPI({
-  clientID: 'OAUTH_CLIENT_ID',
-  token: localStorage.getItem('oauth_token'),
-})
-
-Api
-  .User
-  .Info()
-    .then(res => console.log('User info received: ', res))
-    .catch(err => console.log('Error occured while fetching user info: ', err))
+```bash
+$ npm install axios@^0.19 @putdotio/api-client -S
 ```
 
-## Properties
+### Module
+```js
+import PutioAPI from '@putdotio/api-client'
+```
+
+### CommonJS
+```js
+const PutioAPI = require('@putdotio/api-client').default
+```
+
+### Browser
+```
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/@putdotio/api-client/dist/index.umd.js"></script>
+```
+```js
+const PutioAPI = window.PutioAPI
+```
+
+### Example
+```js
+const Api = new PutioAPI({ clientID: 'OAUTH_CLIENT_ID' }).setToken('XYZ')
+
+Api.User.Info()
+  .then(response => console.log('Fetched user info: ', response))
+  .catch(error => console.log('An error occured while fetching user info: ', error))
+```
+
+## Options
 | Prop | Type | Default Value | Description |
 | :---- |:-------------|:----:| :------- |
-| **debug** | bool | false | Debug mode |
-| **options.clientID** | number | 1 (put.io webapp) | OAuth app client id |
-| **options.token** | string | - | OAuth token to use for API requests |
-| **options.isomorphic** | bool | true | Uses [axios](https://github.com/axios/axios) for sending requests from node environment |
-| **options.baseURL** | string | [api.put.io/v2](https://api.put.io/v2) | Base URL of the API |
+| **clientID** | number | 1 | OAuth app client ID, defaults to [put.io web app](app.put.io) |
+| **baseURL** | string | [api.put.io/v2](https://api.put.io/v2) | Base URL of the API |
+| **webAppURL** | string | [app.put.io](https://put.io) | Base URL of the Put.io web app, used for OAuth Flow|
 
 ## Methods
 | Name | Parameters | Return Value |
 | :---- |:-------------|:-----|
-| **setDebug** | (debug: bool) | PutioApiClient Instance |
-| **setToken** | (token: string) | PutioApiClient Instance |
-| **setAdminToken** | (token: string) | PutioApiClient Instance |
-| **setBaseURL** | (url: string) | PutioApiClient Instance |
+| **setToken** | (token: string) | PutioAPIClient Instance |
+| **setAdminToken** | (token: string) | PutioAPIClient Instance |
 
 ### Events
 | Value | Payload |  Description |
 | :---- |:-------------:| :------- |
-| **error** | object | Fired when an http request fails |
+| **ERROR** | IPutioAPIClientErrorData | Fired when an HTTP request fails |
+| **CLIENT_IP_CHANGED** | { IP: string, newIP: string }| Fired when the IP of the client changes |

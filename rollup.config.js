@@ -1,41 +1,43 @@
-import resolve from 'rollup-plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
+import json from '@rollup/plugin-json';
 import commonjs from 'rollup-plugin-commonjs';
-import json from 'rollup-plugin-json';
-import babel from 'rollup-plugin-babel';
+import typescript from 'rollup-plugin-typescript2';
+import { terser } from 'rollup-plugin-terser';
+import filesize from 'rollup-plugin-filesize';
 import pkg from './package.json';
 
 export default [
   {
-    input: 'src/index.js',
+    external: ['axios'],
+    input: 'src/index.ts',
     output: [
       {
         name: 'PutioAPI',
         file: pkg.browser,
         format: 'umd',
+        globals: { 'axios': 'axios' },
+        plugins: [terser()],
       },
       {
         file: pkg.main,
         format: 'cjs',
+        exports: 'named'
       },
       {
         file: pkg.module,
         format: 'es',
+        exports: 'named'
       },
     ],
     plugins: [
-      babel({
-        exclude: 'node_modules/**',
-      }),
+      typescript({ useTsconfigDeclarationDir: true }),
       resolve({
-        module: true,
-        jsnext: true,
-        main: true,
-        browser: true,
-      }),
-      commonjs({
-        include: 'node_modules/**',
+        mainFields: ['jsnext', 'browser'],
+        preferBuiltins: true,
       }),
       json(),
+      commonjs({ include: 'node_modules/**' }),
+      filesize()
     ],
   },
 ];
