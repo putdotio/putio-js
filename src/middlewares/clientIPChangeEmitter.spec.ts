@@ -80,25 +80,4 @@ describe("middlewares/errorEmitter", () => {
       { IP: "0.0.0.0", newIP: "1.1.1.1" }
     );
   });
-
-  // describe("failed responses", () => {
-  //   it("calls client.emit method with correct signature", () => {
-  //     const error: IPutioAPIClientError = {
-  //       ...mockPutioAPIClientError,
-  //       response: {
-  //         config: {},
-  //         data: {
-  //           error_type: "API_ERROR",
-  //           error_message: "Putio API Error"
-  //         },
-  //         headers: {},
-  //         status: 400,
-  //         statusText: "Error!"
-  //       }
-  //     };
-
-  //     errorEmitter.onRejected(error).catch(e => expect(e).toEqual(error))
-  //     expect(API.emit).toHaveBeenCalledWith(PutioAPIClientEventTypes.ERROR, error.data);
-  //   })
-  // });
 });

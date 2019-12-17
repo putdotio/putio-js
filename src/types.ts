@@ -4,6 +4,7 @@ import PutioAPIClient from ".";
 export interface IPutioAPIClientOptions {
   clientID?: number;
   baseURL?: string;
+  webAppURL?: string,
 }
 
 export interface IPutioAPIClientResponse extends AxiosResponse {

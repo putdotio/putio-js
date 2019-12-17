@@ -21,7 +21,7 @@ export default class Auth {
     clientID: string;
     clientName?: string;
   }): string {
-    const url = new URI("https://app.put.io/authenticate").query({
+    const url = new URI(`${this.client.options.webAppURL}/authenticate`).query({
       client_id: clientID || this.client.options.clientID,
       client_name: clientName,
       redirect_uri: redirectURI,

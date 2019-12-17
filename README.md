@@ -40,8 +40,9 @@ Api.User.Info()
 ## Options
 | Prop | Type | Default Value | Description |
 | :---- |:-------------|:----:| :------- |
-| **clientID** | number | 1 (put.io webapp) | OAuth app client ID |
+| **clientID** | number | 1 | OAuth app client ID, defaults to [put.io web app](app.put.io) |
 | **baseURL** | string | [api.put.io/v2](https://api.put.io/v2) | Base URL of the API |
+| **webAppURL** | string | [app.put.io](https://put.io) | Base URL of the Put.io web app, used for OAuth Flow|
 
 ## Methods
 | Name | Parameters | Return Value |
@@ -52,4 +53,5 @@ Api.User.Info()
 ### Events
 | Value | Payload |  Description |
 | :---- |:-------------:| :------- |
-| **error** | IPutioAPIClientErrorData | Fired when an HTTP request fails |
+| **ERROR** | IPutioAPIClientErrorData | Fired when an HTTP request fails |
+| **CLIENT_IP_CHANGED** | { IP: string, newIP: string }| Fired when the IP of the client changes |

@@ -31,7 +31,8 @@ import {
 class PutioAPIClient {
   public static DEFAULT_OPTIONS: IPutioAPIClientOptions = {
     baseURL: "https://api.put.io/v2",
-    clientID: 1
+    clientID: 1,
+    webAppURL: "https://app.put.io"
   };
 
   public options: IPutioAPIClientOptions;
@@ -49,7 +50,7 @@ class PutioAPIClient {
   public Payment: Payment;
   public RSS: RSS;
   public Transfers: Transfers;
-  public Trash: any;
+  public Trash: Trash;
   public Tunnel: Tunnel;
   public User: User;
   public Zips: Zips;
