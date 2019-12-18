@@ -1,6 +1,6 @@
 {
   "name": "@putdotio/api-client",
-  "version": "7.0.0-alpha1",
+  "version": "7.0.0-alpha2",
   "description": "JS client for Put.io API",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
