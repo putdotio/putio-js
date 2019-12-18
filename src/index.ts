@@ -92,19 +92,35 @@ class PutioAPIClient {
   }
 
   public get(url: string, config?: AxiosRequestConfig) {
-    return this.http.get(url, config);
+    return this.http({
+      method: "GET",
+      url,
+      ...config
+    });
   }
 
   public post(url: string, config?: AxiosRequestConfig) {
-    return this.http.post(url, config);
+    return this.http({
+      method: "POST",
+      url,
+      ...config
+    });
   }
 
   public put(url: string, config?: AxiosRequestConfig) {
-    return this.http.put(url, config);
+    return this.http({
+      method: "PUT",
+      url,
+      ...config
+    });
   }
 
   public delete(url: string, config?: AxiosRequestConfig) {
-    return this.http.delete(url, config);
+    return this.http({
+      method: "DELETE",
+      url,
+      ...config
+    });
   }
 
   private createHTTPClient() {
