@@ -13,7 +13,8 @@
     "start": "rollup -c -w",
     "prebuild": "npm run clean",
     "build": "rollup -c",
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "npm run build"
   },
   "author": "Put.io <devs@put.io>",
   "license": "MIT",
