@@ -6,7 +6,7 @@ JavaScript library for [Put.io API v2](https://api.put.io/v2).
 
 ## Usage
 ```bash
-$ npm install axios@^0.19 @putdotio/api-client -S
+$ npm install @putdotio/api-client -S
 ```
 
 ### Module
