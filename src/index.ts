@@ -29,6 +29,8 @@ import {
 } from "./types";
 
 class PutioAPIClient {
+  public static EVENTS = PutioAPIClientEventTypes;
+
   public static DEFAULT_OPTIONS: IPutioAPIClientOptions = {
     baseURL: "https://api.put.io/v2",
     clientID: 1,
