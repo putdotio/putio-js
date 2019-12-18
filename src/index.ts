@@ -114,8 +114,8 @@ class PutioAPIClient {
     });
 
     const middlewareFactories: IPutioAPIClientMiddlewareFactory[] = [
-      createClientIPChangeEmitterMiddleware,
       createResponseFormatterMiddleware,
+      createClientIPChangeEmitterMiddleware,
       createErrorEmitterMiddleware
     ];
 
