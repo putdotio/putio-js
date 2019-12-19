@@ -9,9 +9,8 @@
   "types": "dist/types/index.d.ts",
   "scripts": {
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "clean": "rm -rf dist",
     "start": "rollup -c -w",
-    "prebuild": "npm run clean",
+    "prebuild": "rm -rf dist && npm run lint",
     "build": "rollup -c",
     "test": "jest",
     "prepublish": "npm run build"
