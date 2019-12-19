@@ -5,8 +5,8 @@ import {
 } from "../test-utils/mocks";
 import {
   IPutioAPIClientError,
-  PutioAPIClientEventTypes,
-  IPutioAPIClientMiddleware
+  IPutioAPIClientMiddleware,
+  PutioAPIClientEventTypes
 } from "../types";
 import create from "./clientIPChangeEmitter";
 
