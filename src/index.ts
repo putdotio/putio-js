@@ -86,11 +86,6 @@ class PutioAPIClient {
     return this;
   }
 
-  public setAdminToken(token: string): PutioAPIClient {
-    this.http.defaults.headers.common["Putio-Admin-Token"] = token;
-    return this;
-  }
-
   public get(url: string, config?: AxiosRequestConfig) {
     return this.http({
       method: "GET",

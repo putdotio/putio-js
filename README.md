@@ -37,18 +37,22 @@ Api.User.Info()
   .catch(error => console.log('An error occured while fetching user info: ', error))
 ```
 
-## Options
+## API
+
+### Options
 | Prop | Type | Default Value | Description |
 | :---- |:-------------|:----:| :------- |
 | **clientID** | number | 1 | OAuth app client ID, defaults to [put.io web app](app.put.io) |
 | **baseURL** | string | [api.put.io/v2](https://api.put.io/v2) | Base URL of the API |
-| **webAppURL** | string | [app.put.io](https://put.io) | Base URL of the Put.io web app, used for OAuth Flow|
+| **webAppURL** | string | [app.put.io](https://put.io) | Base URL of the Put.io web app, used in the OAuth Flow|
 
-## Methods
+### Methods
 | Name | Parameters | Return Value |
 | :---- |:-------------|:-----|
 | **setToken** | (token: string) | PutioAPIClient Instance |
-| **setAdminToken** | (token: string) | PutioAPIClient Instance |
+
+### Properties
+TypeDoc is coming soon! You can refer to [resources folder for now 😇](./src/resources)
 
 ### Events
 | Value | Payload |  Description |
