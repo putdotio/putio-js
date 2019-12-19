@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import EventEmitter from "event-emitter";
+import EventEmitter, { Emitter, EventListener } from "event-emitter";
 
 import createClientIPChangeEmitterMiddleware from "./middlewares/clientIPChangeEmitter";
 import createErrorEmitterMiddleware from "./middlewares/errorEmitter";
@@ -28,7 +28,7 @@ import {
   PutioAPIClientEventTypes
 } from "./types";
 
-class PutioAPIClient {
+class PutioAPIClient implements Emitter {
   public static EVENTS = PutioAPIClientEventTypes;
 
   public static DEFAULT_OPTIONS: IPutioAPIClientOptions = {
@@ -39,7 +39,11 @@ class PutioAPIClient {
 
   public options: IPutioAPIClientOptions;
   public token: string;
-  public emit: (event: PutioAPIClientEventTypes, data: any) => void;
+
+  public emit: (event: PutioAPIClientEventTypes, ...args: any[]) => void;
+  public once: (event: PutioAPIClientEventTypes, listener: EventListener) => void;
+  public on: (event: PutioAPIClientEventTypes, listener: EventListener) => void;
+  public off: (event: PutioAPIClientEventTypes, listener: EventListener) => void;
 
   public Auth: Auth;
   public Events: Events;
