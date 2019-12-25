@@ -76,6 +76,29 @@ describe('middlewares/errorEmitter', () => {
       PutioAPIClientEventTypes.CLIENT_IP_CHANGED,
       { IP: '198.168.0.2', newIP: '198.168.0.1' },
     )
+
+    expect(API.emit).toBeCalledTimes(2)
+  })
+
+  it('calls client.emit method once if the IP changes to a falsy value', () => {
+    clientIPChangeEmitter.onFulfilled({
+      ...mockPutioAPIClientResponse,
+      headers: { 'putio-client-ip': '198.168.0.1' },
+    })
+
+    clientIPChangeEmitter.onFulfilled({
+      ...mockPutioAPIClientResponse,
+      headers: { 'putio-client-ip': '198.168.0.2' },
+    })
+
+    expect(API.emit).toBeCalledWith(
+      PutioAPIClientEventTypes.CLIENT_IP_CHANGED,
+      { IP: '198.168.0.1', newIP: '198.168.0.2' },
+    )
+
+    clientIPChangeEmitter.onFulfilled(mockPutioAPIClientResponse)
+
+    expect(API.emit).toBeCalledTimes(1)
   })
 
   it('handles failed requests and updates the IP', () => {

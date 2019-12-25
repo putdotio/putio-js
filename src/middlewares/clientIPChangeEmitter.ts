@@ -18,7 +18,7 @@ const createClientIPChangeEmitterMiddleware: IPutioAPIClientMiddlewareFactory = 
       return
     }
 
-    if (IP !== newIP) {
+    if (newIP && IP !== newIP) {
       client.emit(PutioAPIClientEventTypes.CLIENT_IP_CHANGED, { IP, newIP })
       IP = newIP
       return
