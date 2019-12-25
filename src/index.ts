@@ -12,6 +12,7 @@ import Events from './resources/Events'
 import Family from './resources/Family'
 import File from './resources/File'
 import Files from './resources/Files'
+import FriendInvites from './resources/FriendInvites'
 import Friends from './resources/Friends'
 import IFTTT from './resources/IFTTT'
 import OAuth from './resources/OAuth'
@@ -58,6 +59,7 @@ class PutioAPIClient implements Emitter {
   public Files: Files
   public File: File
   public Friends: Friends
+  public FriendInvites: FriendInvites
   public IFTTT: IFTTT
   public OAuth: OAuth
   public Payment: Payment
@@ -81,6 +83,7 @@ class PutioAPIClient implements Emitter {
     this.Files = new Files(this)
     this.File = new File(this)
     this.Friends = new Friends(this)
+    this.FriendInvites = new FriendInvites(this)
     this.Family = new Family(this)
     this.OAuth = new OAuth(this)
     this.Payment = new Payment(this)
