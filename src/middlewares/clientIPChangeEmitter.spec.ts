@@ -25,7 +25,7 @@ describe('middlewares/errorEmitter', () => {
     expect(API.emit).not.toHaveBeenCalled()
   })
 
-  it('does not call client.emit method if the IP changes but was in the empty state initially', () => {
+  it('does not call client.emit method if the IP changes from initial state', () => {
     clientIPChangeEmitter.onFulfilled(mockPutioAPIClientResponse)
     clientIPChangeEmitter.onFulfilled({
       ...mockPutioAPIClientResponse,
@@ -34,7 +34,7 @@ describe('middlewares/errorEmitter', () => {
     expect(API.emit).not.toHaveBeenCalled()
   })
 
-  it('calls client.emit method if the IP changes but was in the empty state initially', () => {
+  it('calls client.emit method if the IP changes once', () => {
     clientIPChangeEmitter.onFulfilled({
       ...mockPutioAPIClientResponse,
       headers: { 'putio-client-ip': '198.168.0.1' },
@@ -48,6 +48,33 @@ describe('middlewares/errorEmitter', () => {
     expect(API.emit).toBeCalledWith(
       PutioAPIClientEventTypes.CLIENT_IP_CHANGED,
       { IP: '198.168.0.1', newIP: '198.168.0.2' },
+    )
+  })
+
+  it('calls client.emit method if the IP changes multiple times', () => {
+    clientIPChangeEmitter.onFulfilled({
+      ...mockPutioAPIClientResponse,
+      headers: { 'putio-client-ip': '198.168.0.1' },
+    })
+
+    clientIPChangeEmitter.onFulfilled({
+      ...mockPutioAPIClientResponse,
+      headers: { 'putio-client-ip': '198.168.0.2' },
+    })
+
+    expect(API.emit).toBeCalledWith(
+      PutioAPIClientEventTypes.CLIENT_IP_CHANGED,
+      { IP: '198.168.0.1', newIP: '198.168.0.2' },
+    )
+
+    clientIPChangeEmitter.onFulfilled({
+      ...mockPutioAPIClientResponse,
+      headers: { 'putio-client-ip': '198.168.0.1' },
+    })
+
+    expect(API.emit).toBeCalledWith(
+      PutioAPIClientEventTypes.CLIENT_IP_CHANGED,
+      { IP: '198.168.0.2', newIP: '198.168.0.1' },
     )
   })
 
