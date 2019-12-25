@@ -19,7 +19,7 @@ export default class FriendInvites {
     this.client = client
   }
 
-  public GetInvites(): Promise<
+  public GetAll(): Promise<
     IPutioAPIClientResponse<{
       invites: IFriendInvite[]
       remaining_limit: number
@@ -28,7 +28,7 @@ export default class FriendInvites {
     return this.client.get('/account/friend_invites')
   }
 
-  public CreateInvite(): Promise<IPutioAPIClientResponse<{ code: string }>> {
-    return this.client.post('/acccount/create_friend_invitation')
+  public Create(): Promise<IPutioAPIClientResponse<{ code: string }>> {
+    return this.client.post('/account/create_friend_invitation')
   }
 }
