@@ -17,7 +17,7 @@ export default class Trash {
 
   public Continue(cursor: string, { limit = 50 } = {}) {
     return this.client.post('/trash/list/continue', {
-      params: {
+      data: {
         cursor,
         per_page: limit,
       },
