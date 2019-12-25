@@ -1,43 +1,43 @@
-import { AxiosResponse } from "axios";
-import PutioAPIClient from "..";
+import { AxiosResponse } from 'axios'
+import PutioAPIClient from '..'
 import {
   IPutioAPIClientMiddlewareFactory,
-  PutioAPIClientEventTypes
-} from "../types";
+  PutioAPIClientEventTypes,
+} from '../types'
 
 const createClientIPChangeEmitterMiddleware: IPutioAPIClientMiddlewareFactory = (
-  client: PutioAPIClient
+  client: PutioAPIClient,
 ) => {
-  let IP: string = "";
+  let IP: string = ''
 
   const checkIP = (response: AxiosResponse) => {
-    const newIP = response.headers["putio-client-ip"];
+    const newIP = response.headers['putio-client-ip']
 
     if (!IP) {
-      IP = newIP;
-      return;
+      IP = newIP
+      return
     }
 
     if (IP !== newIP) {
-      client.emit(PutioAPIClientEventTypes.CLIENT_IP_CHANGED, { IP, newIP });
-      return;
+      client.emit(PutioAPIClientEventTypes.CLIENT_IP_CHANGED, { IP, newIP })
+      return
     }
-  };
+  }
 
   return {
     onFulfilled: response => {
-      checkIP(response);
-      return response;
+      checkIP(response)
+      return response
     },
 
     onRejected: error => {
       if (error.response) {
-        checkIP(error.response);
+        checkIP(error.response)
       }
 
-      return Promise.reject(error);
-    }
-  };
-};
+      return Promise.reject(error)
+    },
+  }
+}
 
-export default createClientIPChangeEmitterMiddleware;
+export default createClientIPChangeEmitterMiddleware

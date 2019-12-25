@@ -1,30 +1,34 @@
-import { IPutioAPIClientMiddlewareFactory } from "../types";
+import { IPutioAPIClientMiddlewareFactory } from '../types'
 
-const isPutioAPIError = (data: any) => data.error_type && data.error_message;
+const isPutioAPIError = (data: any) => data.error_type && data.error_message
 
 const createResponseFormatterMiddleware: IPutioAPIClientMiddlewareFactory = () => ({
   onFulfilled: response => ({
     ...response,
-    body: response.data
+    body: response.data,
   }),
 
   onRejected: error => {
     if (error.response && error.response.data) {
-      const { status, data = {} } = error.response;
+      const { status, data = {} } = error.response
 
       error.data = isPutioAPIError(data)
         ? { ...data, status_code: status }
-        : { error_message: error.message, error_type: "ERROR", status_code: status };
+        : {
+            error_message: error.message,
+            error_type: 'ERROR',
+            status_code: status,
+          }
     } else {
       error.data = {
         error_message: error.message,
-        error_type: "ERROR",
-        status_code: 0
-      };
+        error_type: 'ERROR',
+        status_code: 0,
+      }
     }
 
-    return Promise.reject(error);
-  }
-});
+    return Promise.reject(error)
+  },
+})
 
-export default createResponseFormatterMiddleware;
+export default createResponseFormatterMiddleware

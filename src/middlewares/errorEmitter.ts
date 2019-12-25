@@ -1,19 +1,19 @@
-import PutioAPIClient from "..";
+import PutioAPIClient from '..'
 import {
   IPutioAPIClientMiddlewareFactory,
-  PutioAPIClientEventTypes
-} from "../types";
-import { identity } from "../utils";
+  PutioAPIClientEventTypes,
+} from '../types'
+import { identity } from '../utils'
 
 const createErrorEmitterMiddleware: IPutioAPIClientMiddlewareFactory = (
-  client: PutioAPIClient
+  client: PutioAPIClient,
 ) => ({
   onFulfilled: identity,
 
   onRejected: error => {
-    client.emit(PutioAPIClientEventTypes.ERROR, error.data);
-    return Promise.reject(error);
-  }
-});
+    client.emit(PutioAPIClientEventTypes.ERROR, error.data)
+    return Promise.reject(error)
+  },
+})
 
-export default createErrorEmitterMiddleware;
+export default createErrorEmitterMiddleware

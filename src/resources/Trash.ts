@@ -1,64 +1,64 @@
-import PutioAPIClient from "../index";
+import PutioAPIClient from '../index'
 
 export default class Trash {
-  private client: PutioAPIClient;
+  private client: PutioAPIClient
 
   constructor(client: PutioAPIClient) {
-    this.client = client;
+    this.client = client
   }
 
   public List({ limit = 50 } = {}) {
-    return this.client.get("/trash/list", {
+    return this.client.get('/trash/list', {
       params: {
-        per_page: limit
-      }
-    });
+        per_page: limit,
+      },
+    })
   }
 
   public Continue(cursor: string, { limit = 50 } = {}) {
-    return this.client.post("/trash/list/continue", {
+    return this.client.post('/trash/list/continue', {
       params: {
         cursor,
-        per_page: limit
-      }
-    });
+        per_page: limit,
+      },
+    })
   }
 
   public Restore({
     useCursor = false,
     ids = [],
-    cursor
+    cursor,
   }: {
-    useCursor?: boolean;
-    ids?: number[];
-    cursor?: string;
+    useCursor?: boolean
+    ids?: number[]
+    cursor?: string
   }) {
-    return this.client.post("/trash/restore", {
+    return this.client.post('/trash/restore', {
       data: {
         cursor: useCursor ? cursor : undefined,
-        file_ids: !useCursor ? ids.join(",") : undefined
-      }
-    });
+        file_ids: !useCursor ? ids.join(',') : undefined,
+      },
+    })
   }
 
   public Delete({
     useCursor = false,
     ids = [],
-    cursor
+    cursor,
   }: {
-    useCursor?: boolean;
-    ids?: number[];
-    cursor?: string;
+    useCursor?: boolean
+    ids?: number[]
+    cursor?: string
   }) {
-    return this.client.post("/trash/delete", {
+    return this.client.post('/trash/delete', {
       data: {
         cursor: useCursor ? cursor : undefined,
-        file_ids: !useCursor ? ids.join(",") : undefined
-      }
-    });
+        file_ids: !useCursor ? ids.join(',') : undefined,
+      },
+    })
   }
 
   public Empty() {
-    return this.client.post("/trash/empty");
+    return this.client.post('/trash/empty')
   }
 }

@@ -1,13 +1,13 @@
-import PutioAPIClient from "../index";
+import PutioAPIClient from '../index'
 
 export default class Tunnel {
-  private client: PutioAPIClient;
+  private client: PutioAPIClient
 
   constructor(client: PutioAPIClient) {
-    this.client = client;
+    this.client = client
   }
 
   public Routes() {
-    return this.client.get("/tunnel/routes");
+    return this.client.get('/tunnel/routes')
   }
 }
