@@ -6,6 +6,7 @@ import createErrorEmitterMiddleware from './middlewares/errorEmitter'
 import createResponseFormatterMiddleware from './middlewares/responseFormatter'
 
 import Auth from './resources/Auth'
+import Config from './resources/Config'
 import Events from './resources/Events'
 import Family from './resources/Family'
 import File from './resources/File'
@@ -49,6 +50,7 @@ class PutioAPIClient implements Emitter {
   public off: (event: PutioAPIClientEventTypes, listener: EventListener) => void
 
   public Auth: Auth
+  public Config: Config
   public Events: Events
   public Family: Family
   public Files: Files
@@ -71,6 +73,7 @@ class PutioAPIClient implements Emitter {
     this.options = { ...PutioAPIClient.DEFAULT_OPTIONS, ...options }
     this.http = this.createHTTPClient()
     this.Auth = new Auth(this)
+    this.Config = new Config(this)
     this.Events = new Events(this)
     this.Files = new Files(this)
     this.File = new File(this)
