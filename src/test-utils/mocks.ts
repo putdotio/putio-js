@@ -8,9 +8,11 @@ export class MockPutioAPIClient extends PutioAPIClient {
   }
 }
 
-export const mockPutioAPIClientResponse: IPutioAPIClientResponse = {
+export const mockPutioAPIClientResponse: IPutioAPIClientResponse<{
+  foo: string
+}> = {
   config: {},
-  data: { hello: 'world' },
+  data: { foo: 'bar' },
   headers: {},
   status: 200,
   statusText: 'ok',

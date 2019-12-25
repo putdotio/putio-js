@@ -7,8 +7,9 @@ export interface IPutioAPIClientOptions {
   webAppURL?: string
 }
 
-export interface IPutioAPIClientResponse extends AxiosResponse {
-  body?: any // Remove when it's irrelevant.
+export interface IPutioAPIClientResponse<T> extends AxiosResponse {
+  data: T
+  body?: T // @TODO: Remove when it's irrelevant.
 }
 
 interface IPutioAPIClientErrorData {
@@ -23,7 +24,9 @@ export interface IPutioAPIClientError extends AxiosError {
 }
 
 export interface IPutioAPIClientMiddleware {
-  onFulfilled: (response: IPutioAPIClientResponse) => IPutioAPIClientResponse
+  onFulfilled: (
+    response: IPutioAPIClientResponse<any>,
+  ) => IPutioAPIClientResponse<any>
   onRejected: (error: IPutioAPIClientError) => Promise<IPutioAPIClientError>
 }
 
