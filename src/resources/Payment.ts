@@ -17,7 +17,7 @@ export default class Payment {
 
   public History({ unReportedOnly = false } = {}) {
     return this.client.get('/payment/history', {
-      data: {
+      params: {
         unreported_only: unReportedOnly,
       },
     })
@@ -37,7 +37,7 @@ export default class Payment {
     couponCode?: string
   }) {
     return this.client.get(`/payment/change_plan/${planPath}`, {
-      data: {
+      params: {
         coupon_code: couponCode,
         payment_type: paymentType,
       },
