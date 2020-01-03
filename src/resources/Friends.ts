@@ -17,7 +17,7 @@ export default class Friends {
 
   public Search(phrase: string) {
     return this.client.post('/friends/user-search', {
-      params: {
+      data: {
         name: phrase,
       },
     })
