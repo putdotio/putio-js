@@ -1,4 +1,10 @@
-import { IPutioAPIClientMiddlewareFactory } from '../types'
+import { AxiosError } from 'axios'
+import PutioAPIClient from '..'
+import { mockPutioAPIClientError } from '../test-utils/mocks'
+import {
+  IPutioAPIClientError,
+  IPutioAPIClientMiddlewareFactory,
+} from '../types'
 
 const isPutioAPIError = (data: any) => data.error_type && data.error_message
 
@@ -9,10 +15,12 @@ const createResponseFormatterMiddleware: IPutioAPIClientMiddlewareFactory = () =
   }),
 
   onRejected: error => {
+    let errorData: any = {}
+
     if (error.response && error.response.data) {
       const { status, data = {} } = error.response
 
-      error.data = isPutioAPIError(data)
+      errorData = isPutioAPIError(data)
         ? { ...data, status_code: status }
         : {
             error_message: error.message,
@@ -20,14 +28,20 @@ const createResponseFormatterMiddleware: IPutioAPIClientMiddlewareFactory = () =
             status_code: status,
           }
     } else {
-      error.data = {
+      errorData = {
         error_message: error.message,
         error_type: 'ERROR',
         status_code: 0,
       }
     }
 
-    return Promise.reject(error)
+    const formattedError: IPutioAPIClientError = {
+      ...error,
+      data: errorData,
+      toJSON: () => errorData,
+    }
+
+    return Promise.reject(formattedError)
   },
 })
 

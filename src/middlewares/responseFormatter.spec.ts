@@ -20,7 +20,7 @@ describe('middlewares/responseFormatter', () => {
 
   describe('failed responses', () => {
     it('sets error.data property correctly when the request failed with Put.io API signature', () => {
-      const error: IPutioAPIClientError = {
+      const error = {
         ...mockPutioAPIClientError,
         response: {
           config: {},

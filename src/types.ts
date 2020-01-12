@@ -20,7 +20,8 @@ interface IPutioAPIClientErrorData {
   status_code: number
 }
 export interface IPutioAPIClientError extends AxiosError {
-  data?: IPutioAPIClientErrorData
+  data: IPutioAPIClientErrorData
+  toJSON: () => IPutioAPIClientErrorData
 }
 
 export interface IPutioAPIClientMiddleware {

@@ -1,3 +1,4 @@
+import Axios, { AxiosError } from 'axios'
 import PutioAPIClient from '../index'
 import { IPutioAPIClientError, IPutioAPIClientResponse } from '../types'
 
@@ -18,9 +19,27 @@ export const mockPutioAPIClientResponse: IPutioAPIClientResponse<{
   statusText: 'ok',
 }
 
-export const mockPutioAPIClientError: IPutioAPIClientError = {
+export const mockAxiosError: AxiosError = {
   config: {},
   isAxiosError: true,
-  message: 'Mock Error!',
-  name: 'MockError',
+  name: 'MOCK_ERROR',
+  message: 'MOCK_MESSAGE',
+  toJSON() {
+    return {
+      name: this.name,
+      message: this.message,
+    }
+  },
+}
+
+export const mockPutioAPIClientError: IPutioAPIClientError = {
+  ...mockAxiosError,
+  data: {
+    error_type: 'MOCK_ERROR',
+    error_message: 'MOCK_MESSAGE',
+    status_code: 0,
+  },
+  toJSON() {
+    return this.data
+  },
 }
