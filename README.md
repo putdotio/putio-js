@@ -70,4 +70,4 @@ TypeDoc is coming soon! You can refer to [resources folder for now 😇](./src/r
 | Value                 |            Payload            | Description                             |
 | :-------------------- | :---------------------------: | :-------------------------------------- |
 | **ERROR**             |   [IPutioAPIClientErrorData](https://github.com/putdotio/putio.js/blob/master/src/types.ts#L15-L21)    | Fired when an HTTP request fails        |
-| **CLIENT_IP_CHANGED** | { IP: string, newIP: string } | Fired when the IP of the client changes |
+| **CLIENT_IP_CHANGED** | `{ IP: string, newIP: string }` | Fired when the IP of the client changes |
