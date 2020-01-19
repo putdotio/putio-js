@@ -7,7 +7,7 @@
 
 JavaScript library for [Put.io API v2](https://api.put.io/v2).
 
-## Usage
+## Installation
 
 ```bash
 $ npm install @putdotio/api-client -S
@@ -35,10 +35,12 @@ const PutioAPI = require('@putdotio/api-client').default
 const PutioAPI = window.PutioAPI
 ```
 
-### Example
+## Usage
 
 ```js
-const API = new PutioAPI({ clientID: 'OAUTH_CLIENT_ID' }).setToken('XYZ')
+const API = new PutioAPI({ clientID: 'OAUTH_CLIENT_ID' })
+
+API.setToken('XYZ')
 
 API.User.Info()
   .then(r => console.log('Fetched user info: ', r))
@@ -59,7 +61,7 @@ API.User.Info()
 
 | Name         | Parameters      | Return Value            |
 | :----------- | :-------------- | :---------------------- |
-| **setToken** | (token: string) | PutioAPIClient Instance |
+| **setToken** | `(token: string)` | PutioAPIClient Instance |
 
 ### Properties
 
