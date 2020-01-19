@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/putdotio/putio.js.svg?branch=master)](https://travis-ci.org/putdotio/putio.js)
 [![Coverage Status](https://coveralls.io/repos/github/putdotio/putio.js/badge.svg?branch=master)](https://coveralls.io/github/putdotio/putio.js?branch=master)
 ![npm (scoped)](https://img.shields.io/npm/v/@putdotio/api-client)
+![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@putdotio/api-client)
 ![GitHub](https://img.shields.io/github/license/putdotio/putio.js)
 
 JavaScript library for [Put.io API v2](https://api.put.io/v2).
