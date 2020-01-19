@@ -28,7 +28,7 @@ const PutioAPI = require('@putdotio/api-client').default
 
 ### Browser
 
-```
+```html
 <script src="https://unpkg.com/@putdotio/api-client/dist/index.umd.js"></script>
 ```
 
