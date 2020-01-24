@@ -8,6 +8,7 @@ script:
   - npm run coveralls
 
 deploy:
+  edge: true
   skip_cleanup: true
   provider: npm
   email: altay.aydemir@gmail.com
