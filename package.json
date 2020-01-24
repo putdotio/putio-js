@@ -9,7 +9,6 @@
   ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "browser": "dist/index.umd.js",
   "jsnext:main": "dist/index.es.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
