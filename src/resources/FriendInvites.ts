@@ -1,4 +1,4 @@
-import PutioAPIClient from '../index'
+import PutioAPIClient from '../client'
 import { IPutioAPIClientResponse } from '../types'
 
 interface IFriendInvite {

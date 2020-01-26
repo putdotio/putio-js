@@ -1,5 +1,5 @@
 import URI from 'urijs'
-import PutioAPIClient from '../index'
+import PutioAPIClient from '../client'
 
 export default class Auth {
   private client: PutioAPIClient

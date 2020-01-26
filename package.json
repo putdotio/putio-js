@@ -41,6 +41,7 @@
     "@rollup/plugin-node-resolve": "^7.0.0",
     "@types/event-emitter": "^0.3.3",
     "@types/jest": "^24.0.25",
+    "@types/urijs": "^1.19.5",
     "coveralls": "^3.0.9",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",

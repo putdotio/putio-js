@@ -1,4 +1,4 @@
-import PutioAPIClient from '../index'
+import PutioAPIClient from '../client'
 
 export default class Config {
   private client: PutioAPIClient

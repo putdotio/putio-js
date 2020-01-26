@@ -1,5 +1,5 @@
-import Axios, { AxiosError } from 'axios'
-import PutioAPIClient from '../index'
+import { AxiosError } from 'axios'
+import PutioAPIClient from '../client'
 import { IPutioAPIClientError, IPutioAPIClientResponse } from '../types'
 
 export class MockPutioAPIClient extends PutioAPIClient {

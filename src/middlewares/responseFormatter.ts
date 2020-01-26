@@ -1,6 +1,3 @@
-import { AxiosError } from 'axios'
-import PutioAPIClient from '..'
-import { mockPutioAPIClientError } from '../test-utils/mocks'
 import {
   IPutioAPIClientError,
   IPutioAPIClientMiddlewareFactory,

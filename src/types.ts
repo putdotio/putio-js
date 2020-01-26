@@ -12,7 +12,7 @@ export interface IPutioAPIClientResponse<T> extends AxiosResponse {
   body?: T // @TODO: Remove when it's irrelevant.
 }
 
-interface IPutioAPIClientErrorData {
+export interface IPutioAPIClientErrorData {
   error_id?: string
   error_uri?: string
   error_type: string

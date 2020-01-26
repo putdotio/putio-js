@@ -1,4 +1,4 @@
-import PutioAPIClient from '../index'
+import PutioAPIClient from '../client'
 
 export default class File {
   private client: PutioAPIClient
@@ -137,24 +137,8 @@ export default class File {
     })
   }
 
-  public CreatePublicLink({
-    id,
-    senderName,
-    senderMessage,
-    receiverEmail,
-  }: {
-    id: number
-    senderName: string
-    senderMessage: string
-    receiverEmail: string
-  }) {
-    return this.client.post(`/files/${id}/share_public`, {
-      data: {
-        receiver_mail: receiverEmail,
-        sender_message: senderMessage,
-        sender_name: senderName,
-      },
-    })
+  public CreatePublicLink(id: string) {
+    return this.client.post(`/files/${id}/share_public`)
   }
 
   public RevokePublicLink(id: number) {
