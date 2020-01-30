@@ -1,17 +1,8 @@
 import PutioAPIClient from '../client'
-import { IPutioAPIClientResponse } from '../types'
-
-interface IFriendInvite {
-  code: string
-  created_at: string
-  user?: {
-    name: string
-    avatar_url: string
-    created_at: string
-    earned_amount: number
-  }
-}
-
+import {
+  IFriendInvitesCreateResponse,
+  IFriendInvitesResponse,
+} from './FriendInvitesTypes'
 export default class FriendInvites {
   private client: PutioAPIClient
 
@@ -19,16 +10,13 @@ export default class FriendInvites {
     this.client = client
   }
 
-  public GetAll(): Promise<
-    IPutioAPIClientResponse<{
-      invites: IFriendInvite[]
-      remaining_limit: number
-    }>
-  > {
-    return this.client.get('/account/friend_invites')
+  public GetAll() {
+    return this.client.get<IFriendInvitesResponse>('/account/friend_invites')
   }
 
-  public Create(): Promise<IPutioAPIClientResponse<{ code: string }>> {
-    return this.client.post('/account/create_friend_invitation')
+  public Create() {
+    return this.client.post<IFriendInvitesCreateResponse>(
+      '/account/create_friend_invitation',
+    )
   }
 }

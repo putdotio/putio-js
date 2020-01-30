@@ -39,3 +39,5 @@ export enum PutioAPIClientEventTypes {
   ERROR = 'ERROR',
   CLIENT_IP_CHANGED = 'CLIENT_IP_CHANGED',
 }
+
+export * from './resources/FriendInvitesTypes'

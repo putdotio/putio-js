@@ -28,6 +28,7 @@ import {
   IPutioAPIClientMiddleware,
   IPutioAPIClientMiddlewareFactory,
   IPutioAPIClientOptions,
+  IPutioAPIClientResponse,
   PutioAPIClientEventTypes,
 } from './types'
 
@@ -102,7 +103,10 @@ class PutioAPIClient implements Emitter {
     return this
   }
 
-  public get(url: string, config?: AxiosRequestConfig) {
+  public get<T = any>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ): Promise<IPutioAPIClientResponse<T>> {
     return this.http({
       method: 'GET',
       url,
@@ -110,7 +114,10 @@ class PutioAPIClient implements Emitter {
     })
   }
 
-  public post(url: string, config?: AxiosRequestConfig) {
+  public post<T = any>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ): Promise<IPutioAPIClientResponse<T>> {
     return this.http({
       method: 'POST',
       url,
@@ -118,7 +125,10 @@ class PutioAPIClient implements Emitter {
     })
   }
 
-  public put(url: string, config?: AxiosRequestConfig) {
+  public put<T = any>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ): Promise<IPutioAPIClientResponse<T>> {
     return this.http({
       method: 'PUT',
       url,
@@ -126,7 +136,10 @@ class PutioAPIClient implements Emitter {
     })
   }
 
-  public delete(url: string, config?: AxiosRequestConfig) {
+  public delete<T = any>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ): Promise<IPutioAPIClientResponse<T>> {
     return this.http({
       method: 'DELETE',
       url,
