@@ -1,6 +1,10 @@
 import { AxiosError } from 'axios'
 import PutioAPIClient from '../client'
-import { IPutioAPIClientError, IPutioAPIClientResponse } from '../types'
+import {
+  IPutioAPIClientError,
+  IPutioAPIClientErrorData,
+  IPutioAPIClientResponse,
+} from '../types'
 
 export class MockPutioAPIClient extends PutioAPIClient {
   constructor() {
@@ -22,8 +26,8 @@ export const mockPutioAPIClientResponse: IPutioAPIClientResponse<{
 export const mockAxiosError: AxiosError = {
   config: {},
   isAxiosError: true,
-  name: 'MOCK_ERROR',
-  message: 'MOCK_MESSAGE',
+  name: 'AXIOS_ERROR',
+  message: 'AXIOS_ERROR_MESSAGE',
   toJSON() {
     return {
       name: this.name,
@@ -43,3 +47,28 @@ export const mockPutioAPIClientError: IPutioAPIClientError = {
     return this.data
   },
 }
+
+export const createMockResponse = <T>(
+  data: T,
+  status: number = 200,
+): IPutioAPIClientResponse<T> => ({
+  config: {},
+  data,
+  status,
+  headers: {},
+  statusText: 'ok',
+})
+
+export const createMockErrorResponse = (
+  data: IPutioAPIClientErrorData,
+  status: number = 0,
+): IPutioAPIClientError => ({
+  ...mockAxiosError,
+  data: {
+    ...data,
+    status_code: status,
+  },
+  toJSON() {
+    return this.data
+  },
+})

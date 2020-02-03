@@ -72,7 +72,7 @@ describe('middlewares/responseFormatter', () => {
       responseFormatter.onRejected(error).catch(e =>
         expect(e).toMatchInlineSnapshot(`
           Object {
-            "error_message": "MOCK_MESSAGE",
+            "error_message": "AXIOS_ERROR_MESSAGE",
             "error_type": "ERROR",
             "status_code": 502,
           }
@@ -84,7 +84,7 @@ describe('middlewares/responseFormatter', () => {
       responseFormatter.onRejected(mockPutioAPIClientError).catch(e =>
         expect(e).toMatchInlineSnapshot(`
           Object {
-            "error_message": "MOCK_MESSAGE",
+            "error_message": "AXIOS_ERROR_MESSAGE",
             "error_type": "ERROR",
             "status_code": 0,
           }
