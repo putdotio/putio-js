@@ -2,6 +2,7 @@ export type FriendInviteJoinedUserStatus =
   | 'CONVERTED'
   | 'IN_TRIAL'
   | 'TRIAL_ENDED'
+  | 'TRIAL_NOT_STARTED'
 
 export interface IFriendInviteJoinedUser {
   name: string
