@@ -1,4 +1,9 @@
 import PutioAPIClient from '../client'
+import {
+  IHistoryClearAllEventsResponse,
+  IHistoryDeleteEventResponse,
+  IHistoryResponse,
+} from './EventsTypes'
 
 export default class PutioEvents {
   private client: PutioAPIClient
@@ -8,14 +13,14 @@ export default class PutioEvents {
   }
 
   public Query() {
-    return this.client.get('/events/list')
-  }
-
-  public Clear() {
-    return this.client.post('/events/delete')
+    return this.client.get<IHistoryResponse>('/events/list')
   }
 
   public Delete(id: number) {
-    return this.client.post(`/events/delete/${id}`)
+    return this.client.post<IHistoryDeleteEventResponse>(`/events/delete/${id}`)
+  }
+
+  public Clear() {
+    return this.client.post<IHistoryClearAllEventsResponse>('/events/delete')
   }
 }

@@ -41,3 +41,4 @@ export enum PutioAPIClientEventTypes {
 }
 
 export * from './resources/FriendInvitesTypes'
+export * from './resources/EventsTypes'
