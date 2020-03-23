@@ -151,6 +151,7 @@ class PutioAPIClient implements Emitter {
     const axiosInstance = axios.create({
       baseURL: this.options.baseURL,
       withCredentials: true,
+      timeout: 30000,
     })
 
     const middlewareFactories: IPutioAPIClientMiddlewareFactory[] = [
