@@ -52,6 +52,8 @@ class PutioAPIClient implements Emitter {
   public on: (event: PutioAPIClientEventTypes, listener: EventListener) => void
   public off: (event: PutioAPIClientEventTypes, listener: EventListener) => void
 
+  public http: AxiosInstance
+
   public Account: Account
   public Auth: Auth
   public Config: Config
@@ -70,8 +72,6 @@ class PutioAPIClient implements Emitter {
   public Tunnel: Tunnel
   public User: User
   public Zips: Zips
-
-  private http: AxiosInstance
 
   constructor(options: IPutioAPIClientOptions) {
     EventEmitter(this)
