@@ -57,7 +57,7 @@ export default class File {
     })
   }
 
-  public Subtitles(id: number, oauthToken: string, languages: string) {
+  public Subtitles(id: number, oauthToken: string, languages: string[]) {
     return this.client.get(`/files/${id}/subtitles`, {
       params: {
         languages,
