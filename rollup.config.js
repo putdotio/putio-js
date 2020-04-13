@@ -7,7 +7,7 @@ import pkg from './package.json'
 
 export default [
   {
-    external: ['axios', 'event-emitter', 'urijs'],
+    external: ['axios', 'event-emitter', 'urijs', 'js-base64'],
     input: 'src/index.ts',
     output: [
       {

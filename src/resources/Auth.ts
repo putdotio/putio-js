@@ -1,3 +1,4 @@
+import { Base64 } from 'js-base64'
 import URI from 'urijs'
 import PutioAPIClient from '../client'
 
@@ -48,7 +49,7 @@ export default class Auth {
       `/oauth2/authorizations/clients/${app.client_id}?client_secret=${app.client_secret}`,
       {
         headers: {
-          Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+          Authorization: `Basic ${Base64.encode(`${username}:${password}`)}`,
         },
       },
     )
