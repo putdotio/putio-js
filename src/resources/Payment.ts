@@ -1,4 +1,5 @@
 import PutioAPIClient from '../client'
+import { IVoucherInfoResponse } from './PaymentTypes'
 
 export default class Payment {
   private client: PutioAPIClient
@@ -85,6 +86,12 @@ export default class Payment {
 
   public CancelSubscription() {
     return this.client.post('/payment/stop_subscription')
+  }
+
+  public GetVoucherInfo(code: string) {
+    return this.client.get<IVoucherInfoResponse>(
+      `/payment/redeem_voucher/${code}`,
+    )
   }
 
   public RedeemVoucher(code: string) {
