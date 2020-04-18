@@ -1,16 +1,20 @@
 type PlanType = string
+type PlanCode = string
+type PlanGroupCode = string
 type PlanName = string
 type PlanDiskSize = number
 type PlanExpirationDate = string
 
 export interface IVoucherInfoResponse {
   current_plan: {
-    plan_type: PlanType | null
+    type: PlanType | null
+    expiration_date: PlanExpirationDate
   }
   target_plan: {
-    plan_type: PlanType
-    period_days: number
-    plan_name: PlanName
+    type: PlanType
+    name: PlanName
+    code: PlanCode
+    group_code: PlanGroupCode
     hd_avail: PlanDiskSize
     simulated_expiration: PlanExpirationDate
   }
