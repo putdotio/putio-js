@@ -1,6 +1,6 @@
 import { IPutioAPIClientErrorData } from './types'
 
-export const identity = (arg: any) => arg
+export const identity = <T>(arg: T) => arg
 
 export const isPutioAPIError = (
   input: unknown,
