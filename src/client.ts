@@ -5,7 +5,6 @@ import createClientIPChangeEmitterMiddleware from './middlewares/clientIPChangeE
 import createErrorEmitterMiddleware from './middlewares/errorEmitter'
 import createResponseFormatterMiddleware from './middlewares/responseFormatter'
 
-import Account from './resources/Account'
 import Auth from './resources/Auth'
 import Config from './resources/Config'
 import Events from './resources/Events'
@@ -21,7 +20,7 @@ import RSS from './resources/RSS'
 import Transfers from './resources/Transfers'
 import Trash from './resources/Trash'
 import Tunnel from './resources/Tunnel'
-import User from './resources/User'
+import User from './resources/User/User'
 import Zips from './resources/Zips'
 
 import {
@@ -77,7 +76,6 @@ class PutioAPIClient implements Emitter {
     EventEmitter(this)
     this.options = { ...PutioAPIClient.DEFAULT_OPTIONS, ...options }
     this.http = this.createHTTPClient()
-    this.Account = new Account(this)
     this.Auth = new Auth(this)
     this.Config = new Config(this)
     this.Events = new Events(this)

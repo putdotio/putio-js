@@ -1,4 +1,5 @@
-import PutioAPIClient from '../client'
+import PutioAPIClient from '../../client'
+import { IUserInfoResponse, IUserSettingsResponse } from './types'
 
 export default class User {
   private client: PutioAPIClient
@@ -8,16 +9,16 @@ export default class User {
   }
 
   public Info(params: any) {
-    return this.client.get('/account/info', {
+    return this.client.get<IUserInfoResponse>('/account/info', {
       params,
     })
   }
 
   public Settings() {
-    return this.client.get('/account/settings')
+    return this.client.get<IUserSettingsResponse>('/account/settings')
   }
 
-  public SaveSettings(settings: object) {
+  public SaveSettings(settings: Record<string, any>) {
     return this.client.post('/account/settings', {
       data: settings,
     })
@@ -27,7 +28,7 @@ export default class User {
     return this.client.get('/config')
   }
 
-  public SaveConfig(config: object) {
+  public SaveConfig(config: Record<string, any>) {
     return this.client.put('/config', {
       data: { config },
     })
@@ -39,10 +40,10 @@ export default class User {
     })
   }
 
-  public Destroy(password: string) {
+  public Destroy(currentPassword: string) {
     return this.client.post('/account/destroy', {
       data: {
-        current_password: password,
+        current_password: currentPassword,
       },
     })
   }
