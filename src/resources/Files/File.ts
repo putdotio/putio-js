@@ -66,10 +66,6 @@ export default class File {
     })
   }
 
-  public Delete(id: number) {
-    return this.client.post(`/files/${id}/delete`)
-  }
-
   public ConvertToMp4(id: number) {
     return this.client.post(`/files/${id}/mp4`)
   }
