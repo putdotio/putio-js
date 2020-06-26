@@ -8,3 +8,7 @@ export type FileType =
   | 'PDF'
   | 'TEXT'
   | 'SWF'
+
+export interface IGetStartFromResponse {
+  start_from: number
+}

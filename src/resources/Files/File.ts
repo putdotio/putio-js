@@ -1,5 +1,5 @@
 import PutioAPIClient from '../../client'
-
+import { IGetStartFromResponse } from './types'
 export default class File {
   private client: PutioAPIClient
 
@@ -29,20 +29,20 @@ export default class File {
     })
   }
 
-  public Download(id: number) {
-    return this.client.get(`/files/${id}/download`)
+  public Download(fileId: number) {
+    return this.client.get(`/files/${fileId}/download`)
   }
 
-  public GetStorageURL(id: number) {
-    return this.client.get(`/files/${id}/url`)
+  public GetStorageURL(fileId: number) {
+    return this.client.get(`/files/${fileId}/url`)
   }
 
-  public GetContent(id: number) {
-    return this.client.get(`/files/${id}/stream`)
+  public GetContent(fileId: number) {
+    return this.client.get(`/files/${fileId}/stream`)
   }
 
   public Get(
-    id: number,
+    fileId: number,
     params = {
       breadcrumbs: 1,
       codecs: 1,
@@ -52,13 +52,13 @@ export default class File {
       stream_url: 1,
     },
   ) {
-    return this.client.get(`/files/${id}`, {
+    return this.client.get(`/files/${fileId}`, {
       params,
     })
   }
 
-  public Subtitles(id: number, oauthToken: string, languages: string[]) {
-    return this.client.get(`/files/${id}/subtitles`, {
+  public Subtitles(fileId: number, oauthToken: string, languages: string[]) {
+    return this.client.get(`/files/${fileId}/subtitles`, {
       params: {
         languages,
         oauth_token: oauthToken,
@@ -66,23 +66,23 @@ export default class File {
     })
   }
 
-  public ConvertToMp4(id: number) {
-    return this.client.post(`/files/${id}/mp4`)
+  public ConvertToMp4(fileId: number) {
+    return this.client.post(`/files/${fileId}/mp4`)
   }
 
-  public ConvertStatus(id: number) {
-    return this.client.get(`/files/${id}/mp4`)
+  public ConvertStatus(fileId: number) {
+    return this.client.get(`/files/${fileId}/mp4`)
   }
 
-  public DeleteMp4(id: number) {
-    return this.client.delete(`/files/${id}/mp4`)
+  public DeleteMp4(fileId: number) {
+    return this.client.delete(`/files/${fileId}/mp4`)
   }
 
-  public SharedWith(id: number) {
-    return this.client.get(`/files/${id}/shared-with`)
+  public SharedWith(fileId: number) {
+    return this.client.get(`/files/${fileId}/shared-with`)
   }
 
-  public Unshare(id: number, shareId: any) {
+  public Unshare(fileId: number, shareId: any) {
     let shares = shareId
 
     if (shares) {
@@ -92,62 +92,66 @@ export default class File {
       shares = shares.join(',')
     }
 
-    return this.client.post(`/files/${id}/unshare`, {
+    return this.client.post(`/files/${fileId}/unshare`, {
       data: {
         shares: shares || 'everyone',
       },
     })
   }
 
-  public SaveAsMp4(id: number) {
-    return this.client.get(`/files/${id}/put-mp4-to-my-folders`)
+  public SaveAsMp4(fileId: number) {
+    return this.client.get(`/files/${fileId}/put-mp4-to-my-folders`)
   }
 
-  public Rename(id: number, name: string) {
+  public Rename(fileId: number, name: string) {
     return this.client.post('/files/rename', {
       data: {
-        file_id: id,
+        file_id: fileId,
         name,
       },
     })
   }
 
-  public SetStartFrom(id: number, time: string) {
-    return this.client.post(`/files/${id}/start-from/set`, {
+  public GetStartFrom(fileId: number) {
+    return this.client.get<IGetStartFromResponse>(`/files/${fileId}/start-from`)
+  }
+
+  public SetStartFrom(fileId: number, time: string) {
+    return this.client.post(`/files/${fileId}/start-from/set`, {
       data: {
         time: parseInt(time, 10),
       },
     })
   }
 
-  public ResetStartFrom(id: number) {
-    return this.client.get(`/files/${id}/start-from/delete`)
+  public ResetStartFrom(fileId: number) {
+    return this.client.get(`/files/${fileId}/start-from/delete`)
   }
 
-  public Extract(id: number, password?: string) {
+  public Extract(fileId: number, password?: string) {
     return this.client.post('/files/extract', {
       data: {
         password,
-        user_file_ids: [id.toString()],
+        user_file_ids: [fileId.toString()],
       },
     })
   }
 
-  public CreatePublicLink(id: string) {
-    return this.client.post(`/files/${id}/share_public`)
+  public CreatePublicLink(fileId: string) {
+    return this.client.post(`/files/${fileId}/share_public`)
   }
 
   public RevokePublicLink(id: number) {
     return this.client.delete(`/files/public/list/${id}`)
   }
 
-  public FindNextFile(id: number, fileType: string) {
-    return this.client.get(`/files/${id}/next-file`, {
+  public FindNextFile(fileId: number, fileType: string) {
+    return this.client.get(`/files/${fileId}/next-file`, {
       params: { file_type: fileType },
     })
   }
 
-  public FindNextVideo(id: number) {
-    return this.client.get(`/files/${id}/next-video`)
+  public FindNextVideo(fileId: number) {
+    return this.client.get(`/files/${fileId}/next-video`)
   }
 }
