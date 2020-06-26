@@ -1,4 +1,5 @@
-import PutioAPIClient from '../client'
+import PutioAPIClient from '../../client'
+import { FileType } from './types'
 
 export default class Files {
   private client: PutioAPIClient
@@ -61,8 +62,17 @@ export default class Files {
     })
   }
 
-  public Search(phrase: string, page: number = 1) {
-    return this.client.get(`/files/search/${phrase}/page/${page}`)
+  public Search(
+    phrase: string,
+    { page, fileType }: { page: number; fileType?: FileType | FileType[] } = {
+      page: 1,
+    },
+  ) {
+    return this.client.get(`/files/search/${phrase}/page/${page}`, {
+      params: {
+        type: fileType,
+      },
+    })
   }
 
   public NewFolder(name: string, parentId: number = 0) {
