@@ -1,5 +1,5 @@
-import PutioAPIClient from '../client'
-import { IVoucherInfoResponse } from './PaymentTypes'
+import PutioAPIClient from '../../client'
+import { IUserPaymentInfoResponse, IVoucherInfoResponse } from './types'
 
 export default class Payment {
   private client: PutioAPIClient
@@ -9,7 +9,7 @@ export default class Payment {
   }
 
   public Info() {
-    return this.client.get('/payment/info')
+    return this.client.get<IUserPaymentInfoResponse>('/payment/info')
   }
 
   public Plans() {
