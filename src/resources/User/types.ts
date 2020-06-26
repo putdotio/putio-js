@@ -1,13 +1,15 @@
+export interface IUserDisk {
+  avail: number
+  used: number
+  size: number
+}
+
 export interface IUserProperties extends Record<string, any> {
   username: string
   account_active: boolean
   files_will_be_deleted_at: string | null
   is_admin: boolean
-  disk: {
-    avail: number
-    used: number
-    size: number
-  }
+  disk: IUserDisk
 }
 
 export interface IUserSettings extends Record<string, any> {
