@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import EventEmitter, { Emitter, EventListener } from 'event-emitter'
+import qs from 'qs'
 
 import createClientIPChangeEmitterMiddleware from './middlewares/clientIPChangeEmitter'
 import createErrorEmitterMiddleware from './middlewares/errorEmitter'
@@ -150,6 +151,7 @@ class PutioAPIClient implements Emitter {
       baseURL: this.options.baseURL,
       withCredentials: true,
       timeout: 30000,
+      paramsSerializer: params => qs.stringify(params, { indices: false }),
     })
 
     const middlewareFactories: IPutioAPIClientMiddlewareFactory[] = [
