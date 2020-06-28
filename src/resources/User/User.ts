@@ -8,7 +8,7 @@ export default class User {
     this.client = client
   }
 
-  public Info(params: any) {
+  public Info(params: Record<string, string | number>) {
     return this.client.get<IUserInfoResponse>('/account/info', {
       params,
     })
