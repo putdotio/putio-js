@@ -1,5 +1,5 @@
 import PutioAPIClient from '../../client'
-import { FileType } from './types'
+import { FileType, ISearchResponse } from './types'
 
 export default class Files {
   private client: PutioAPIClient
@@ -63,13 +63,16 @@ export default class Files {
   }
 
   public Search(
-    phrase: string,
-    { page, fileType }: { page: number; fileType?: FileType | FileType[] } = {
-      page: 1,
-    },
+    query: string,
+    {
+      perPage,
+      fileType,
+    }: { perPage: number; fileType?: FileType | FileType[] } = { perPage: 50 },
   ) {
-    return this.client.get(`/files/search/${phrase}/page/${page}`, {
+    return this.client.get<ISearchResponse>('/files/search', {
       params: {
+        query,
+        per_page: perPage,
         type: fileType,
       },
     })
