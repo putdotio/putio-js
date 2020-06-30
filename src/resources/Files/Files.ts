@@ -78,6 +78,18 @@ export default class Files {
     })
   }
 
+  public ContinueSearch(
+    cursor: string,
+    { perPage }: { perPage?: number } = {},
+  ) {
+    return this.client.post<ISearchResponse>('/files/search/continue', {
+      data: {
+        cursor,
+        per_page: perPage,
+      },
+    })
+  }
+
   public NewFolder(name: string, parentId: number = 0) {
     return this.CreateFolder({ name, parentId })
   }
