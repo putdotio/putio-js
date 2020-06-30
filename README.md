@@ -11,7 +11,7 @@ JavaScript library for [Put.io API v2](https://api.put.io/v2).
 ## Installation
 
 ```bash
-$ npm install @putdotio/api-client -S
+npm install @putdotio/api-client -S
 ```
 
 ### ES Modules / TypeScript
@@ -53,10 +53,6 @@ API.User.Info()
 | Name         | Parameters        | Return Value            |
 | :----------- | :---------------- | :---------------------- |
 | **setToken** | `(token: string)` | PutioAPIClient Instance |
-
-### Properties
-
-TypeDoc is coming soon! You can refer to [resources folder for now 😇](./src/resources)
 
 ### Events
 
