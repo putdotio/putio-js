@@ -2,8 +2,7 @@ import {
   IPutioAPIClientError,
   IPutioAPIClientMiddlewareFactory,
 } from '../types'
-
-const isPutioAPIError = (data: any) => data.error_type && data.error_message
+import { isPutioAPIErrorResponse } from '../utils'
 
 const createResponseFormatterMiddleware: IPutioAPIClientMiddlewareFactory = () => ({
   onFulfilled: response => ({
@@ -17,7 +16,7 @@ const createResponseFormatterMiddleware: IPutioAPIClientMiddlewareFactory = () =
     if (error.response && error.response.data) {
       const { status, data = {} } = error.response
 
-      errorData = isPutioAPIError(data)
+      errorData = isPutioAPIErrorResponse(data)
         ? { ...data, status_code: status }
         : {
             error_message: error.message,

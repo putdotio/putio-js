@@ -109,6 +109,7 @@ describe('middlewares/errorEmitter', () => {
         data: {
           error_type: 'API_ERROR',
           error_message: 'Putio API Error',
+          status_code: 400,
         },
         headers: { 'putio-client-ip': '0.0.0.0' },
         status: 400,

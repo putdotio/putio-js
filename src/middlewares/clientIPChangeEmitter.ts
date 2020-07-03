@@ -5,13 +5,15 @@ import {
   PutioAPIClientEventTypes,
 } from '../types'
 
+const IP_HEADER_KEY = 'putio-client-ip'
+
 const createClientIPChangeEmitterMiddleware: IPutioAPIClientMiddlewareFactory = (
   client: PutioAPIClient,
 ) => {
   let IP: string = ''
 
   const checkIP = (response: AxiosResponse) => {
-    const newIP = response.headers['putio-client-ip']
+    const newIP = response.headers[IP_HEADER_KEY]
 
     if (!IP) {
       IP = newIP

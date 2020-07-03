@@ -56,7 +56,7 @@ API.User.Info()
 
 ### Events
 
-| Value                 | Payload                                                                                           | Description                             |
-| :-------------------- | :------------------------------------------------------------------------------------------------ | :-------------------------------------- |
-| **ERROR**             | [IPutioAPIClientErrorData](https://github.com/putdotio/putio.js/blob/master/src/types.ts#L15-L21) | Fired when an HTTP request fails        |
-| **CLIENT_IP_CHANGED** | `{ IP: string, newIP: string }`                                                                   | Fired when the IP of the client changes |
+| Value                 | Payload                                                                                       | Description                             |
+| :-------------------- | :-------------------------------------------------------------------------------------------- | :-------------------------------------- |
+| **ERROR**             | [IPutioAPIClientError](https://github.com/putdotio/putio.js/blob/master/src/types.ts#L15-L21) | Fired when an HTTP request fails        |
+| **CLIENT_IP_CHANGED** | `{ IP: string, newIP: string }`                                                               | Fired when the IP of the client changes |

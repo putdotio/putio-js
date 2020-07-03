@@ -11,7 +11,7 @@ const createErrorEmitterMiddleware: IPutioAPIClientMiddlewareFactory = (
   onFulfilled: identity,
 
   onRejected: error => {
-    client.emit(PutioAPIClientEventTypes.ERROR, error.data)
+    client.emit(PutioAPIClientEventTypes.ERROR, error)
     return Promise.reject(error)
   },
 })

@@ -26,6 +26,7 @@ describe('middlewares/errorEmitter', () => {
         response: {
           config: {},
           data: {
+            status_code: 400,
             error_type: 'API_ERROR',
             error_message: 'Putio API Error',
           },
@@ -36,9 +37,10 @@ describe('middlewares/errorEmitter', () => {
       }
 
       errorEmitter.onRejected(error).catch(e => expect(e).toEqual(error))
+
       expect(API.emit).toHaveBeenCalledWith(
         PutioAPIClientEventTypes.ERROR,
-        error.data,
+        error,
       )
     })
   })

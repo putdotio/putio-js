@@ -17,10 +17,12 @@ describe('middlewares/responseFormatter', () => {
         Object {
           "body": Object {
             "foo": "bar",
+            "status": "OK",
           },
           "config": Object {},
           "data": Object {
             "foo": "bar",
+            "status": "OK",
           },
           "headers": Object {},
           "status": 200,
@@ -39,6 +41,7 @@ describe('middlewares/responseFormatter', () => {
           data: {
             error_type: 'API_ERROR',
             error_message: 'Putio API Error',
+            status_code: 400,
           },
           headers: {},
           status: 400,

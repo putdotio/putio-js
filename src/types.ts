@@ -8,8 +8,8 @@ export interface IPutioAPIClientOptions {
 }
 
 export interface IPutioAPIClientResponse<T> extends AxiosResponse {
-  data: T
-  body?: T // @TODO: Remove when it's irrelevant.
+  data: T & { status: 'OK' }
+  body?: T & { status: 'OK' } // @TODO: Remove when it's irrelevant.
 }
 
 export interface IPutioAPIClientErrorData {
@@ -19,7 +19,8 @@ export interface IPutioAPIClientErrorData {
   error_message: string
   status_code: number
 }
-export interface IPutioAPIClientError extends AxiosError {
+export interface IPutioAPIClientError
+  extends AxiosError<IPutioAPIClientErrorData | string> {
   data: IPutioAPIClientErrorData
   toJSON: () => IPutioAPIClientErrorData
 }
@@ -40,8 +41,9 @@ export enum PutioAPIClientEventTypes {
   CLIENT_IP_CHANGED = 'CLIENT_IP_CHANGED',
 }
 
-export * from './resources/FriendInvitesTypes'
 export * from './resources/EventsTypes'
-export * from './resources/Payment/types'
 export * from './resources/Files/types'
+export * from './resources/FriendInvitesTypes'
+export * from './resources/Friends/types'
+export * from './resources/Payment/types'
 export * from './resources/User/types'

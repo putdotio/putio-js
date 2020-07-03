@@ -17,7 +17,7 @@ export const mockPutioAPIClientResponse: IPutioAPIClientResponse<{
   foo: string
 }> = {
   config: {},
-  data: { foo: 'bar' },
+  data: { foo: 'bar', status: 'OK' },
   headers: {},
   status: 200,
   statusText: 'ok',
@@ -53,7 +53,7 @@ export const createMockResponse = <T>(
   status: number = 200,
 ): IPutioAPIClientResponse<T> => ({
   config: {},
-  data,
+  data: { ...data, status: 'OK' },
   status,
   headers: {},
   statusText: 'ok',
