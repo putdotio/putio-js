@@ -11,7 +11,7 @@ JavaScript library for [Put.io API v2](https://api.put.io/v2).
 ## Installation
 
 ```bash
-npm install @putdotio/api-client -S
+npm install @putdotio/api-client
 ```
 
 ### ES Modules / TypeScript
@@ -58,5 +58,5 @@ API.User.Info()
 
 | Value                 | Payload                                                                                       | Description                             |
 | :-------------------- | :-------------------------------------------------------------------------------------------- | :-------------------------------------- |
-| **ERROR**             | [IPutioAPIClientError](https://github.com/putdotio/putio.js/blob/master/src/types.ts#L15-L21) | Fired when an HTTP request fails        |
+| **ERROR**             | [IPutioAPIClientError](https://github.com/putdotio/putio.js/blob/master/src/types.ts#L23-L27) | Fired when an HTTP request fails        |
 | **CLIENT_IP_CHANGED** | `{ IP: string, newIP: string }`                                                               | Fired when the IP of the client changes |
