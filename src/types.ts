@@ -19,6 +19,7 @@ export interface IPutioAPIClientErrorData {
   error_message: string
   status_code: number
 }
+
 export interface IPutioAPIClientError
   extends AxiosError<IPutioAPIClientErrorData | string> {
   data: IPutioAPIClientErrorData
