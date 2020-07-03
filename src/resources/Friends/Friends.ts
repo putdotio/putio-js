@@ -1,4 +1,5 @@
-import PutioAPIClient from '../client'
+import PutioAPIClient from '../../client'
+import { IFriendListResponse, IUserSearchResponse } from './types'
 
 export default class Friends {
   private client: PutioAPIClient
@@ -8,19 +9,13 @@ export default class Friends {
   }
 
   public Query() {
-    return this.client.get('/friends/list', {
-      params: {
-        shared_info: 1,
-      },
-    })
+    return this.client.get<IFriendListResponse>('/friends/list')
   }
 
-  public Search(phrase: string) {
-    return this.client.post('/friends/user-search', {
-      data: {
-        name: phrase,
-      },
-    })
+  public Search(username: string) {
+    return this.client.post<IUserSearchResponse>(
+      `/friends/user-search/${username}`,
+    )
   }
 
   public WaitingRequests() {
