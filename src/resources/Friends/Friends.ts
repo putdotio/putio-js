@@ -13,7 +13,7 @@ export default class Friends {
   }
 
   public Search(username: string) {
-    return this.client.post<IUserSearchResponse>(
+    return this.client.get<IUserSearchResponse>(
       `/friends/user-search/${username}`,
     )
   }
