@@ -14,7 +14,7 @@ const createResponseFormatterMiddleware: IPutioAPIClientMiddlewareFactory = () =
     let errorData: any = {}
 
     if (error.response && error.response.data) {
-      const { status, data = {} } = error.response
+      const { status, data } = error.response
 
       errorData = isPutioAPIErrorResponse(data)
         ? { ...data, status_code: status }

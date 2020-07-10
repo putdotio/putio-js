@@ -129,4 +129,14 @@ describe('middlewares/errorEmitter', () => {
       { IP: '0.0.0.0', newIP: '1.1.1.1' },
     )
   })
+
+  it('does not call client.emit method if the error is not recognized', () => {
+    const error = new Error()
+
+    clientIPChangeEmitter
+      .onRejected(error as any)
+      .catch(e => expect(e).toEqual(error))
+
+    expect(API.emit).not.toHaveBeenCalled()
+  })
 })
