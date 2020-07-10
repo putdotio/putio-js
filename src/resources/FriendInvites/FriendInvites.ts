@@ -1,8 +1,6 @@
-import PutioAPIClient from '../client'
-import {
-  IFriendInvitesCreateResponse,
-  IFriendInvitesResponse,
-} from './FriendInvitesTypes'
+import PutioAPIClient from '../../client'
+import { IFriendInvitesCreateResponse, IFriendInvitesResponse } from './types'
+
 export default class FriendInvites {
   private client: PutioAPIClient
 

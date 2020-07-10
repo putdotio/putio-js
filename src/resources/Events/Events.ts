@@ -1,9 +1,9 @@
-import PutioAPIClient from '../client'
+import PutioAPIClient from '../../client'
 import {
   IHistoryClearAllEventsResponse,
   IHistoryDeleteEventResponse,
   IHistoryResponse,
-} from './EventsTypes'
+} from './types'
 
 export default class PutioEvents {
   private client: PutioAPIClient

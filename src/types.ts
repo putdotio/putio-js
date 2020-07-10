@@ -42,9 +42,9 @@ export enum PutioAPIClientEventTypes {
   CLIENT_IP_CHANGED = 'CLIENT_IP_CHANGED',
 }
 
-export * from './resources/EventsTypes'
+export * from './resources/Events/types'
 export * from './resources/Files/types'
-export * from './resources/FriendInvitesTypes'
+export * from './resources/FriendInvites/types'
 export * from './resources/Friends/types'
 export * from './resources/Payment/types'
 export * from './resources/User/types'
