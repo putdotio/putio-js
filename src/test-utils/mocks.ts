@@ -61,13 +61,9 @@ export const createMockResponse = <T>(
 
 export const createMockErrorResponse = (
   data: IPutioAPIClientErrorData,
-  status: number = 0,
 ): IPutioAPIClientError => ({
   ...mockAxiosError,
-  data: {
-    ...data,
-    status_code: status,
-  },
+  data,
   toJSON() {
     return this.data
   },
