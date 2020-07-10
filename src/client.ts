@@ -151,7 +151,8 @@ class PutioAPIClient implements Emitter {
       baseURL: this.options.baseURL,
       withCredentials: true,
       timeout: 30000,
-      paramsSerializer: params => qs.stringify(params, { indices: false }),
+      paramsSerializer: params =>
+        qs.stringify(params, { arrayFormat: 'comma' }),
     })
 
     const middlewareFactories: IPutioAPIClientMiddlewareFactory[] = [
