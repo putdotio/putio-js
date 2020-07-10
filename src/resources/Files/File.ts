@@ -66,6 +66,30 @@ export default class File {
     })
   }
 
+  public GetHLSStreamURL(
+    fileId: number,
+    {
+      subtitleLanguages = [],
+      maxSubtitleCount = -1,
+      playOriginal = 0,
+    }: {
+      subtitleLanguages?: string[]
+      maxSubtitleCount?: number
+      playOriginal?: 0 | 1
+    },
+  ) {
+    return new URI(
+      `${this.client.options.baseURL}/v2/files/${fileId}/hls/media.m3u8`,
+    )
+      .query({
+        oauth_token: this.client.token,
+        subtitle_languages: subtitleLanguages,
+        max_subtitle_count: maxSubtitleCount,
+        original: playOriginal,
+      })
+      .toString()
+  }
+
   public ConvertToMp4(fileId: number) {
     return this.client.post(`/files/${fileId}/mp4`)
   }
