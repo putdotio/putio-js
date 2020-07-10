@@ -69,23 +69,25 @@ export default class File {
   public GetHLSStreamURL(
     fileId: number,
     {
+      token = '',
       subtitleLanguages = [],
       maxSubtitleCount = -1,
-      playOriginal = 0,
+      playOriginal = false,
     }: {
+      token?: string
       subtitleLanguages?: string[]
       maxSubtitleCount?: number
-      playOriginal?: 0 | 1
+      playOriginal?: boolean
     },
   ) {
     return new URI(
       `${this.client.options.baseURL}/v2/files/${fileId}/hls/media.m3u8`,
     )
       .query({
-        oauth_token: this.client.token,
+        oauth_token: token || this.client.token,
         subtitle_languages: subtitleLanguages,
         max_subtitle_count: maxSubtitleCount,
-        original: playOriginal,
+        original: playOriginal ? 1 : 0,
       })
       .toString()
   }
