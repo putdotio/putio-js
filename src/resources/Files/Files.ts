@@ -1,5 +1,5 @@
 import PutioAPIClient from '../../client'
-import { FileType, ISearchResponse } from './types'
+import { FileSortOption, FileType, ISearchResponse } from './types'
 
 export default class Files {
   private client: PutioAPIClient
@@ -11,53 +11,75 @@ export default class Files {
   public Query(
     id: number | string,
     {
-      breadcrumbs = null,
-      sort = null,
-      total = null,
-      limit = null,
-      mp4Status = null,
-      mp4StatusParent = null,
-      videoMetadata = null,
-      videoMetadataParent = null,
+      perPage = null,
+      sortBy = null,
+      contentType = null,
+      fileType = null,
       streamUrl = null,
       streamUrlParent = null,
       mp4StreamUrl = null,
       mp4StreamUrlParent = null,
-      contentType = null,
+      hidden = false,
+      mp4Status = null,
+      mp4StatusParent = null,
+      videoMetadata = null,
+      videoMetadataParent = null,
       codecsParent = null,
       mediaInfoParent = null,
+      breadcrumbs = false,
+      total = true,
+    }: {
+      perPage?: number
+      sortBy?: FileSortOption
+      contentType?: string
+      fileType?: FileType
+      streamUrl?: boolean
+      streamUrlParent?: boolean
+      mp4StreamUrl?: boolean
+      mp4StreamUrlParent?: boolean
+      hidden?: boolean
+      mp4Status?: boolean
+      mp4StatusParent?: boolean
+      videoMetadata?: boolean
+      videoMetadataParent?: boolean
+      codecsParent?: boolean
+      mediaInfoParent?: boolean
+      breadcrumbs?: boolean
+      total?: boolean
     } = {},
   ) {
     return this.client.get(
       `/files/${id === 'friends' ? 'items-shared-with-you' : 'list'}`,
       {
         params: {
-          breadcrumbs,
           parent_id: id !== 'friends' ? id : null,
-          sort,
-          total,
-          per_page: limit,
-          mp4_status: mp4Status,
-          mp4_status_parent: mp4StatusParent,
-          video_metadata: videoMetadata,
-          video_metadata_parent: videoMetadataParent,
+          per_page: perPage,
+          sort_by: sortBy,
+          content_type: contentType,
+          file_type: fileType,
           stream_url: streamUrl,
           stream_url_parent: streamUrlParent,
           mp4_stream_url: mp4StreamUrl,
           mp4_stream_url_parent: mp4StreamUrlParent,
-          content_type: contentType,
+          hidden,
+          mp4_status: mp4Status,
+          mp4_status_parent: mp4StatusParent,
+          video_metadata: videoMetadata,
+          video_metadata_parent: videoMetadataParent,
           codecs_parent: codecsParent,
           media_info_parent: mediaInfoParent,
+          breadcrumbs,
+          total,
         },
       },
     )
   }
 
-  public Continue(cursor: string, { limit }: { limit?: number } = {}) {
+  public Continue(cursor: string, { perPage }: { perPage?: number } = {}) {
     return this.client.post('/files/list/continue', {
       data: {
         cursor,
-        per_page: limit,
+        per_page: perPage,
       },
     })
   }
@@ -95,19 +117,19 @@ export default class Files {
   }
 
   public CreateFolder({
-    path,
     name,
     parentId,
+    path,
   }: {
-    path?: string
     name: string
-    parentId: number
+    parentId?: number
+    path?: string
   }) {
     return this.client.post('/files/create-folder', {
       data: {
-        path,
         name,
         parent_id: parentId,
+        path,
       },
     })
   }

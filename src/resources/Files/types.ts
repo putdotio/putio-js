@@ -9,6 +9,19 @@ export type FileType =
   | 'TEXT'
   | 'SWF'
 
+export const FileSortOptions = {
+  NAME_ASC: 'NAME_ASC',
+  NAME_DESC: 'NAME_DESC',
+  SIZE_ASC: 'SIZE_ASC',
+  SIZE_DESC: 'SIZE_DESC',
+  DATE_ASC: 'DATE_ASC',
+  DATE_DESC: 'DATE_DESC',
+  MODIFIED_ASC: 'MODIFIED_ASC',
+  MODIFIED_DESC: 'MODIFIED_DESC',
+} as const
+
+export type FileSortOption = typeof FileSortOptions[keyof typeof FileSortOptions]
+
 export interface IFile extends Record<string, any> {
   id: number
   parent_id: number

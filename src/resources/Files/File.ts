@@ -79,7 +79,7 @@ export default class File {
       subtitleLanguages?: string[]
       maxSubtitleCount?: number
       playOriginal?: boolean
-    },
+    } = {},
   ) {
     return new URI(
       `${this.client.options.baseURL}/v2/files/${fileId}/hls/media.m3u8`,
