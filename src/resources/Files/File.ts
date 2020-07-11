@@ -42,22 +42,6 @@ export default class File {
     return this.client.get(`/files/${fileId}/stream`)
   }
 
-  public Get(
-    fileId: number,
-    params = {
-      breadcrumbs: 1,
-      codecs: 1,
-      media_info: 1,
-      mp4_size: 1,
-      start_from: 1,
-      stream_url: 1,
-    },
-  ) {
-    return this.client.get(`/files/${fileId}`, {
-      params,
-    })
-  }
-
   public Subtitles(fileId: number, oauthToken: string, languages: string[]) {
     return this.client.get(`/files/${fileId}/subtitles`, {
       params: {
