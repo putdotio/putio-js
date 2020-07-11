@@ -66,7 +66,7 @@ export default class File {
     } = {},
   ) {
     return new URI(
-      `${this.client.options.baseURL}/v2/files/${fileId}/hls/media.m3u8`,
+      `${this.client.options.baseURL}/files/${fileId}/hls/media.m3u8`,
     )
       .query({
         oauth_token: token || this.client.token,
