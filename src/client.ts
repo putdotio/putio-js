@@ -45,10 +45,6 @@ class PutioAPIClient {
   public token: string | undefined
 
   public emitter: Emitter
-  public emit (event: PutioAPIClientEventTypes, ...args: any[]) { this.emitter.emit(event, ...args) }
-  public once (event: PutioAPIClientEventTypes, listener: EventListener) { this.once(event, listener) }
-  public on (event: PutioAPIClientEventTypes, listener: EventListener) { this.emitter.on(event, listener) }
-  public off (event: PutioAPIClientEventTypes, listener: EventListener) { this.emitter.off(event, listener) }
 
   public http: AxiosInstance
 
@@ -91,6 +87,22 @@ class PutioAPIClient {
     this.User = new User(this)
     this.Zips = new Zips(this)
     this.IFTTT = new IFTTT(this)
+  }
+
+  public emit(event: PutioAPIClientEventTypes, ...args: any[]) {
+    this.emitter.emit(event, ...args)
+  }
+
+  public once(event: PutioAPIClientEventTypes, listener: EventListener) {
+    this.once(event, listener)
+  }
+
+  public on(event: PutioAPIClientEventTypes, listener: EventListener) {
+    this.emitter.on(event, listener)
+  }
+
+  public off(event: PutioAPIClientEventTypes, listener: EventListener) {
+    this.emitter.off(event, listener)
   }
 
   public setToken(token: string): PutioAPIClient {
