@@ -64,7 +64,7 @@ export default class Payment {
     })
   }
 
-  public ChangePlan(args) {
+  public ChangePlan(args: any) {
     return this.GetPlanChangeUrls(args)
   }
 
@@ -110,7 +110,7 @@ export default class Payment {
     })
   }
 
-  public AddWaitingPayment(data) {
+  public AddWaitingPayment(data: any) {
     return this.client.post('/payment/paddle_waiting_payment', { data })
   }
 }

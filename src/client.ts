@@ -32,7 +32,7 @@ import {
   PutioAPIClientEventTypes,
 } from './types'
 
-class PutioAPIClient implements Emitter {
+class PutioAPIClient {
   public static EVENTS = PutioAPIClientEventTypes
 
   public static DEFAULT_OPTIONS: IPutioAPIClientOptions = {
@@ -42,19 +42,12 @@ class PutioAPIClient implements Emitter {
   }
 
   public options: IPutioAPIClientOptions
-  public token: string
+  public token: string | undefined
 
-  public emit: (event: PutioAPIClientEventTypes, ...args: any[]) => void
-  public once: (
-    event: PutioAPIClientEventTypes,
-    listener: EventListener,
-  ) => void
-  public on: (event: PutioAPIClientEventTypes, listener: EventListener) => void
-  public off: (event: PutioAPIClientEventTypes, listener: EventListener) => void
+  public emitter: Emitter
 
   public http: AxiosInstance
 
-  public Account: Account
   public Auth: Auth
   public Config: Config
   public Events: Events
@@ -74,7 +67,7 @@ class PutioAPIClient implements Emitter {
   public Zips: Zips
 
   constructor(options: IPutioAPIClientOptions) {
-    EventEmitter(this)
+    this.emitter = EventEmitter()
     this.options = { ...PutioAPIClient.DEFAULT_OPTIONS, ...options }
     this.http = this.createHTTPClient()
     this.Auth = new Auth(this)
@@ -94,6 +87,22 @@ class PutioAPIClient implements Emitter {
     this.User = new User(this)
     this.Zips = new Zips(this)
     this.IFTTT = new IFTTT(this)
+  }
+
+  public emit(event: PutioAPIClientEventTypes, ...args: any[]) {
+    this.emitter.emit(event, ...args)
+  }
+
+  public once(event: PutioAPIClientEventTypes, listener: EventListener) {
+    this.once(event, listener)
+  }
+
+  public on(event: PutioAPIClientEventTypes, listener: EventListener) {
+    this.emitter.on(event, listener)
+  }
+
+  public off(event: PutioAPIClientEventTypes, listener: EventListener) {
+    this.emitter.off(event, listener)
   }
 
   public setToken(token: string): PutioAPIClient {
