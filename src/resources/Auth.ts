@@ -40,7 +40,7 @@ export default class Auth {
   }: {
     username: string
     password: string
-    app?: {
+    app: {
       client_id: string
       client_secret: string
     }

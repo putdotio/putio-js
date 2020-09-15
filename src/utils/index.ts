@@ -3,9 +3,9 @@ import { IPutioAPIClientError, IPutioAPIClientErrorData } from '../types'
 export const identity = <T>(arg: T) => arg
 
 export const isPutioAPIErrorResponse = (
-  input: unknown,
+  input: any,
 ): input is IPutioAPIClientErrorData =>
-  typeof input === 'object' && Object.keys(input).includes('error_type')
+  Object.keys(input).includes('error_type')
 
 export const isPutioAPIError = (
   input: unknown,
