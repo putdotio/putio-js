@@ -14,7 +14,7 @@ export default class OAuth {
       options: { baseURL },
     } = this.client
 
-    const uri = new URI(`${baseURL}/oauth2/authorize`).query({
+    const uri = new URI(`${baseURL}/oauth2/authorize`).addQuery({
       ...query,
       oauth_token: token,
     })

@@ -68,7 +68,7 @@ export default class File {
     return new URI(
       `${this.client.options.baseURL}/files/${fileId}/hls/media.m3u8`,
     )
-      .query({
+      .addQuery({
         oauth_token: token || this.client.token,
         subtitle_languages: subtitleLanguages,
         max_subtitle_count: maxSubtitleCount,

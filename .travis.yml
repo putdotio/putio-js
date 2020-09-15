@@ -4,8 +4,8 @@ node_js:
   - '12.13'
 
 script:
-  - npm run build
-  - npm run coveralls
+  - yarn build
+  - yarn coveralls
 
 deploy:
   edge: true

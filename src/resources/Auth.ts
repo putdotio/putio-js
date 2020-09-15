@@ -22,11 +22,14 @@ export default class Auth {
     clientID: string
     clientName?: string
   }): string {
-    const url = new URI(`${this.client.options.webAppURL}/authenticate`).query({
-      client_id: clientID || this.client.options.clientID,
+    const { options } = this.client
+
+    const url = new URI(`${options.webAppURL}/authenticate`).addQuery({
+      client_id: clientID || options.clientID,
       client_name: clientName,
       redirect_uri: redirectURI,
       response_type: responseType,
+      isolated: 1,
       state,
     })
 
