@@ -11,7 +11,11 @@ JavaScript library for [Put.io API v2](https://api.put.io/v2).
 ## Installation
 
 ```bash
-npm install @putdotio/api-client
+yarn add @putdotio/api-client
+```
+
+```bash
+npm install @putdotio/api-client -S
 ```
 
 ### ES Modules / TypeScript
