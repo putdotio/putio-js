@@ -13,7 +13,7 @@ export default class Tranfers {
     callbackUrl,
   }: {
     url: string
-    saveTo: number
+    saveTo?: number
     callbackUrl?: string
   }) {
     return this.client.post('/transfers/add', {
