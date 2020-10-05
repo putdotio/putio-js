@@ -47,4 +47,12 @@ export default class User {
       },
     })
   }
+
+  public Confirmations(type?: string) {
+    return this.client.get('/account/confirmation/list', {
+      data: {
+        type,
+      },
+    })
+  }
 }
