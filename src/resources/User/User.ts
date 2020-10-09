@@ -1,5 +1,10 @@
 import PutioAPIClient from '../../client'
-import { IUserInfoResponse, IUserSettingsResponse } from './types'
+import {
+  IUserInfoResponse,
+  IUserSettingsResponse,
+  IUserConfirmationsResponse,
+  ConfirmationSubject,
+} from './types'
 
 export default class User {
   private client: PutioAPIClient
@@ -46,5 +51,16 @@ export default class User {
         current_password: currentPassword,
       },
     })
+  }
+
+  public Confirmations(type?: ConfirmationSubject) {
+    return this.client.get<IUserConfirmationsResponse>(
+      '/account/confirmation/list',
+      {
+        data: {
+          type,
+        },
+      },
+    )
   }
 }

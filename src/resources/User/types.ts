@@ -10,9 +10,13 @@ export interface IUserProperties extends Record<string, any> {
   mail: string
   avatar_url: string
   account_active: boolean
-  files_will_be_deleted_at: string | null
-  is_admin: boolean
   disk: IUserDisk
+  is_sub_account: boolean
+  is_eligible_for_friend_invitation: boolean
+  is_admin: boolean
+  can_create_sub_account: boolean
+  files_will_be_deleted_at: string | null
+  password_last_changed_at: string | null
 }
 
 export interface IUserSettings extends Record<string, any> {
@@ -37,4 +41,15 @@ export interface IUserInfoResponse {
 
 export interface IUserSettingsResponse {
   settings: IUserSettings
+}
+
+export type ConfirmationSubject = 'mail_change'
+
+export interface IUserConfirmation {
+  subject: ConfirmationSubject
+  created_at: string
+}
+
+export interface IUserConfirmationsResponse {
+  confirmations: IUserConfirmation[]
 }
