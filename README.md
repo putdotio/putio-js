@@ -12,10 +12,8 @@ JavaScript library for [Put.io API v2](https://api.put.io/v2).
 
 ```bash
 yarn add @putdotio/api-client
-```
 
-```bash
-npm install @putdotio/api-client -S
+npm install @putdotio/api-client
 ```
 
 ### ES Modules / TypeScript
@@ -33,30 +31,45 @@ const PutioAPI = require('@putdotio/api-client').default
 ## Usage
 
 ```js
-const API = new PutioAPI({ clientID: 'OAUTH_CLIENT_ID' })
+// you can pass the options in constructor
+const putioAPI = new PutioAPI({ clientID: 'OAUTH_CLIENT_ID' })
 
-API.setToken('XYZ')
+// or use `configure` method
+MyApp.bootstrap(config => {
+  putioAPI.configure({ clientID: config.OAUTH_CLIENT_ID })
+})
 
-API.User.Info()
-  .then(r => console.log('Fetched user info: ', r))
-  .catch(e => console.log('An error occurred while fetching user info: ', e))
+// setToken will send the given auth token with every request, in Authorization header
+MyApp.onLogin(token => {
+  putioAPI.setToken(token)
+
+  putioAPI.User.Info()
+    .then(r => console.log('Fetched user info: ', r))
+    .catch(e => console.log('An error occurred while fetching user info: ', e))
+})
+
+// clearToken will perform a clean-up and stop sending the token in Authorization header
+MyApp.onLogout(() => {
+  putioAPI.clearToken()
+})
 ```
 
 ## API
 
 ### Options
 
-| Prop          | Type   |             Default Value              | Description                                                     |
-| :------------ | :----- | :------------------------------------: | :-------------------------------------------------------------- |
-| **clientID**  | number |                   1                    | OAuth app client ID, defaults to [put.io web app](app.put.io)   |
+| Prop          | Type   | Default Value                          | Description                                                     |
+| :------------ | :----- | :------------------------------------- | :-------------------------------------------------------------- |
+| **clientID**  | number | 1                                      | OAuth app client ID, defaults to [put.io web app](app.put.io)   |
 | **baseURL**   | string | [api.put.io/v2](https://api.put.io/v2) | Base URL of the API                                             |
-| **webAppURL** | string |      [app.put.io](https://put.io)      | Base URL of the Put.io web app, used in the authentication flow |
+| **webAppURL** | string | [app.put.io](https://put.io)           | Base URL of the Put.io web app, used in the authentication flow |
 
 ### Methods
 
-| Name         | Parameters        | Return Value            |
-| :----------- | :---------------- | :---------------------- |
-| **setToken** | `(token: string)` | PutioAPIClient Instance |
+| Name          | Parameters                          | Return Value            |
+| :------------ | :---------------------------------- | :---------------------- |
+| **configure** | `(options: IPutioAPIClientOptions)` | PutioAPIClient Instance |
+| **setToken**  | `(token: string)`                   | PutioAPIClient Instance |
 
 ### Events
 
