@@ -1,14 +1,12 @@
 import {
-  MockPutioAPIClient,
   mockPutioAPIClientError,
   mockPutioAPIClientResponse,
 } from '../test-utils/mocks'
 import { IPutioAPIClientError } from '../types'
-import create from './responseFormatter'
+import { createResponseFormatterMiddleware } from './responseFormatter'
 
 describe('middlewares/responseFormatter', () => {
-  const API = new MockPutioAPIClient()
-  const responseFormatter = create(API)
+  const responseFormatter = createResponseFormatterMiddleware()
 
   describe('successful responses', () => {
     it('transforms as expected', () => {

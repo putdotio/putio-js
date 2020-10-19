@@ -1,10 +1,7 @@
-import {
-  IPutioAPIClientError,
-  IPutioAPIClientMiddlewareFactory,
-} from '../types'
+import { IPutioAPIClientError, PutioAPIClientMiddlewareFactory } from '../types'
 import { isPutioAPIErrorResponse } from '../utils'
 
-const createResponseFormatterMiddleware: IPutioAPIClientMiddlewareFactory = () => ({
+export const createResponseFormatterMiddleware: PutioAPIClientMiddlewareFactory = () => ({
   onFulfilled: response => ({
     ...response,
     body: response.data,
@@ -40,5 +37,3 @@ const createResponseFormatterMiddleware: IPutioAPIClientMiddlewareFactory = () =
     return Promise.reject(formattedError)
   },
 })
-
-export default createResponseFormatterMiddleware

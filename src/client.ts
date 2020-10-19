@@ -1,11 +1,19 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
-import EventEmitter, { Emitter, EventListener } from 'event-emitter'
 import qs from 'qs'
-
-import createClientIPChangeEmitterMiddleware from './middlewares/clientIPChangeEmitter'
-import createErrorEmitterMiddleware from './middlewares/errorEmitter'
-import createResponseFormatterMiddleware from './middlewares/responseFormatter'
-
+import { createClientIPChangeEmitterMiddleware } from './middlewares/clientIPChangeEmitter'
+import { createErrorEmitterMiddleware } from './middlewares/errorEmitter'
+import { createResponseFormatterMiddleware } from './middlewares/responseFormatter'
+import {
+  eventEmitter,
+  EVENTS,
+  PutioAPIClientEventTypes,
+  EventListener,
+} from './eventEmitter'
+import {
+  PutioAPIClientMiddlewareFactory,
+  IPutioAPIClientOptions,
+  IPutioAPIClientResponse,
+} from './types'
 import Auth from './resources/Auth'
 import Config from './resources/Config'
 import Events from './resources/Events/Events'
@@ -24,16 +32,8 @@ import Tunnel from './resources/Tunnel'
 import User from './resources/User/User'
 import Zips from './resources/Zips'
 
-import {
-  IPutioAPIClientMiddleware,
-  IPutioAPIClientMiddlewareFactory,
-  IPutioAPIClientOptions,
-  IPutioAPIClientResponse,
-  PutioAPIClientEventTypes,
-} from './types'
-
 export class PutioAPIClient {
-  public static EVENTS = PutioAPIClientEventTypes
+  public static EVENTS = EVENTS
 
   public static DEFAULT_OPTIONS: IPutioAPIClientOptions = {
     baseURL: 'https://api.put.io/v2',
@@ -43,9 +43,6 @@ export class PutioAPIClient {
 
   public options: IPutioAPIClientOptions
   public token: string | undefined
-
-  public emitter: Emitter
-
   public http: AxiosInstance
 
   public Auth: Auth
@@ -67,7 +64,6 @@ export class PutioAPIClient {
   public Zips: Zips
 
   constructor(options: IPutioAPIClientOptions) {
-    this.emitter = EventEmitter()
     this.options = { ...PutioAPIClient.DEFAULT_OPTIONS, ...options }
     this.http = this.createHTTPClient()
     this.Auth = new Auth(this)
@@ -89,20 +85,16 @@ export class PutioAPIClient {
     this.IFTTT = new IFTTT(this)
   }
 
-  public emit(event: PutioAPIClientEventTypes, ...args: any[]) {
-    this.emitter.emit(event, ...args)
-  }
-
   public once(event: PutioAPIClientEventTypes, listener: EventListener) {
-    this.once(event, listener)
+    return eventEmitter.once(event, listener)
   }
 
   public on(event: PutioAPIClientEventTypes, listener: EventListener) {
-    this.emitter.on(event, listener)
+    return eventEmitter.on(event, listener)
   }
 
   public off(event: PutioAPIClientEventTypes, listener: EventListener) {
-    this.emitter.off(event, listener)
+    return eventEmitter.off(event, listener)
   }
 
   public configure(options: IPutioAPIClientOptions) {
@@ -175,22 +167,20 @@ export class PutioAPIClient {
         qs.stringify(params, { arrayFormat: 'comma' }),
     })
 
-    const middlewareFactories: IPutioAPIClientMiddlewareFactory[] = [
+    const middlewareFactories: PutioAPIClientMiddlewareFactory[] = [
       createResponseFormatterMiddleware,
       createClientIPChangeEmitterMiddleware,
       createErrorEmitterMiddleware,
     ]
 
-    const middlewares: IPutioAPIClientMiddleware[] = middlewareFactories.map(
-      createMiddleware => createMiddleware(this),
-    )
-
-    middlewares.forEach(middleware => {
-      axiosInstance.interceptors.response.use(
-        middleware.onFulfilled,
-        middleware.onRejected,
-      )
-    })
+    middlewareFactories
+      .map(createMiddleware => createMiddleware())
+      .forEach(middleware => {
+        axiosInstance.interceptors.response.use(
+          middleware.onFulfilled,
+          middleware.onRejected,
+        )
+      })
 
     return axiosInstance
   }

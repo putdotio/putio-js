@@ -1,21 +1,21 @@
+import { eventEmitter, EVENTS } from '../eventEmitter'
 import {
-  MockPutioAPIClient,
   mockPutioAPIClientError,
   mockPutioAPIClientResponse,
 } from '../test-utils/mocks'
-import { IPutioAPIClientError, PutioAPIClientEventTypes } from '../types'
-import create from './errorEmitter'
+import { IPutioAPIClientError } from '../types'
+import { createErrorEmitterMiddleware } from './errorEmitter'
 
 describe('middlewares/errorEmitter', () => {
-  const API = new MockPutioAPIClient()
-  const errorEmitter = create(API)
+  const eventEmitterEmit = jest.spyOn(eventEmitter, 'emit')
+  const errorEmitter = createErrorEmitterMiddleware()
 
   beforeEach(jest.resetAllMocks)
 
   describe('successful responses', () => {
     it('does not call client.emit method', () => {
       errorEmitter.onFulfilled(mockPutioAPIClientResponse)
-      expect(API.emit).not.toHaveBeenCalled()
+      expect(eventEmitterEmit).not.toHaveBeenCalled()
     })
   })
 
@@ -37,11 +37,7 @@ describe('middlewares/errorEmitter', () => {
       }
 
       errorEmitter.onRejected(error).catch(e => expect(e).toEqual(error))
-
-      expect(API.emit).toHaveBeenCalledWith(
-        PutioAPIClientEventTypes.ERROR,
-        error,
-      )
+      expect(eventEmitterEmit).toHaveBeenCalledWith(EVENTS.ERROR, error)
     })
   })
 })
