@@ -86,15 +86,15 @@ export class PutioAPIClient {
   }
 
   public once(event: PutioAPIClientEventTypes, listener: EventListener) {
-    return eventEmitter.once(event, listener)
+    eventEmitter.once(event, listener)
   }
 
   public on(event: PutioAPIClientEventTypes, listener: EventListener) {
-    return eventEmitter.on(event, listener)
+    eventEmitter.on(event, listener)
   }
 
   public off(event: PutioAPIClientEventTypes, listener: EventListener) {
-    return eventEmitter.off(event, listener)
+    eventEmitter.off(event, listener)
   }
 
   public configure(options: IPutioAPIClientOptions) {
