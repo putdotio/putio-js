@@ -32,7 +32,7 @@ import {
   PutioAPIClientEventTypes,
 } from './types'
 
-class PutioAPIClient {
+export class PutioAPIClient {
   public static EVENTS = PutioAPIClientEventTypes
 
   public static DEFAULT_OPTIONS: IPutioAPIClientOptions = {
@@ -105,9 +105,20 @@ class PutioAPIClient {
     this.emitter.off(event, listener)
   }
 
+  public configure(options: IPutioAPIClientOptions) {
+    this.options = { ...this.options, ...options }
+    return this
+  }
+
   public setToken(token: string): PutioAPIClient {
     this.token = token
     this.http.defaults.headers.common.Authorization = `token ${token}`
+    return this
+  }
+
+  public clearToken(): PutioAPIClient {
+    this.token = undefined
+    this.http.defaults.headers.common.Authorization = ``
     return this
   }
 
@@ -184,5 +195,3 @@ class PutioAPIClient {
     return axiosInstance
   }
 }
-
-export default PutioAPIClient

@@ -1,5 +1,5 @@
 import URI from 'urijs'
-import PutioAPIClient from '../../client'
+import { PutioAPIClient } from '../../client'
 import { IGetStartFromResponse } from './types'
 export default class File {
   private client: PutioAPIClient

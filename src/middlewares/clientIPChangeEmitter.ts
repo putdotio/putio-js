@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import PutioAPIClient from '../client'
+import { PutioAPIClient } from '../client'
 import {
   IPutioAPIClientMiddlewareFactory,
   PutioAPIClientEventTypes,
