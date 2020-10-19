@@ -1,4 +1,4 @@
-import PutioAPIClient from '../client'
+import { PutioAPIClient } from '../client'
 import {
   IPutioAPIClientMiddlewareFactory,
   PutioAPIClientEventTypes,

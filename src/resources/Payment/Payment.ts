@@ -1,4 +1,4 @@
-import PutioAPIClient from '../../client'
+import { PutioAPIClient } from '../../client'
 import { IUserPaymentInfoResponse, IVoucherInfoResponse } from './types'
 
 export default class Payment {

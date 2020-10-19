@@ -1,4 +1,4 @@
-import PutioAPIClient from '../../client'
+import { PutioAPIClient } from '../../client'
 import { IFriendListResponse, IUserSearchResponse } from './types'
 
 export default class Friends {

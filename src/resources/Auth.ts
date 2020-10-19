@@ -1,6 +1,6 @@
 import { Base64 } from 'js-base64'
 import URI from 'urijs'
-import PutioAPIClient from '../client'
+import { PutioAPIClient } from '../client'
 
 export default class Auth {
   private client: PutioAPIClient

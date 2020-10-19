@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios'
-import PutioAPIClient from '../client'
+import { PutioAPIClient } from '../client'
 import {
   IPutioAPIClientError,
   IPutioAPIClientErrorData,

@@ -1,4 +1,4 @@
-import PutioAPIClient from '../../client'
+import { PutioAPIClient } from '../../client'
 import { FileSortOption, FileType, ISearchResponse } from './types'
 
 export default class Files {

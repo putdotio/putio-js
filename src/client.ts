@@ -106,7 +106,7 @@ export class PutioAPIClient {
   }
 
   public configure(options: IPutioAPIClientOptions) {
-    this.options = { ...PutioAPIClient.DEFAULT_OPTIONS, ...options }
+    this.options = { ...this.options, ...options }
     return this
   }
 
