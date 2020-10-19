@@ -1,17 +1,9 @@
 import { AxiosError } from 'axios'
-import { PutioAPIClient } from '../client'
 import {
   IPutioAPIClientError,
   IPutioAPIClientErrorData,
   IPutioAPIClientResponse,
 } from '../types'
-
-export class MockPutioAPIClient extends PutioAPIClient {
-  constructor() {
-    super({})
-    this.emit = jest.fn()
-  }
-}
 
 export const mockPutioAPIClientResponse: IPutioAPIClientResponse<{
   foo: string

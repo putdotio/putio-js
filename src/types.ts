@@ -1,5 +1,4 @@
 import { AxiosError, AxiosResponse } from 'axios'
-import PutioAPIClient from '.'
 
 export interface IPutioAPIClientOptions {
   clientID?: number
@@ -26,21 +25,14 @@ export interface IPutioAPIClientError
   toJSON: () => IPutioAPIClientErrorData
 }
 
-export interface IPutioAPIClientMiddleware {
+export interface PutioAPIClientMiddleware {
   onFulfilled: (
     response: IPutioAPIClientResponse<any>,
   ) => IPutioAPIClientResponse<any>
   onRejected: (error: IPutioAPIClientError) => Promise<IPutioAPIClientError>
 }
 
-export type IPutioAPIClientMiddlewareFactory = (
-  client: PutioAPIClient,
-) => IPutioAPIClientMiddleware
-
-export enum PutioAPIClientEventTypes {
-  ERROR = 'ERROR',
-  CLIENT_IP_CHANGED = 'CLIENT_IP_CHANGED',
-}
+export type PutioAPIClientMiddlewareFactory = () => PutioAPIClientMiddleware
 
 export * from './resources/Events/types'
 export * from './resources/Files/types'
