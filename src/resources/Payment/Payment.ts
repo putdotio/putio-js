@@ -68,6 +68,14 @@ export default class Payment {
     return this.GetPlanChangeUrls(args)
   }
 
+  public CreateNanoPaymentRequest({ planCode }: { planCode: string }) {
+    return this.client.post('/payment/methods/nano/request', {
+      data: {
+        plan_code: planCode,
+      },
+    })
+  }
+
   public CreateCoinbaseCharge(path: string) {
     return this.client.post('/payment/methods/coinbase/charge', {
       data: {
