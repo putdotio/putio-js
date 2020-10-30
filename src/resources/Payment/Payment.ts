@@ -1,5 +1,9 @@
 import { PutioAPIClient } from '../../client'
-import { IUserPaymentInfoResponse, IVoucherInfoResponse } from './types'
+import {
+  IUserPaymentInfoResponse,
+  IVoucherInfoResponse,
+  INanoPaymentRequestResponse,
+} from './types'
 
 export default class Payment {
   private client: PutioAPIClient
@@ -69,11 +73,14 @@ export default class Payment {
   }
 
   public CreateNanoPaymentRequest({ planCode }: { planCode: string }) {
-    return this.client.post('/payment/methods/nano/request', {
-      data: {
-        plan_code: planCode,
+    return this.client.post<INanoPaymentRequestResponse>(
+      '/payment/methods/nano/request',
+      {
+        data: {
+          plan_code: planCode,
+        },
       },
-    })
+    )
   }
 
   public CreateCoinbaseCharge(path: string) {
