@@ -59,3 +59,9 @@ export interface IVoucherInfoResponse {
   }
   new_remaining_days: number
 }
+
+export interface INanoPaymentRequestResponse {
+  nano: {
+    token: string
+  }
+}
