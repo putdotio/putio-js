@@ -1,3 +1,5 @@
+import FormData from 'form-data'
+
 import { PutioAPIClient } from '../../client'
 import { FileSortOption, FileType, ISearchResponse } from './types'
 
@@ -302,6 +304,25 @@ export default class Files {
         cursor,
         watched,
       },
+    })
+  }
+
+  public Upload({
+    file,
+    filename = '',
+    parent_id = '',
+  }: {
+    file: string
+    filename?: string
+    parent_id?: number
+  }) {
+    const form = new FormData()
+    form.append('file', file)
+    form.append('filename', filename)
+    form.append('parent_id', parent_id)
+    return this.client.post('/files/upload', {
+      data: form,
+      headers: form.getHeaders(),
     })
   }
 }
