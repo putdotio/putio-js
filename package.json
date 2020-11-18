@@ -53,7 +53,7 @@
   "devDependencies": {
     "@putdotio/prettier-config": "^1.0.0",
     "@types/event-emitter": "^0.3.3",
-    "@types/qs": "^6.9.3",
+    "@types/qs": "^6.9.5",
     "@types/urijs": "^1.19.5",
     "coveralls": "^3.1.0",
     "husky": "^4.2.5",
