@@ -1,4 +1,5 @@
 export * from './test-utils/mocks'
+export * from './client/types'
 export * from './resources/Events/types'
 export * from './resources/Files/types'
 export * from './resources/FriendInvites/types'
