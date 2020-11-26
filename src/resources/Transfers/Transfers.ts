@@ -1,4 +1,5 @@
 import { PutioAPIClient } from '../../client'
+import { ITransfersResponse, Transfer } from './types'
 
 export default class Tranfers {
   private client: PutioAPIClient
@@ -26,11 +27,25 @@ export default class Tranfers {
   }
 
   public Get(id: number) {
-    return this.client.get(`/transfers/${id}`)
+    return this.client.get<{ transfer: Transfer }>(`/transfers/${id}`)
   }
 
-  public Query() {
-    return this.client.get('/transfers/list')
+  public Query({ perPage, total }: { perPage?: number; total?: boolean } = {}) {
+    return this.client.get<ITransfersResponse>('/transfers/list', {
+      params: {
+        per_page: perPage,
+        total,
+      },
+    })
+  }
+
+  public Continue(cursor: string, { perPage }: { perPage?: number } = {}) {
+    return this.client.post<ITransfersResponse>('/transfers/list/continue', {
+      data: {
+        cursor,
+        per_page: perPage,
+      },
+    })
   }
 
   public ClearAll() {
