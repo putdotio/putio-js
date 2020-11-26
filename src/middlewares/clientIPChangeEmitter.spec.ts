@@ -3,7 +3,7 @@ import {
   mockPutioAPIClientError,
   mockPutioAPIClientResponse,
 } from '../test-utils/mocks'
-import { IPutioAPIClientError, PutioAPIClientMiddleware } from '../types'
+import { IPutioAPIClientError, PutioAPIClientMiddleware } from '../client/types'
 import { createClientIPChangeEmitterMiddleware } from './clientIPChangeEmitter'
 
 describe('middlewares/errorEmitter', () => {
