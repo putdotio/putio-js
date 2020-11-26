@@ -1,4 +1,4 @@
-import { IPutioAPIClientError, IPutioAPIClientErrorData } from '../types'
+import { IPutioAPIClientError, IPutioAPIClientErrorData } from '../client/types'
 
 export const identity = <T>(arg: T) => arg
 

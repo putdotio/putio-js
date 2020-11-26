@@ -1,4 +1,7 @@
-import { IPutioAPIClientError, PutioAPIClientMiddlewareFactory } from '../types'
+import {
+  IPutioAPIClientError,
+  PutioAPIClientMiddlewareFactory,
+} from '../client/types'
 import { isPutioAPIErrorResponse } from '../utils'
 
 export const createResponseFormatterMiddleware: PutioAPIClientMiddlewareFactory = () => ({

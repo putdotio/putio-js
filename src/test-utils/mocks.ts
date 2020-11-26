@@ -3,7 +3,7 @@ import {
   IPutioAPIClientError,
   IPutioAPIClientErrorData,
   IPutioAPIClientResponse,
-} from '../types'
+} from '../client/types'
 
 export const mockPutioAPIClientResponse: IPutioAPIClientResponse<{
   foo: string

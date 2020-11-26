@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import { PutioAPIClientMiddlewareFactory } from '../types'
+import { PutioAPIClientMiddlewareFactory } from '../client/types'
 import { eventEmitter, EVENTS } from '../eventEmitter'
 
 const IP_HEADER_KEY = 'putio-client-ip'

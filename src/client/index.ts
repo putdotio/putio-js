@@ -1,36 +1,36 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import qs from 'qs'
-import { createClientIPChangeEmitterMiddleware } from './middlewares/clientIPChangeEmitter'
-import { createErrorEmitterMiddleware } from './middlewares/errorEmitter'
-import { createResponseFormatterMiddleware } from './middlewares/responseFormatter'
+import { createClientIPChangeEmitterMiddleware } from '../middlewares/clientIPChangeEmitter'
+import { createErrorEmitterMiddleware } from '../middlewares/errorEmitter'
+import { createResponseFormatterMiddleware } from '../middlewares/responseFormatter'
 import {
   eventEmitter,
   EVENTS,
   PutioAPIClientEventTypes,
   EventListener,
-} from './eventEmitter'
+} from '../eventEmitter'
 import {
   PutioAPIClientMiddlewareFactory,
   IPutioAPIClientOptions,
   IPutioAPIClientResponse,
 } from './types'
-import Auth from './resources/Auth'
-import Config from './resources/Config'
-import Events from './resources/Events/Events'
-import Family from './resources/Family'
-import File from './resources/Files/File'
-import Files from './resources/Files/Files'
-import FriendInvites from './resources/FriendInvites/FriendInvites'
-import Friends from './resources/Friends/Friends'
-import IFTTT from './resources/IFTTT'
-import OAuth from './resources/OAuth'
-import Payment from './resources/Payment/Payment'
-import RSS from './resources/RSS'
-import Transfers from './resources/Transfers'
-import Trash from './resources/Trash'
-import Tunnel from './resources/Tunnel'
-import User from './resources/User/User'
-import Zips from './resources/Zips'
+import Auth from '../resources/Auth'
+import Config from '../resources/Config'
+import Events from '../resources/Events/Events'
+import Family from '../resources/Family'
+import File from '../resources/Files/File'
+import Files from '../resources/Files/Files'
+import FriendInvites from '../resources/FriendInvites/FriendInvites'
+import Friends from '../resources/Friends/Friends'
+import IFTTT from '../resources/IFTTT'
+import OAuth from '../resources/OAuth'
+import Payment from '../resources/Payment/Payment'
+import RSS from '../resources/RSS'
+import Transfers from '../resources/Transfers/Transfers'
+import Trash from '../resources/Trash'
+import Tunnel from '../resources/Tunnel'
+import User from '../resources/User/User'
+import Zips from '../resources/Zips'
 
 export class PutioAPIClient {
   public static EVENTS = EVENTS

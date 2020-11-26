@@ -1,4 +1,4 @@
-import { PutioAPIClientMiddlewareFactory } from '../types'
+import { PutioAPIClientMiddlewareFactory } from '../client/types'
 import { identity } from '../utils'
 import { eventEmitter, EVENTS } from '../eventEmitter'
 
