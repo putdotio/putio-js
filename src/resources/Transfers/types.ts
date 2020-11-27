@@ -13,6 +13,8 @@ type TransferStatus =
   | 'ERROR'
   | 'PREPARING_SEED'
 
+type TransferLink = { url: string; label: string }
+
 type BaseTransfer = {
   availability: null | number
   created_at: ISODateString
@@ -33,29 +35,31 @@ type BaseTransfer = {
   started_at: null | ISODateString
   status: TransferStatus
   type: TransferType
-  subscription_id: null | number
+  subscription_id: null | number // ID of the RSS Feed
   uploaded: number
   up_speed: number
 
   // not documented in swagger
-  callback_url: null | string
+  callback_url: null | string // not used in clients
   client_ip: null | string
-  completion_percent: number // used?
-  created_torrent: boolean // used?
-  download_id: number
-  hash: null | string // used?
-  links: string[] // used?
+
+  completion_percent: number // ⬇️ are they different?
+  percent_done: number // ⬆️
+
+  created_torrent: boolean // not used in clients
+  download_id: number // not used in clients
+  hash: null | string // not used in clients
+  links: TransferLink[] // used in admin
   peers_connected: number
-  peers_getting_from_us: number
-  peers_sending_to_us: number
-  percent_done: number
-  simulated: boolean
+  peers_getting_from_us: number // not used in clients
+  peers_sending_to_us: number // not used in clients
+  simulated: boolean // not used in clients
   status_message: string
   torrent_link: null | string
-  tracker: null | string
+  tracker: null | string // not used in clients
   tracker_message: null | string
 
-  // documented in swagger but doesn't come in response, delete from api docs?
+  // documented in swagger but doesn't come in response
   peers: number
 }
 
@@ -118,11 +122,12 @@ export type PlaylistTransfer = (
 ) & {
   type: 'PLAYLIST'
 
-  // not documented in swagger. not present in transfers/list response, but comes within socket updates
+  // not documented in swagger
+  // not present in transfers/list response, but comes within socket updates.
   downloaded_items: number
   total_items: number
 
-  // why present in this one?
+  // why present in this one? it's not live recording.
   recorded_seconds: number
 }
 
