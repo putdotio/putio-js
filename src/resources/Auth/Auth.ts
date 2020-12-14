@@ -1,6 +1,7 @@
 import { Base64 } from 'js-base64'
 import URI from 'urijs'
-import { PutioAPIClient } from '../client'
+import { PutioAPIClient } from '../../client'
+import { IGenerateTOTPResponse, IVerifyTOTPResponse } from './types'
 
 export default class Auth {
   private client: PutioAPIClient
@@ -148,12 +149,12 @@ export default class Auth {
     return this.client.get('/oauth2/validate')
   }
 
-  public GenerateTotp() {
-    return this.client.post('/two_factor/generate/totp')
+  public GenerateTOTP() {
+    return this.client.post<IGenerateTOTPResponse>('/two_factor/generate/totp')
   }
 
-  public VerifyTotp(totp: string) {
-    return this.client.post('/two_factor/verify/totp', {
+  public VerifyTOTP(totp: string) {
+    return this.client.post<IVerifyTOTPResponse>('/two_factor/verify/totp', {
       data: {
         totp,
       },
