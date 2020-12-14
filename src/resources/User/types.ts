@@ -43,7 +43,7 @@ export interface IUserSettingsResponse {
   settings: IUserSettings
 }
 
-export type ConfirmationSubject = 'mail_change'
+export type ConfirmationSubject = 'mail_change' | 'password_change'
 
 export interface IUserConfirmation {
   subject: ConfirmationSubject
