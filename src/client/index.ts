@@ -14,7 +14,7 @@ import {
   IPutioAPIClientOptions,
   IPutioAPIClientResponse,
 } from './types'
-import Auth from '../resources/Auth'
+import Auth from '../resources/Auth/Auth'
 import Config from '../resources/Config'
 import Events from '../resources/Events/Events'
 import Family from '../resources/Family'

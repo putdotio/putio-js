@@ -29,6 +29,7 @@ export interface IUserSettings extends Record<string, any> {
   is_invisible: boolean
   start_from: boolean
   trash_enabled: boolean
+  two_factor_enabled: boolean
 }
 
 export interface IUser extends IUserProperties {
