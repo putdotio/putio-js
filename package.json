@@ -48,7 +48,7 @@
     "form-data": "^3.0.0",
     "js-base64": "^2.6.2",
     "qs": "^6.9.4",
-    "urijs": "^1.19.2"
+    "urijs": "^1.19.5"
   },
   "devDependencies": {
     "@putdotio/prettier-config": "^1.0.0",
