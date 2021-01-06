@@ -44,7 +44,10 @@ export interface IUserSettingsResponse {
   settings: IUserSettings
 }
 
-export type ConfirmationSubject = 'mail_change' | 'password_change'
+export type ConfirmationSubject =
+  | 'mail_change'
+  | 'password_change'
+  | 'subscription_upgrade'
 
 export interface IUserConfirmation {
   subject: ConfirmationSubject

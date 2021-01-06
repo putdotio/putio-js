@@ -43,7 +43,7 @@
   },
   "prettier": "@putdotio/prettier-config",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.19.2",
     "event-emitter": "^0.3.5",
     "form-data": "^3.0.0",
     "js-base64": "^2.6.2",

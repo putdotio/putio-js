@@ -53,14 +53,17 @@ export default class Payment {
     planPath,
     paymentType,
     couponCode,
+    confirmationCode,
   }: {
     planPath: string
     paymentType: string
     couponCode?: string
+    confirmationCode?: string
   }) {
     return this.client.post(`/payment/change_plan/${planPath}`, {
       data: {
         payment_type: paymentType,
+        confirmation_code: confirmationCode,
       },
       params: {
         coupon_code: couponCode,
