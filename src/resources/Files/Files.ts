@@ -1,4 +1,3 @@
-import FormData from 'form-data'
 import { PutioAPIClient } from '../../client'
 import { FileSortOption, FileType, ISearchResponse } from './types'
 
@@ -315,6 +314,7 @@ export default class Files {
     fileName?: string
     parentId?: number
   }) {
+    const FormData = require('form-data')
     const form = new FormData()
     form.append('file', file)
     form.append('filename', fileName)
