@@ -58,11 +58,11 @@ MyApp.onLogout(() => {
 
 ### Options
 
-| Prop          | Type   | Default Value                          | Description                                                     |
-| :------------ | :----- | :------------------------------------- | :-------------------------------------------------------------- |
-| **clientID**  | number | 1                                      | OAuth app client ID, defaults to [put.io web app](app.put.io)   |
-| **baseURL**   | string | [api.put.io/v2](https://api.put.io/v2) | Base URL of the API                                             |
-| **webAppURL** | string | [app.put.io](https://put.io)           | Base URL of the Put.io web app, used in the authentication flow |
+| Prop          | Type   | Default Value                              | Description                                                           |
+| :------------ | :----- | :----------------------------------------- | :-------------------------------------------------------------------- |
+| **clientID**  | number | 1                                          | OAuth app client ID, defaults to [put.io web app](https://app.put.io) |
+| **baseURL**   | string | [api.put.io/v2](https://api.put.io/v2)     | Base URL of the API                                                   |
+| **webAppURL** | string | [app.put.io](https://app.put.io)           | Base URL of the Put.io web app, used in the authentication flow       |
 
 ### Methods
 
@@ -73,7 +73,7 @@ MyApp.onLogout(() => {
 
 ### Events
 
-| Value                 | Payload                                                                                       | Description                             |
-| :-------------------- | :-------------------------------------------------------------------------------------------- | :-------------------------------------- |
-| **ERROR**             | [IPutioAPIClientError](https://github.com/putdotio/putio.js/blob/master/src/types.ts#L23-L27) | Fired when an HTTP request fails        |
-| **CLIENT_IP_CHANGED** | `{ IP: string, newIP: string }`                                                               | Fired when the IP of the client changes |
+| Value                 | Payload                                                                                              | Description                             |
+| :-------------------- | :--------------------------------------------------------------------------------------------------- | :-------------------------------------- |
+| **ERROR**             | [IPutioAPIClientError](https://github.com/putdotio/putio.js/blob/master/src/client/types.ts#L22-L26) | Fired when an HTTP request fails        |
+| **CLIENT_IP_CHANGED** | `{ IP: string, newIP: string }`                                                                      | Fired when the IP of the client changes |
