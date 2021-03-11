@@ -91,31 +91,4 @@ export default class Tranfers {
   public Count() {
     return this.client.get('/transfers/count')
   }
-
-  public CreateTorrent({
-    cursor,
-    excludeIds = [],
-    name = '',
-    trackers = '',
-    isPrivate = false,
-    ids = [],
-  }: {
-    name: string
-    trackers: string
-    isPrivate: boolean
-    cursor?: string
-    ids: number[]
-    excludeIds: number[]
-  }) {
-    return this.client.post('/transfers/create-torrent', {
-      data: {
-        cursor,
-        excludeIds: excludeIds.join(','),
-        file_ids: ids.join(','),
-        is_private: isPrivate,
-        name,
-        trackers,
-      },
-    })
-  }
 }
