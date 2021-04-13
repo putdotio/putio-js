@@ -1,5 +1,10 @@
 import { PutioAPIClient } from '../../client'
-import { FileSortOption, FileType, ISearchResponse } from './types'
+import {
+  FileSortOption,
+  FileType,
+  IFileDeleteResponse,
+  ISearchResponse,
+} from './types'
 
 export default class Files {
   private client: PutioAPIClient
@@ -143,7 +148,7 @@ export default class Files {
       partialDelete?: boolean
     },
   ) {
-    return this.client.post('/files/delete', {
+    return this.client.post<IFileDeleteResponse>('/files/delete', {
       data: {
         cursor,
         exclude_ids: excludeIds.join(','),
@@ -167,7 +172,7 @@ export default class Files {
       skipTrash?: boolean
     } = {},
   ) {
-    return this.client.post('/files/delete', {
+    return this.client.post<IFileDeleteResponse>('/files/delete', {
       data: {
         file_ids: ids.join(','),
       },
