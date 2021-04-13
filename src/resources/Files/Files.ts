@@ -1,5 +1,10 @@
 import { PutioAPIClient } from '../../client'
-import { FileSortOption, FileType, ISearchResponse } from './types'
+import {
+  FileSortOption,
+  FileType,
+  IFileDeleteResponse,
+  ISearchResponse,
+} from './types'
 
 export default class Files {
   private client: PutioAPIClient
@@ -134,29 +139,48 @@ export default class Files {
     })
   }
 
-  public DeleteAll(cursor: string, excludeIds: number[] = []) {
-    return this.client.post('/files/delete', {
+  public DeleteAll(
+    cursor: string,
+    excludeIds: number[] = [],
+    {
+      partialDelete = false,
+    }: {
+      partialDelete?: boolean
+    },
+  ) {
+    return this.client.post<IFileDeleteResponse>('/files/delete', {
       data: {
         cursor,
         exclude_ids: excludeIds.join(','),
       },
       params: {
         skip_nonexistents: true,
+        partial_delete: partialDelete,
       },
     })
   }
 
   public Delete(
     ids: number[] = [],
-    { ignoreFileOwner = false }: { ignoreFileOwner?: boolean } = {},
+    {
+      ignoreFileOwner = false,
+      partialDelete = false,
+      skipTrash,
+    }: {
+      ignoreFileOwner?: boolean
+      partialDelete?: boolean
+      skipTrash?: boolean
+    } = {},
   ) {
-    return this.client.post('/files/delete', {
+    return this.client.post<IFileDeleteResponse>('/files/delete', {
       data: {
         file_ids: ids.join(','),
       },
       params: {
         skip_nonexistents: true,
         skip_owner_check: ignoreFileOwner,
+        partial_delete: partialDelete,
+        skip_trash: skipTrash,
       },
     })
   }

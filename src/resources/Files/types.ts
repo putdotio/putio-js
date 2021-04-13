@@ -43,3 +43,8 @@ export interface ISearchResponse {
   total: number
   cursor: string
 }
+
+export interface IFileDeleteResponse {
+  skipped: number[]
+  deleted: number[]
+}
