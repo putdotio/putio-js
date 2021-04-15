@@ -1,6 +1,6 @@
 {
   "name": "@putdotio/api-client",
-  "version": "8.15.2",
+  "version": "8.15.3",
   "description": "JS client for Put.io API",
   "keywords": [
     "putio",
