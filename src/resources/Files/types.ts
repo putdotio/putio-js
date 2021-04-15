@@ -45,6 +45,6 @@ export interface ISearchResponse {
 }
 
 export interface IFileDeleteResponse {
-  skipped: number[]
-  deleted: number[]
+  skipped: number
+  cursor: string
 }

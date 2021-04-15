@@ -84,6 +84,8 @@ export default class Files {
     return this.client.post('/files/list/continue', {
       data: {
         cursor,
+      },
+      params: {
         per_page: perPage,
       },
     })
@@ -112,6 +114,8 @@ export default class Files {
     return this.client.post<ISearchResponse>('/files/search/continue', {
       data: {
         cursor,
+      },
+      params: {
         per_page: perPage,
       },
     })
@@ -144,8 +148,10 @@ export default class Files {
     excludeIds: number[] = [],
     {
       partialDelete = false,
+      skipTrash,
     }: {
       partialDelete?: boolean
+      skipTrash?: boolean
     },
   ) {
     return this.client.post<IFileDeleteResponse>('/files/delete', {
@@ -156,6 +162,7 @@ export default class Files {
       params: {
         skip_nonexistents: true,
         partial_delete: partialDelete,
+        skip_trash: skipTrash,
       },
     })
   }
