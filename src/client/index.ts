@@ -15,6 +15,7 @@ import {
   IPutioAPIClientResponse,
 } from './types'
 import Auth from '../resources/Auth/Auth'
+import DownloadLinks from '../resources/DownloadLinks/DownloadLinks'
 import Config from '../resources/Config'
 import Events from '../resources/Events/Events'
 import Family from '../resources/Family'
@@ -46,6 +47,7 @@ export class PutioAPIClient {
   public http: AxiosInstance
 
   public Auth: Auth
+  public DownloadLinks: DownloadLinks
   public Config: Config
   public Events: Events
   public Family: Family
@@ -67,6 +69,7 @@ export class PutioAPIClient {
     this.options = { ...PutioAPIClient.DEFAULT_OPTIONS, ...options }
     this.http = this.createHTTPClient()
     this.Auth = new Auth(this)
+    this.DownloadLinks = new DownloadLinks(this)
     this.Config = new Config(this)
     this.Events = new Events(this)
     this.Files = new Files(this)
