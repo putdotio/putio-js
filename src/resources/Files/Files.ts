@@ -271,24 +271,6 @@ export default class Files {
     })
   }
 
-  public DownloadLinks({
-    ids = [],
-    cursor,
-    excludeIds = [],
-  }: {
-    ids?: number[]
-    cursor?: string
-    excludeIds?: number[]
-  }) {
-    return this.client.post('/files/get-download-links', {
-      data: {
-        file_ids: ids.join(','),
-        exclude_ids: excludeIds.join(','),
-        cursor,
-      },
-    })
-  }
-
   public ConvertToMp4({
     ids = [],
     cursor,
