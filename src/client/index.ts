@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import qs from 'qs'
+import { v4 as uuidv4 } from 'uuid'
 import { createClientIPChangeEmitterMiddleware } from '../middlewares/clientIPChangeEmitter'
 import { createErrorEmitterMiddleware } from '../middlewares/errorEmitter'
 import { createResponseFormatterMiddleware } from '../middlewares/responseFormatter'
@@ -14,6 +15,7 @@ import {
   IPutioAPIClientOptions,
   IPutioAPIClientResponse,
 } from './types'
+import { CORRELATION_ID_HEADER_NAME } from '../constants'
 import Auth from '../resources/Auth/Auth'
 import DownloadLinks from '../resources/DownloadLinks/DownloadLinks'
 import Config from '../resources/Config'
@@ -169,6 +171,17 @@ export class PutioAPIClient {
       paramsSerializer: params =>
         qs.stringify(params, { arrayFormat: 'comma' }),
     })
+
+    axiosInstance.interceptors.request.use(
+      config => {
+        config.headers[CORRELATION_ID_HEADER_NAME] = uuidv4()
+        return config
+      },
+      null,
+      // the 3rd argument is not reflected in the types, but it exists lol.
+      // @ts-ignore
+      { synchronous: true },
+    )
 
     const middlewareFactories: PutioAPIClientMiddlewareFactory[] = [
       createResponseFormatterMiddleware,

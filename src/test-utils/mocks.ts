@@ -1,14 +1,21 @@
-import { AxiosError } from 'axios'
+import { AxiosError, AxiosRequestConfig } from 'axios'
+import { CORRELATION_ID_HEADER_NAME } from '../constants'
 import {
   IPutioAPIClientError,
   IPutioAPIClientErrorData,
   IPutioAPIClientResponse,
 } from '../client/types'
 
+const mockRequestConfig: AxiosRequestConfig = {
+  headers: {
+    [CORRELATION_ID_HEADER_NAME]: '443bff25-b0fa-403b-88b0-00ae5a114b2e',
+  },
+}
+
 export const mockPutioAPIClientResponse: IPutioAPIClientResponse<{
   foo: string
 }> = {
-  config: {},
+  config: mockRequestConfig,
   data: { foo: 'bar', status: 'OK' },
   headers: {},
   status: 200,
@@ -16,7 +23,7 @@ export const mockPutioAPIClientResponse: IPutioAPIClientResponse<{
 }
 
 export const mockAxiosError: AxiosError = {
-  config: {},
+  config: mockRequestConfig,
   isAxiosError: true,
   name: 'AXIOS_ERROR',
   message: 'AXIOS_ERROR_MESSAGE',
@@ -44,7 +51,7 @@ export const createMockResponse = <T>(
   data: T,
   status: number = 200,
 ): IPutioAPIClientResponse<T> => ({
-  config: {},
+  config: mockRequestConfig,
   data: { ...data, status: 'OK' },
   status,
   headers: {},

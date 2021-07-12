@@ -43,12 +43,13 @@
   },
   "prettier": "@putdotio/prettier-config",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "event-emitter": "^0.3.5",
     "form-data": "^3.0.0",
     "js-base64": "^2.6.2",
     "qs": "^6.9.4",
-    "urijs": "^1.19.5"
+    "urijs": "^1.19.5",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@putdotio/prettier-config": "^1.0.0",
@@ -56,6 +57,7 @@
     "@types/js-base64": "^2.3.2",
     "@types/qs": "^6.9.5",
     "@types/urijs": "^1.19.13",
+    "@types/uuid": "^8.3.1",
     "coveralls": "^3.1.0",
     "husky": "^4.2.5",
     "tsdx": "^0.14.1",

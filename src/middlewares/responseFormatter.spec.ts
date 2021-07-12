@@ -17,7 +17,11 @@ describe('middlewares/responseFormatter', () => {
             "foo": "bar",
             "status": "OK",
           },
-          "config": Object {},
+          "config": Object {
+            "headers": Object {
+              "X-Putio-Correlation-Id": "443bff25-b0fa-403b-88b0-00ae5a114b2e",
+            },
+          },
           "data": Object {
             "foo": "bar",
             "status": "OK",
@@ -50,6 +54,7 @@ describe('middlewares/responseFormatter', () => {
       responseFormatter.onRejected(error).catch(e =>
         expect(e).toMatchInlineSnapshot(`
           Object {
+            "correlation_id": "443bff25-b0fa-403b-88b0-00ae5a114b2e",
             "error_message": "Putio API Error",
             "error_type": "API_ERROR",
             "status_code": 400,
@@ -58,7 +63,7 @@ describe('middlewares/responseFormatter', () => {
       )
     })
 
-    it('sets error.data property correctly when the request failed with HTTP response but without Put.io API signature', () => {
+    it('sets error.data property correctly when the request failed with HTTP response but without Put.io API signature and no meaningful header config', () => {
       const error: IPutioAPIClientError = {
         ...mockPutioAPIClientError,
         response: {
@@ -70,9 +75,12 @@ describe('middlewares/responseFormatter', () => {
         },
       }
 
+      error.config.headers = undefined
+
       responseFormatter.onRejected(error).catch(e =>
         expect(e).toMatchInlineSnapshot(`
           Object {
+            "correlation_id": undefined,
             "error_message": "AXIOS_ERROR_MESSAGE",
             "error_type": "ERROR",
             "status_code": 502,
@@ -85,6 +93,7 @@ describe('middlewares/responseFormatter', () => {
       responseFormatter.onRejected(mockPutioAPIClientError).catch(e =>
         expect(e).toMatchInlineSnapshot(`
           Object {
+            "correlation_id": undefined,
             "error_message": "AXIOS_ERROR_MESSAGE",
             "error_type": "ERROR",
             "status_code": 0,
@@ -92,5 +101,13 @@ describe('middlewares/responseFormatter', () => {
         `),
       )
     })
+  })
+
+  describe('royally fucked up cases', () => {
+    const royallyFuckedUpError = new Error('undefined is not a function')
+
+    responseFormatter
+      .onRejected(royallyFuckedUpError as any)
+      .catch(e => expect(e).toBe(royallyFuckedUpError))
   })
 })
