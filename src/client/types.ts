@@ -12,6 +12,7 @@ export interface IPutioAPIClientResponse<T> extends AxiosResponse {
 }
 
 export interface IPutioAPIClientErrorData {
+  correlation_id?: string
   error_id?: string
   error_uri?: string
   error_type: string
