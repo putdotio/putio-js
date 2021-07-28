@@ -8,18 +8,18 @@ export default class Family {
   }
 
   public GetInvites() {
-    return this.client.get('/account/family_invites')
+    return this.client.get('/family/invites')
   }
 
   public CreateInvite() {
-    return this.client.post('/account/sub_account')
+    return this.client.post('/family/sub_account')
   }
 
   public DeleteMember(username: string) {
-    return this.client.delete(`/account/sub_account/${username}`)
+    return this.client.delete(`/family/sub_account/${username}`)
   }
 
   public Join(invitationCode: string) {
-    return this.client.post(`/account/join_family/${invitationCode}`)
+    return this.client.post(`/family/join/${invitationCode}`)
   }
 }
