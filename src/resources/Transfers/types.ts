@@ -54,7 +54,6 @@ type BaseTransfer = {
   peers_getting_from_us: number // not used in clients
   peers_sending_to_us: number // not used in clients
   simulated: boolean // not used in clients
-  status_message: string
   torrent_link: null | string
   tracker: null | string // not used in clients
   tracker_message: null | string
