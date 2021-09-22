@@ -6,7 +6,7 @@
 ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@putdotio/api-client)
 ![GitHub](https://img.shields.io/github/license/putdotio/putio.js)
 
-JavaScript library for [Put.io API v2](https://api.put.io/v2).
+JavaScript library for [Put.io API v2](https://api.put.io/v2/docs).
 
 ## Installation
 
