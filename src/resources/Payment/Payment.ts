@@ -3,6 +3,7 @@ import {
   IUserPaymentInfoResponse,
   IVoucherInfoResponse,
   INanoPaymentRequestResponse,
+  IPaymentOptionsResponse,
 } from './types'
 
 export default class Payment {
@@ -18,6 +19,10 @@ export default class Payment {
 
   public Plans() {
     return this.client.get('/payment/plans')
+  }
+
+  public Options() {
+    return this.client.get<IPaymentOptionsResponse>('/payment/options')
   }
 
   public History({ unReportedOnly = false } = {}) {
