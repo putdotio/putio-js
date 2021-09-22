@@ -65,3 +65,16 @@ export interface INanoPaymentRequestResponse {
     token: string
   }
 }
+
+export type PaymentOption = {
+  name: string
+  disabled: boolean
+  suitable_plan_types: (PlanType | 'trial')[]
+  default?: boolean
+  discount_percent: Number
+  banned_countries: string[]
+}
+
+export interface IPaymentOptionsResponse {
+  options: PaymentOption[]
+}
