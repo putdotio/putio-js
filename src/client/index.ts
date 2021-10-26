@@ -18,6 +18,7 @@ import {
 import { CORRELATION_ID_HEADER_NAME } from '../constants'
 import Auth from '../resources/Auth/Auth'
 import DownloadLinks from '../resources/DownloadLinks/DownloadLinks'
+import Sharing from '../resources/Sharing/Sharing'
 import Config from '../resources/Config'
 import Events from '../resources/Events/Events'
 import Family from '../resources/Family'
@@ -50,6 +51,7 @@ export class PutioAPIClient {
 
   public Auth: Auth
   public DownloadLinks: DownloadLinks
+  public Sharing: Sharing
   public Config: Config
   public Events: Events
   public Family: Family
@@ -72,6 +74,7 @@ export class PutioAPIClient {
     this.http = this.createHTTPClient()
     this.Auth = new Auth(this)
     this.DownloadLinks = new DownloadLinks(this)
+    this.Sharing = new Sharing(this)
     this.Config = new Config(this)
     this.Events = new Events(this)
     this.Files = new Files(this)
