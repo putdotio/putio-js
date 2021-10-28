@@ -12,15 +12,18 @@ export default class Sharing {
     ids = [],
     cursor,
     excludeIds = [],
+    parentId = 0,
   }: {
     ids?: number[]
     cursor?: string
     excludeIds?: number[]
+    parentId?: number
   }) {
     return this.client.post<ISharingCloneResponse>('/sharing/clone', {
       data: {
         file_ids: ids.join(','),
         exclude_ids: excludeIds.join(','),
+        parent_id: parentId,
         cursor,
       },
     })
@@ -28,7 +31,7 @@ export default class Sharing {
 
   public CloneInfo(cloneInfoId: number) {
     return this.client.get<ISharingCloneInfoResponse>(
-      `/download_links/${cloneInfoId}`,
+      `/sharing/clone/${cloneInfoId}`,
     )
   }
 }
