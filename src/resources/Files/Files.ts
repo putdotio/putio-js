@@ -262,15 +262,6 @@ export default class Files {
     })
   }
 
-  public Copy(ids: number[], to = 0) {
-    return this.client.post('/files/copy-to-disk', {
-      data: {
-        file_ids: ids.join(','),
-        parent_id: to,
-      },
-    })
-  }
-
   public ConvertToMp4({
     ids = [],
     cursor,
