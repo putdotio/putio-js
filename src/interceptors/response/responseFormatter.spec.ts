@@ -1,12 +1,12 @@
 import {
   mockPutioAPIClientError,
   mockPutioAPIClientResponse,
-} from '../test-utils/mocks'
-import { IPutioAPIClientError } from '../client/types'
-import { createResponseFormatterMiddleware } from './responseFormatter'
+} from '../../test-utils/mocks'
+import { IPutioAPIClientError } from '../../client/types'
+import { createResponseFormatter } from './responseFormatter'
 
-describe('middlewares/responseFormatter', () => {
-  const responseFormatter = createResponseFormatterMiddleware()
+describe('interceptors/response/responseFormatter', () => {
+  const responseFormatter = createResponseFormatter()
 
   describe('successful responses', () => {
     it('transforms as expected', () => {
@@ -19,7 +19,7 @@ describe('middlewares/responseFormatter', () => {
           },
           "config": Object {
             "headers": Object {
-              "X-Putio-Correlation-Id": "443bff25-b0fa-403b-88b0-00ae5a114b2e",
+              "X-Putio-Correlation-Id": "00000000-0000-0000-0000-000000000000",
             },
           },
           "data": Object {
@@ -54,7 +54,7 @@ describe('middlewares/responseFormatter', () => {
       responseFormatter.onRejected(error).catch(e =>
         expect(e).toMatchInlineSnapshot(`
           Object {
-            "correlation_id": "443bff25-b0fa-403b-88b0-00ae5a114b2e",
+            "correlation_id": "00000000-0000-0000-0000-000000000000",
             "error_message": "Putio API Error",
             "error_type": "API_ERROR",
             "status_code": 400,

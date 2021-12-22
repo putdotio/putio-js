@@ -1,18 +1,21 @@
-import { eventEmitter, EVENTS } from '../eventEmitter'
+import { eventEmitter, EVENTS } from '../../eventEmitter'
 import {
   mockPutioAPIClientError,
   mockPutioAPIClientResponse,
-} from '../test-utils/mocks'
-import { IPutioAPIClientError, PutioAPIClientMiddleware } from '../client/types'
-import { createClientIPChangeEmitterMiddleware } from './clientIPChangeEmitter'
+} from '../../test-utils/mocks'
+import {
+  IPutioAPIClientError,
+  PutioAPIClientResponseInterceptor,
+} from '../../client/types'
+import { createClientIPChangeEmitter } from './clientIPChangeEmitter'
 
-describe('middlewares/errorEmitter', () => {
+describe('interceptors/response/clientIPChangeEmitter', () => {
   const eventEmitterEmit = jest.spyOn(eventEmitter, 'emit')
-  let clientIPChangeEmitter: PutioAPIClientMiddleware
+  let clientIPChangeEmitter: PutioAPIClientResponseInterceptor
 
   beforeEach(() => {
     jest.resetAllMocks()
-    clientIPChangeEmitter = createClientIPChangeEmitterMiddleware()
+    clientIPChangeEmitter = createClientIPChangeEmitter()
   })
 
   it('does not call client.emit method if the IP does not change', () => {

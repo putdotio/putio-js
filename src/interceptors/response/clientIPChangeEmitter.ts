@@ -1,10 +1,10 @@
 import { AxiosResponse } from 'axios'
-import { PutioAPIClientMiddlewareFactory } from '../client/types'
-import { eventEmitter, EVENTS } from '../eventEmitter'
+import { PutioAPIClientResponseInterceptorFactory } from '../../client/types'
+import { eventEmitter, EVENTS } from '../../eventEmitter'
 
 const IP_HEADER_KEY = 'putio-client-ip'
 
-export const createClientIPChangeEmitterMiddleware: PutioAPIClientMiddlewareFactory = () => {
+export const createClientIPChangeEmitter: PutioAPIClientResponseInterceptorFactory = () => {
   let IP: string = ''
 
   const checkIP = (response: AxiosResponse) => {

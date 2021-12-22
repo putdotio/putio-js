@@ -2,12 +2,12 @@ import axios from 'axios'
 import {
   IPutioAPIClientError,
   IPutioAPIClientErrorData,
-  PutioAPIClientMiddlewareFactory,
-} from '../client/types'
-import { CORRELATION_ID_HEADER_NAME } from '../constants'
-import { isPutioAPIErrorResponse } from '../utils'
+  PutioAPIClientResponseInterceptorFactory,
+} from '../../client/types'
+import { CORRELATION_ID_HEADER_NAME } from '../../constants'
+import { isPutioAPIErrorResponse } from '../../utils'
 
-export const createResponseFormatterMiddleware: PutioAPIClientMiddlewareFactory = () => ({
+export const createResponseFormatter: PutioAPIClientResponseInterceptorFactory = () => ({
   onFulfilled: response => ({
     ...response,
     body: response.data,

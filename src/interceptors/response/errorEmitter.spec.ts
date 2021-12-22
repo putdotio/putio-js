@@ -1,14 +1,14 @@
-import { eventEmitter, EVENTS } from '../eventEmitter'
+import { eventEmitter, EVENTS } from '../../eventEmitter'
 import {
   mockPutioAPIClientError,
   mockPutioAPIClientResponse,
-} from '../test-utils/mocks'
-import { IPutioAPIClientError } from '../client/types'
-import { createErrorEmitterMiddleware } from './errorEmitter'
+} from '../../test-utils/mocks'
+import { IPutioAPIClientError } from '../../client/types'
+import { createErrorEmitter } from './errorEmitter'
 
-describe('middlewares/errorEmitter', () => {
+describe('interceptors/response/errorEmitter', () => {
   const eventEmitterEmit = jest.spyOn(eventEmitter, 'emit')
-  const errorEmitter = createErrorEmitterMiddleware()
+  const errorEmitter = createErrorEmitter()
 
   beforeEach(jest.resetAllMocks)
 

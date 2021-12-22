@@ -1,4 +1,4 @@
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 export interface IPutioAPIClientOptions {
   clientID?: number
@@ -26,11 +26,17 @@ export interface IPutioAPIClientError
   toJSON: () => IPutioAPIClientErrorData
 }
 
-export type PutioAPIClientMiddleware = {
+export type PutioAPIClientRequestInterceptor = (
+  config: AxiosRequestConfig,
+) => AxiosRequestConfig
+
+export type PutioApiClientRequestInterceptorFactory = () => PutioAPIClientRequestInterceptor
+
+export type PutioAPIClientResponseInterceptor = {
   onFulfilled: (
     response: IPutioAPIClientResponse<any>,
   ) => IPutioAPIClientResponse<any>
   onRejected: (error: IPutioAPIClientError) => Promise<IPutioAPIClientError>
 }
 
-export type PutioAPIClientMiddlewareFactory = () => PutioAPIClientMiddleware
+export type PutioAPIClientResponseInterceptorFactory = () => PutioAPIClientResponseInterceptor

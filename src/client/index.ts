@@ -1,9 +1,9 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import qs from 'qs'
-import { v4 as uuidv4 } from 'uuid'
-import { createClientIPChangeEmitterMiddleware } from '../middlewares/clientIPChangeEmitter'
-import { createErrorEmitterMiddleware } from '../middlewares/errorEmitter'
-import { createResponseFormatterMiddleware } from '../middlewares/responseFormatter'
+import { createCorrelationIdSetter } from '../interceptors/request/correlationIdSetter'
+import { createClientIPChangeEmitter } from '../interceptors/response/clientIPChangeEmitter'
+import { createErrorEmitter } from '../interceptors/response/errorEmitter'
+import { createResponseFormatter } from '../interceptors/response/responseFormatter'
 import {
   eventEmitter,
   EVENTS,
@@ -11,11 +11,10 @@ import {
   EventListener,
 } from '../eventEmitter'
 import {
-  PutioAPIClientMiddlewareFactory,
+  PutioAPIClientResponseInterceptorFactory,
   IPutioAPIClientOptions,
   IPutioAPIClientResponse,
 } from './types'
-import { CORRELATION_ID_HEADER_NAME } from '../constants'
 import Auth from '../resources/Auth/Auth'
 import DownloadLinks from '../resources/DownloadLinks/DownloadLinks'
 import Sharing from '../resources/Sharing/Sharing'
@@ -35,6 +34,7 @@ import Trash from '../resources/Trash'
 import Tunnel from '../resources/Tunnel'
 import User from '../resources/User/User'
 import Zips from '../resources/Zips'
+import { PutioApiClientRequestInterceptorFactory } from '..'
 
 export class PutioAPIClient {
   public static EVENTS = EVENTS
@@ -175,30 +175,34 @@ export class PutioAPIClient {
         qs.stringify(params, { arrayFormat: 'comma' }),
     })
 
-    axiosInstance.interceptors.request.use(
-      config => {
-        config.headers[CORRELATION_ID_HEADER_NAME] = uuidv4()
-        return config
-      },
-      null,
-      // the 3rd argument is not reflected in the types, but it exists lol.
-      // @ts-ignore
-      { synchronous: true },
-    )
-
-    const middlewareFactories: PutioAPIClientMiddlewareFactory[] = [
-      createResponseFormatterMiddleware,
-      createClientIPChangeEmitterMiddleware,
-      createErrorEmitterMiddleware,
+    // apply request interceptors
+    const requestInterceptorFactories: PutioApiClientRequestInterceptorFactory[] = [
+      createCorrelationIdSetter,
     ]
 
-    middlewareFactories
-      .map(createMiddleware => createMiddleware())
-      .forEach(middleware => {
-        axiosInstance.interceptors.response.use(
-          middleware.onFulfilled,
-          middleware.onRejected,
+    requestInterceptorFactories
+      .map(createInterceptor => createInterceptor())
+      .forEach(requestInterceptor => {
+        axiosInstance.interceptors.request.use(
+          requestInterceptor,
+          null,
+          // the 3rd argument is not reflected in the types, but it exists?
+          // @ts-ignore
+          { synchronous: true },
         )
+      })
+
+    // apply response interceptors
+    const responseInterceptorFactories: PutioAPIClientResponseInterceptorFactory[] = [
+      createResponseFormatter,
+      createClientIPChangeEmitter,
+      createErrorEmitter,
+    ]
+
+    responseInterceptorFactories
+      .map(createResponseInterceptor => createResponseInterceptor())
+      .forEach(({ onFulfilled, onRejected }) => {
+        axiosInstance.interceptors.response.use(onFulfilled, onRejected)
       })
 
     return axiosInstance

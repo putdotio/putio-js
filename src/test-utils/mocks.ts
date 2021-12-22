@@ -1,5 +1,5 @@
 import { AxiosError, AxiosRequestConfig } from 'axios'
-import { CORRELATION_ID_HEADER_NAME } from '../constants'
+import { CORRELATION_ID_HEADER_NAME, NIL_CORRELATION_ID } from '../constants'
 import {
   IPutioAPIClientError,
   IPutioAPIClientErrorData,
@@ -8,7 +8,7 @@ import {
 
 const mockRequestConfig: AxiosRequestConfig = {
   headers: {
-    [CORRELATION_ID_HEADER_NAME]: '443bff25-b0fa-403b-88b0-00ae5a114b2e',
+    [CORRELATION_ID_HEADER_NAME]: NIL_CORRELATION_ID,
   },
 }
 
