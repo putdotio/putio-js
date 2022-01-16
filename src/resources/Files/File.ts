@@ -1,6 +1,6 @@
 import URI from 'urijs'
 import { PutioAPIClient } from '../../client'
-import { IGetStartFromResponse } from './types'
+import { IFileConversionStatusResponse, IGetStartFromResponse } from './types'
 export default class File {
   private client: PutioAPIClient
 
@@ -78,11 +78,13 @@ export default class File {
   }
 
   public ConvertToMp4(fileId: number) {
-    return this.client.post(`/files/${fileId}/mp4`)
+    return this.client.post<{ count: number }>(`/files/${fileId}/mp4`)
   }
 
   public ConvertStatus(fileId: number) {
-    return this.client.get(`/files/${fileId}/mp4`)
+    return this.client.get<IFileConversionStatusResponse>(
+      `/files/${fileId}/mp4`,
+    )
   }
 
   public DeleteMp4(fileId: number) {

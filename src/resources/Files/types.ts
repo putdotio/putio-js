@@ -48,3 +48,16 @@ export interface IFileDeleteResponse {
   skipped: number
   cursor: string
 }
+
+export type FileConversionStatus =
+  | { status: 'NOT_AVAILABLE' }
+  | { status: 'IN_QUEUE' }
+  | { status: 'CONVERTING'; percent_done: number }
+  | { status: 'COMPLETED'; size: IFile['size'] }
+  | { status: 'ERROR' }
+
+export interface IFileConversionStatusResponse {
+  mp4: FileConversionStatus & {
+    id: IFile['id']
+  }
+}
