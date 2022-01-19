@@ -1,13 +1,33 @@
 import { v4 } from 'uuid'
 import { createCorrelationIdSetter } from './correlationIdSetter'
-import { CORRELATION_ID_HEADER_NAME, NIL_CORRELATION_ID } from '../../constants'
+import {
+  CORRELATION_ID_HEADER_NAME,
+  NIL_CORRELATION_ID,
+  DEFAULT_CLIENT_OPTIONS,
+} from '../../constants'
 
 jest.mock('uuid', () => ({ v4: jest.fn() }))
 
 describe('interceptors/request/correlationIdSetter', () => {
-  const correlationIdSetter = createCorrelationIdSetter()
+  let correlationIdSetter = createCorrelationIdSetter(DEFAULT_CLIENT_OPTIONS)
 
-  beforeEach(jest.restoreAllMocks)
+  beforeEach(() => {
+    correlationIdSetter = createCorrelationIdSetter(DEFAULT_CLIENT_OPTIONS)
+    jest.restoreAllMocks()
+  })
+
+  it('uses generateUUID function from client options if available', () => {
+    const mockUUID = 'ecdfa284-6ce1-47b4-b2d4-1d5186fc6f14'
+
+    correlationIdSetter = createCorrelationIdSetter({
+      ...DEFAULT_CLIENT_OPTIONS,
+      generateUUID: () => mockUUID,
+    })
+
+    expect(
+      correlationIdSetter({ headers: {} }).headers[CORRELATION_ID_HEADER_NAME],
+    ).toBe(mockUUID)
+  })
 
   it('sets a unique correlation id when uuid/v4 works properly in the environment', () => {
     const mockUUID = 'fcdfa284-6ce1-47b4-b2d4-1d5186fc6f14'

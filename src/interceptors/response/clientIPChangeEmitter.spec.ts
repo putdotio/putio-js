@@ -7,6 +7,7 @@ import {
   IPutioAPIClientError,
   PutioAPIClientResponseInterceptor,
 } from '../../client/types'
+import { DEFAULT_CLIENT_OPTIONS } from '../../constants'
 import { createClientIPChangeEmitter } from './clientIPChangeEmitter'
 
 describe('interceptors/response/clientIPChangeEmitter', () => {
@@ -15,7 +16,7 @@ describe('interceptors/response/clientIPChangeEmitter', () => {
 
   beforeEach(() => {
     jest.resetAllMocks()
-    clientIPChangeEmitter = createClientIPChangeEmitter()
+    clientIPChangeEmitter = createClientIPChangeEmitter(DEFAULT_CLIENT_OPTIONS)
   })
 
   it('does not call client.emit method if the IP does not change', () => {

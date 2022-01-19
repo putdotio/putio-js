@@ -4,6 +4,7 @@ export interface IPutioAPIClientOptions {
   clientID?: number
   baseURL?: string
   webAppURL?: string
+  generateUUID?: () => string
 }
 
 export interface IPutioAPIClientResponse<T> extends AxiosResponse {
@@ -30,7 +31,9 @@ export type PutioAPIClientRequestInterceptor = (
   config: AxiosRequestConfig,
 ) => AxiosRequestConfig
 
-export type PutioApiClientRequestInterceptorFactory = () => PutioAPIClientRequestInterceptor
+export type PutioApiClientRequestInterceptorFactory = (
+  options: IPutioAPIClientOptions,
+) => PutioAPIClientRequestInterceptor
 
 export type PutioAPIClientResponseInterceptor = {
   onFulfilled: (
@@ -39,4 +42,6 @@ export type PutioAPIClientResponseInterceptor = {
   onRejected: (error: IPutioAPIClientError) => Promise<IPutioAPIClientError>
 }
 
-export type PutioAPIClientResponseInterceptorFactory = () => PutioAPIClientResponseInterceptor
+export type PutioAPIClientResponseInterceptorFactory = (
+  options: IPutioAPIClientOptions,
+) => PutioAPIClientResponseInterceptor

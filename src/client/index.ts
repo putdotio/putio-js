@@ -35,15 +35,11 @@ import Tunnel from '../resources/Tunnel'
 import User from '../resources/User/User'
 import Zips from '../resources/Zips'
 import { PutioApiClientRequestInterceptorFactory } from '..'
+import { DEFAULT_CLIENT_OPTIONS } from '../constants'
 
 export class PutioAPIClient {
   public static EVENTS = EVENTS
-
-  public static DEFAULT_OPTIONS: IPutioAPIClientOptions = {
-    baseURL: 'https://api.put.io/v2',
-    clientID: 1,
-    webAppURL: 'https://app.put.io',
-  }
+  public static DEFAULT_OPTIONS = DEFAULT_CLIENT_OPTIONS
 
   public options: IPutioAPIClientOptions
   public token: string | undefined
@@ -181,7 +177,7 @@ export class PutioAPIClient {
     ]
 
     requestInterceptorFactories
-      .map(createInterceptor => createInterceptor())
+      .map(createInterceptor => createInterceptor(this.options))
       .forEach(requestInterceptor => {
         axiosInstance.interceptors.request.use(
           requestInterceptor,
@@ -200,7 +196,7 @@ export class PutioAPIClient {
     ]
 
     responseInterceptorFactories
-      .map(createResponseInterceptor => createResponseInterceptor())
+      .map(createResponseInterceptor => createResponseInterceptor(this.options))
       .forEach(({ onFulfilled, onRejected }) => {
         axiosInstance.interceptors.response.use(onFulfilled, onRejected)
       })

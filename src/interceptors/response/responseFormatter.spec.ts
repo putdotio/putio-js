@@ -3,10 +3,11 @@ import {
   mockPutioAPIClientResponse,
 } from '../../test-utils/mocks'
 import { IPutioAPIClientError } from '../../client/types'
+import { DEFAULT_CLIENT_OPTIONS } from '../../constants'
 import { createResponseFormatter } from './responseFormatter'
 
 describe('interceptors/response/responseFormatter', () => {
-  const responseFormatter = createResponseFormatter()
+  const responseFormatter = createResponseFormatter(DEFAULT_CLIENT_OPTIONS)
 
   describe('successful responses', () => {
     it('transforms as expected', () => {

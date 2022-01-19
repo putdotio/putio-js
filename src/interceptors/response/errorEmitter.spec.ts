@@ -4,11 +4,12 @@ import {
   mockPutioAPIClientResponse,
 } from '../../test-utils/mocks'
 import { IPutioAPIClientError } from '../../client/types'
+import { DEFAULT_CLIENT_OPTIONS } from '../../constants'
 import { createErrorEmitter } from './errorEmitter'
 
 describe('interceptors/response/errorEmitter', () => {
   const eventEmitterEmit = jest.spyOn(eventEmitter, 'emit')
-  const errorEmitter = createErrorEmitter()
+  const errorEmitter = createErrorEmitter(DEFAULT_CLIENT_OPTIONS)
 
   beforeEach(jest.resetAllMocks)
 
