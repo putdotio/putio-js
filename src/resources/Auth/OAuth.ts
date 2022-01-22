@@ -51,13 +51,13 @@ export default class OAuth {
   }
 
   public Create(app: Omit<MyOAuthApp, 'id'>) {
-    return this.client.post<MyOAuthApp>('/oauth/apps/register', {
+    return this.client.post<{ app: MyOAuthApp }>('/oauth/apps/register', {
       data: createFormDataFromObject(app),
     })
   }
 
   public Update(app: MyOAuthApp) {
-    return this.client.post<MyOAuthApp>(`/oauth/apps/${app.id}`, {
+    return this.client.post<{ app: MyOAuthApp }>(`/oauth/apps/${app.id}`, {
       data: createFormDataFromObject(app),
     })
   }
