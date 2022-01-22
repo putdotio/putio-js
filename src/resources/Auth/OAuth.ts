@@ -1,5 +1,5 @@
 import URI from 'urijs'
-import { createFormDataFromObject } from 'utils'
+import { createFormDataFromObject } from '../../utils'
 import { PutioAPIClient } from '../../client'
 import {
   IMyOAuthAppsResponse,
