@@ -1,7 +1,14 @@
 import { Base64 } from 'js-base64'
 import URI from 'urijs'
 import { PutioAPIClient } from '../../client'
-import { IGenerateTOTPResponse, IVerifyTOTPResponse } from './types'
+import {
+  IGenerateTOTPResponse,
+  ILoginResponse,
+  IVerifyTOTPResponse,
+  IValidateTokenResponse,
+  IOAuthAuthorizedAppsResponse,
+  IOAuthAuthorizedAppSessionsResponse,
+} from './types'
 
 export default class Auth {
   private client: PutioAPIClient
@@ -49,7 +56,7 @@ export default class Auth {
       client_secret: string
     }
   }) {
-    return this.client.put(
+    return this.client.put<ILoginResponse>(
       `/oauth2/authorizations/clients/${app.client_id}?client_secret=${app.client_secret}`,
       {
         headers: {
@@ -126,7 +133,7 @@ export default class Auth {
   }
 
   public Grants() {
-    return this.client.get('/oauth/grants/')
+    return this.client.get<IOAuthAuthorizedAppsResponse>('/oauth/grants/')
   }
 
   public RevokeApp(id: number) {
@@ -134,7 +141,9 @@ export default class Auth {
   }
 
   public Clients() {
-    return this.client.get('/oauth/clients/')
+    return this.client.get<IOAuthAuthorizedAppSessionsResponse>(
+      '/oauth/clients/',
+    )
   }
 
   public RevokeClient(id: string) {
@@ -146,7 +155,7 @@ export default class Auth {
   }
 
   public ValidateToken() {
-    return this.client.get('/oauth2/validate')
+    return this.client.get<IValidateTokenResponse>('/oauth2/validate')
   }
 
   public GenerateTOTP() {

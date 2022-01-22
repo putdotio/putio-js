@@ -16,3 +16,10 @@ export const isPutioAPIError = (
   !!input &&
   !!(input as Record<string, unknown>).data &&
   isPutioAPIErrorResponse((input as Record<string, unknown>).data)
+
+export const createFormDataFromObject = (obj: Record<string, unknown>) => {
+  return Object.keys(obj).reduce((data, key) => {
+    data.append(key, obj[key] as string | Blob)
+    return data
+  }, new FormData())
+}

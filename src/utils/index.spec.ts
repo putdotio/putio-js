@@ -1,4 +1,8 @@
-import { isPutioAPIError, isPutioAPIErrorResponse } from '.'
+import {
+  createFormDataFromObject,
+  isPutioAPIError,
+  isPutioAPIErrorResponse,
+} from '.'
 import {
   mockAxiosError,
   mockPutioAPIClientError,
@@ -37,6 +41,12 @@ describe('utils', () => {
 
     it('validates non-object inputs', () => {
       expect(isPutioAPIError('foo')).toBe(false)
+    })
+  })
+
+  describe('createFormDataFromObject helper', () => {
+    it('creates form data from the given object', () => {
+      expect(createFormDataFromObject({ foo: 'bar' }).get('foo')).toBe('bar')
     })
   })
 })
