@@ -34,10 +34,6 @@ export interface IFile extends Record<string, any> {
   created_at: string
 }
 
-export interface IGetStartFromResponse {
-  start_from: number
-}
-
 export interface ISearchResponse {
   files: IFile[]
   total: number
@@ -49,15 +45,10 @@ export interface IFileDeleteResponse {
   cursor: string
 }
 
-export type FileConversionStatus =
+export type FileConversionStatus = { id: IFile['id'] } & (
   | { status: 'NOT_AVAILABLE' }
   | { status: 'IN_QUEUE' }
   | { status: 'CONVERTING'; percent_done: number }
   | { status: 'COMPLETED'; size: IFile['size'] }
   | { status: 'ERROR' }
-
-export interface IFileConversionStatusResponse {
-  mp4: FileConversionStatus & {
-    id: IFile['id']
-  }
-}
+)

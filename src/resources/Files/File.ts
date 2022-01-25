@@ -1,6 +1,6 @@
 import URI from 'urijs'
 import { PutioAPIClient } from '../../client'
-import { IFileConversionStatusResponse, IGetStartFromResponse } from './types'
+import { FileConversionStatus } from './types'
 export default class File {
   private client: PutioAPIClient
 
@@ -78,17 +78,19 @@ export default class File {
   }
 
   public ConvertToMp4(fileId: number) {
-    return this.client.post<{ count: number }>(`/files/${fileId}/mp4`)
+    return this.client.post<{ mp4: FileConversionStatus }>(
+      `/files/${fileId}/mp4`,
+    )
   }
 
   public ConvertStatus(fileId: number) {
-    return this.client.get<IFileConversionStatusResponse>(
+    return this.client.get<{ mp4: FileConversionStatus }>(
       `/files/${fileId}/mp4`,
     )
   }
 
   public DeleteMp4(fileId: number) {
-    return this.client.delete(`/files/${fileId}/mp4`)
+    return this.client.delete<{}>(`/files/${fileId}/mp4`)
   }
 
   public SharedWith(fileId: number) {
@@ -126,7 +128,9 @@ export default class File {
   }
 
   public GetStartFrom(fileId: number) {
-    return this.client.get<IGetStartFromResponse>(`/files/${fileId}/start-from`)
+    return this.client.get<{ start_from: number }>(
+      `/files/${fileId}/start-from`,
+    )
   }
 
   public SetStartFrom(fileId: number, time: string) {

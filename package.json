@@ -1,70 +1,70 @@
 {
-  "name": "@putdotio/api-client",
-  "version": "8.23.2",
+  "author": "Put.io <devs@put.io>",
+  "bugs": {
+    "url": "https://github.com/putdotio/putio.js/issues"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "event-emitter": "^0.3.5",
+    "form-data": "^3.0.0",
+    "js-base64": "^3.7.2",
+    "qs": "^6.10.3",
+    "urijs": "^1.19.7",
+    "uuid": "^8.3.2"
+  },
   "description": "JS client for Put.io API",
-  "keywords": [
-    "putio",
-    "put.io",
-    "API client"
-  ],
-  "main": "dist/index.js",
-  "module": "dist/api-client.esm.js",
-  "typings": "dist/index.d.ts",
+  "devDependencies": {
+    "@putdotio/prettier-config": "^1.0.0",
+    "@types/event-emitter": "^0.3.3",
+    "@types/js-base64": "^3.3.1",
+    "@types/qs": "^6.9.7",
+    "@types/urijs": "^1.19.18",
+    "@types/uuid": "^8.3.4",
+    "coveralls": "^3.1.1",
+    "husky": "^4.2.5",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.5"
+  },
+  "engines": {
+    "node": ">=10"
+  },
   "files": [
     "dist",
     "src"
   ],
-  "engines": {
-    "node": ">=10"
-  },
-  "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test",
-    "lint": "tsdx lint",
-    "tsc": "tsc --noEmit",
-    "prepare": "tsdx build",
-    "coveralls": "tsdx test --coverage && cat ./coverage/lcov.info | coveralls"
-  },
+  "homepage": "https://github.com/putdotio/putio.js",
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
     }
   },
-  "author": "Put.io <devs@put.io>",
+  "keywords": [
+    "putio",
+    "put.io",
+    "API client"
+  ],
   "license": "MIT",
-  "homepage": "https://github.com/putdotio/putio.js",
+  "main": "dist/index.js",
+  "module": "dist/api-client.esm.js",
+  "name": "@putdotio/api-client",
+  "prettier": "@putdotio/prettier-config",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/putdotio/putio.js.git"
   },
-  "bugs": {
-    "url": "https://github.com/putdotio/putio.js/issues"
+  "scripts": {
+    "build": "tsdx build",
+    "coveralls": "tsdx test --coverage && cat ./coverage/lcov.info | coveralls",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "start": "tsdx watch",
+    "test": "tsdx test",
+    "tsc": "tsc --noEmit"
   },
-  "prettier": "@putdotio/prettier-config",
-  "dependencies": {
-    "axios": "^0.21.1",
-    "event-emitter": "^0.3.5",
-    "form-data": "^3.0.0",
-    "js-base64": "^2.6.2",
-    "qs": "^6.9.4",
-    "urijs": "^1.19.5",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "@putdotio/prettier-config": "^1.0.0",
-    "@types/event-emitter": "^0.3.3",
-    "@types/js-base64": "^2.3.2",
-    "@types/qs": "^6.9.5",
-    "@types/urijs": "^1.19.13",
-    "@types/uuid": "^8.3.1",
-    "coveralls": "^3.1.0",
-    "husky": "^4.2.5",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.0.3",
-    "typescript": "^4.0.3"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+  "typings": "dist/index.d.ts",
+  "version": "8.23.2"
 }
