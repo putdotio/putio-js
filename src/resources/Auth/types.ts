@@ -35,6 +35,14 @@ export type MyOAuthApp = OAuthApp & {
   hidden: boolean
 }
 
+export type PopularOAuthApp = OAuthApp & {
+  maker: string
+  /** admin only */
+  hidden?: boolean
+  /** admin only */
+  users?: number
+}
+
 export type OAuthAppSession = {
   id: number
   app_id: OAuthApp['id']
@@ -46,29 +54,4 @@ export type OAuthAppSession = {
   note: string | null
   created_at: string
   last_used_at: string
-}
-
-export interface IOAuthAuthorizedAppsResponse {
-  apps: OAuthApp[]
-}
-
-export interface IOAuthAuthorizedAppSessionsResponse {
-  clients: OAuthAppSession[]
-}
-
-export type IMyOAuthAppResponse = {
-  app: MyOAuthApp
-  token: string
-}
-
-export interface IMyOAuthAppsResponse {
-  apps: MyOAuthApp[]
-}
-
-export interface IPopularOAuthAppsResponse {
-  apps: (OAuthApp & {
-    maker: string
-    hidden?: boolean
-    users?: number
-  })[]
 }

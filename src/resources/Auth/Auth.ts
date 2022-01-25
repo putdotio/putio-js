@@ -6,8 +6,8 @@ import {
   ILoginResponse,
   IVerifyTOTPResponse,
   IValidateTokenResponse,
-  IOAuthAuthorizedAppsResponse,
-  IOAuthAuthorizedAppSessionsResponse,
+  OAuthApp,
+  OAuthAppSession,
 } from './types'
 
 export default class Auth {
@@ -112,46 +112,42 @@ export default class Auth {
     })
   }
 
-  public GetCode(clientID: string, clientName?: string) {
-    let url = `/oauth2/oob/code?app_id=${clientID}`
-
-    if (clientName) {
-      url = `${url}&client_name=${clientName}`
-    }
-
-    return this.client.get(url)
+  public GetCode(clientID: number | string, clientName?: string) {
+    return this.client.get<{ code: string }>('/oauth2/oob/code', {
+      params: { app_id: clientID, client_name: clientName },
+    })
   }
 
   public CheckCodeMatch(code: string) {
-    return this.client.get(`/oauth2/oob/code/${code}`)
+    return this.client.get<{ oauth_token: string | null }>(
+      `/oauth2/oob/code/${code}`,
+    )
   }
 
   public LinkDevice(code: string) {
-    return this.client.post('/oauth2/oob/code', {
+    return this.client.post<{ app: OAuthApp }>('/oauth2/oob/code', {
       data: { code },
     })
   }
 
   public Grants() {
-    return this.client.get<IOAuthAuthorizedAppsResponse>('/oauth/grants/')
+    return this.client.get<{ apps: OAuthApp[] }>('/oauth/grants/')
   }
 
   public RevokeApp(id: number) {
-    return this.client.post(`/oauth/grants/${id}/delete`)
+    return this.client.post<{}>(`/oauth/grants/${id}/delete`)
   }
 
   public Clients() {
-    return this.client.get<IOAuthAuthorizedAppSessionsResponse>(
-      '/oauth/clients/',
-    )
+    return this.client.get<{ clients: OAuthAppSession[] }>('/oauth/clients/')
   }
 
   public RevokeClient(id: string) {
-    return this.client.post(`/oauth/clients/${id}/delete`)
+    return this.client.post<{}>(`/oauth/clients/${id}/delete`)
   }
 
   public RevokeAllClients() {
-    return this.client.post('/oauth/clients/delete-all')
+    return this.client.post<{}>('/oauth/clients/delete-all')
   }
 
   public ValidateToken() {

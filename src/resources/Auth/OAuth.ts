@@ -1,12 +1,7 @@
 import URI from 'urijs'
 import { createFormDataFromObject } from '../../utils'
 import { PutioAPIClient } from '../../client'
-import {
-  IMyOAuthAppsResponse,
-  IMyOAuthAppResponse,
-  MyOAuthApp,
-  IPopularOAuthAppsResponse,
-} from './types'
+import { MyOAuthApp, PopularOAuthApp } from './types'
 
 export default class OAuth {
   private client: PutioAPIClient
@@ -30,11 +25,13 @@ export default class OAuth {
   }
 
   public Query() {
-    return this.client.get<IMyOAuthAppsResponse>('/oauth/apps')
+    return this.client.get<{ apps: MyOAuthApp[] }>('/oauth/apps')
   }
 
   public Get(id: MyOAuthApp['id']) {
-    return this.client.get<IMyOAuthAppResponse>(`/oauth/apps/${id}`)
+    return this.client.get<{ app: MyOAuthApp; token: string }>(
+      `/oauth/apps/${id}`,
+    )
   }
 
   public GetIconURL(id: MyOAuthApp['id']): string {
@@ -73,6 +70,6 @@ export default class OAuth {
   }
 
   public GetPopularApps() {
-    return this.client.get<IPopularOAuthAppsResponse>('/oauth/apps/popular')
+    return this.client.get<{ apps: PopularOAuthApp[] }>('/oauth/apps/popular')
   }
 }
