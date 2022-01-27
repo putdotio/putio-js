@@ -57,3 +57,14 @@ export interface IUserConfirmation {
 export interface IUserConfirmationsResponse {
   confirmations: IUserConfirmation[]
 }
+
+export type ClearDataOptions = {
+  files: boolean
+  finished_transfers: boolean
+  active_transfers: boolean
+  rss_feeds: boolean
+  rss_logs: boolean
+  history: boolean
+  trash: boolean
+  friends: boolean
+}

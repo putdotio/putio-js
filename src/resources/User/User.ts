@@ -4,6 +4,7 @@ import {
   IUserSettingsResponse,
   IUserConfirmationsResponse,
   ConfirmationSubject,
+  ClearDataOptions,
 } from './types'
 
 export default class User {
@@ -30,23 +31,23 @@ export default class User {
   }
 
   public Config() {
-    return this.client.get('/config')
+    return this.client.get<Record<string, unknown>>('/config')
   }
 
-  public SaveConfig(config: Record<string, any>) {
+  public SaveConfig(config: Record<string, unknown>) {
     return this.client.put('/config', {
       data: { config },
     })
   }
 
-  public ClearData(data = {}) {
-    return this.client.post('/account/clear', {
-      data,
+  public ClearData(options: ClearDataOptions) {
+    return this.client.post<{}>('/account/clear', {
+      data: options,
     })
   }
 
   public Destroy(currentPassword: string) {
-    return this.client.post('/account/destroy', {
+    return this.client.post<{}>('/account/destroy', {
       data: {
         current_password: currentPassword,
       },
