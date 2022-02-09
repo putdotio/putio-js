@@ -1,9 +1,10 @@
 import { ISODateString } from '../../utils/types'
 
-type TransferType = 'URL' | 'TORRENT' | 'PLAYLIST' | 'LIVE_STREAM'
+type TransferType = 'URL' | 'TORRENT' | 'PLAYLIST' | 'LIVE_STREAM' | 'TO_BE_DETERMINED'
 
 type TransferStatus =
   | 'WAITING'
+  | 'PREPARING_DOWNLOAD'
   | 'IN_QUEUE'
   | 'DOWNLOADING'
   | 'COMPLETING'
