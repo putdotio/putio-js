@@ -43,7 +43,7 @@ MyApp.bootstrap(config => {
 MyApp.onLogin(token => {
   putioAPI.setToken(token)
 
-  putioAPI.User.Info()
+  putioAPI.Account.Info()
     .then(r => console.log('Fetched user info: ', r))
     .catch(e => console.log('An error occurred while fetching user info: ', e))
 })
