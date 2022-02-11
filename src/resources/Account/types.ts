@@ -33,7 +33,15 @@ export interface IAccountSettings {
   video_player: 'html5' | 'flash' | null
 }
 
-export interface IAccount {
+export interface IAccountInfoParams {
+  download_token?: 0 | 1
+  sharing?: 0 | 1
+  features?: 0 | 1
+  intercom?: 0 | 1
+  pas?: 0 | 1
+  platform?: string
+}
+export interface IAccountInfo {
   account_active: boolean
   avatar_url: string
   can_create_sub_account: boolean

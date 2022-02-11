@@ -1,6 +1,7 @@
 import { PutioAPIClient } from '../../client'
 import {
-  IAccount,
+  IAccountInfo,
+  IAccountInfoParams,
   IAccountSettings,
   IAccountConfirmation,
   IAccountClearOptions,
@@ -13,8 +14,8 @@ export default class Account {
     this.client = client
   }
 
-  public Info(params: Record<string, string | number>) {
-    return this.client.get<{ info: IAccount }>('/account/info', {
+  public Info(params: IAccountInfoParams) {
+    return this.client.get<{ info: IAccountInfo }>('/account/info', {
       params,
     })
   }
