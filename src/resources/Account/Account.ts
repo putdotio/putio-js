@@ -45,7 +45,7 @@ export default class Account {
   }
 
   public Confirmations(type?: IAccountConfirmation['subject']) {
-    return this.client.get<{ confirmations: IAccountConfirmation }>(
+    return this.client.get<{ confirmations: IAccountConfirmation[] }>(
       '/account/confirmation/list',
       {
         data: {
