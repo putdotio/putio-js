@@ -1,20 +1,28 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import qs from 'qs'
+
+import {
+  PutioAPIClientResponseInterceptorFactory,
+  PutioApiClientRequestInterceptorFactory,
+  IPutioAPIClientOptions,
+  IPutioAPIClientResponse,
+} from './types'
+
+import { DEFAULT_CLIENT_OPTIONS } from '../constants'
+
 import { createCorrelationIdSetter } from '../interceptors/request/correlationIdSetter'
 import { createClientIPChangeEmitter } from '../interceptors/response/clientIPChangeEmitter'
 import { createErrorEmitter } from '../interceptors/response/errorEmitter'
 import { createResponseFormatter } from '../interceptors/response/responseFormatter'
+
 import {
   eventEmitter,
   EVENTS,
   PutioAPIClientEventTypes,
   EventListener,
 } from '../eventEmitter'
-import {
-  PutioAPIClientResponseInterceptorFactory,
-  IPutioAPIClientOptions,
-  IPutioAPIClientResponse,
-} from './types'
+
+import Account from '../resources/Account/Account'
 import Auth from '../resources/Auth/Auth'
 import OAuth from '../resources/Auth/OAuth'
 import DownloadLinks from '../resources/DownloadLinks/DownloadLinks'
@@ -34,8 +42,6 @@ import Trash from '../resources/Trash'
 import Tunnel from '../resources/Tunnel'
 import User from '../resources/User/User'
 import Zips from '../resources/Zips'
-import { PutioApiClientRequestInterceptorFactory } from '..'
-import { DEFAULT_CLIENT_OPTIONS } from '../constants'
 
 export class PutioAPIClient {
   public static EVENTS = EVENTS
@@ -45,6 +51,7 @@ export class PutioAPIClient {
   public token: string | undefined
   public http: AxiosInstance
 
+  public Account: Account
   public Auth: Auth
   public DownloadLinks: DownloadLinks
   public Sharing: Sharing
@@ -68,6 +75,8 @@ export class PutioAPIClient {
   constructor(options: IPutioAPIClientOptions) {
     this.options = { ...PutioAPIClient.DEFAULT_OPTIONS, ...options }
     this.http = this.createHTTPClient()
+
+    this.Account = new Account(this)
     this.Auth = new Auth(this)
     this.DownloadLinks = new DownloadLinks(this)
     this.Sharing = new Sharing(this)

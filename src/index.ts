@@ -1,6 +1,7 @@
 export * from './test-utils/mocks'
 export * from './client/types'
 
+export * from './resources/Account/types'
 export * from './resources/Auth/types'
 export * from './resources/DownloadLinks/types'
 export * from './resources/Events/types'

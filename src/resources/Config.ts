@@ -7,27 +7,30 @@ export default class Config {
     this.client = client
   }
 
-  public Read() {
-    return this.client.get('/config')
+  public Read<Config>() {
+    return this.client.get<{ config: Config }>('/config')
   }
 
-  public Write(config: object) {
+  public Write<Config>(config: Config) {
     return this.client.put('/config', {
       data: { config },
     })
   }
 
-  public GetKey(key: string) {
-    return this.client.get(`/config/${key}`)
+  public GetKey<Config, Key extends keyof Config>(key: Key) {
+    return this.client.get<{ value: Config[Key] }>(`/config/${key}`)
   }
 
-  public SetKey(key: string, value: any) {
+  public SetKey<Config, Key extends keyof Config>(
+    key: Key,
+    value: Config[Key],
+  ) {
     return this.client.put(`/config/${key}`, {
       data: { value },
     })
   }
 
-  public DeleteKey(key: string) {
-    return this.client.delete(`/config/${key}`)
+  public DeleteKey<Config, Key extends keyof Config>(key: Key) {
+    return this.client.delete<{}>(`/config/${key}`)
   }
 }
