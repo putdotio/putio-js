@@ -7,6 +7,7 @@ type TransferStatus =
   | 'PREPARING_DOWNLOAD'
   | 'IN_QUEUE'
   | 'DOWNLOADING'
+  | 'WAITING_FOR_COMPLETE_QUEUE'
   | 'COMPLETING'
   | 'STOPPING'
   | 'SEEDING'
