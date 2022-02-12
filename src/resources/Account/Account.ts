@@ -1,10 +1,11 @@
 import { PutioAPIClient } from '../../client'
 import {
   IAccountInfo,
-  IAccountInfoParams,
+  AccountInfoParams,
   IAccountSettings,
+  SaveAccountSettingsPayload,
   IAccountConfirmation,
-  IAccountClearOptions,
+  AccountClearOptions,
 } from './types'
 
 export default class Account {
@@ -14,7 +15,7 @@ export default class Account {
     this.client = client
   }
 
-  public Info(params: IAccountInfoParams) {
+  public Info(params: AccountInfoParams = {}) {
     return this.client.get<{ info: IAccountInfo }>('/account/info', {
       params,
     })
@@ -24,13 +25,13 @@ export default class Account {
     return this.client.get<{ settings: IAccountSettings }>('/account/settings')
   }
 
-  public SaveSettings(settings: Partial<IAccountSettings>) {
+  public SaveSettings(payload: SaveAccountSettingsPayload) {
     return this.client.post('/account/settings', {
-      data: settings,
+      data: payload,
     })
   }
 
-  public Clear(options: IAccountClearOptions) {
+  public Clear(options: AccountClearOptions) {
     return this.client.post<{}>('/account/clear', {
       data: options,
     })

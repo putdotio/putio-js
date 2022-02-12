@@ -1,9 +1,3 @@
-export interface IDisk {
-  avail: number
-  used: number
-  size: number
-}
-
 export interface IAccountSettings {
   beta_user: boolean
   callback_url: string
@@ -21,7 +15,7 @@ export interface IAccountSettings {
   show_optimistic_usage: boolean
   sort_by: string
   start_from: boolean
-  subtitle_languages: [string, string] | [string, null] | [null, null]
+  subtitle_languages: [string | null, string | null]
   theater_mode: boolean
   theme: 'dark' | 'light' | 'auto'
   transfer_sort_by: string
@@ -33,7 +27,25 @@ export interface IAccountSettings {
   video_player: 'html5' | 'flash' | null
 }
 
-export interface IAccountInfoParams {
+export type SaveAccountSettingsPayload =
+  | Partial<IAccountSettings>
+  | { username: string }
+  | {
+      mail: string
+      current_password: string
+    }
+  | {
+      password: string
+      current_password: string
+    }
+  | {
+      two_factor_enabled: {
+        enable: boolean
+        code: string
+      }
+    }
+
+export type AccountInfoParams = {
   download_token?: 0 | 1
   sharing?: 0 | 1
   features?: 0 | 1
@@ -47,7 +59,11 @@ export interface IAccountInfo {
   can_create_sub_account: boolean
   created_at: string
   days_until_files_deletion: number
-  disk: IDisk
+  disk: {
+    avail: number
+    used: number
+    size: number
+  }
   download_token?: string
   family_owner?: string
   features: Record<string, boolean>
@@ -79,7 +95,7 @@ export interface IAccountConfirmation {
   created_at: string
 }
 
-export interface IAccountClearOptions {
+export type AccountClearOptions = {
   files: boolean
   finished_transfers: boolean
   active_transfers: boolean
