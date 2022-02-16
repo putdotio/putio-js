@@ -13,7 +13,6 @@ type TransferStatus =
   | 'SEEDING'
   | 'COMPLETED'
   | 'ERROR'
-  | 'PREPARING_SEED'
 
 type TransferLink = { url: string; label: string }
 
