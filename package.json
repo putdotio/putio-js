@@ -70,5 +70,5 @@
     "tsc": "tsc --noEmit"
   },
   "typings": "dist/index.d.ts",
-  "version": "8.27.3"
+  "version": "8.28.0"
 }
