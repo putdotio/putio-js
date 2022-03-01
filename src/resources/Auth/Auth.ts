@@ -150,19 +150,20 @@ export default class Auth {
     return this.client.post<{}>('/oauth/clients/delete-all')
   }
 
-  public ValidateToken() {
-    return this.client.get<IValidateTokenResponse>('/oauth2/validate')
+  public ValidateToken(token: string) {
+    return this.client.get<IValidateTokenResponse>('/oauth2/validate', {
+      params: { oauth_token: token },
+    })
   }
 
   public GenerateTOTP() {
     return this.client.post<IGenerateTOTPResponse>('/two_factor/generate/totp')
   }
 
-  public VerifyTOTP(totp: string) {
+  public VerifyTOTP(twoFactorScopedToken: string, totp: string) {
     return this.client.post<IVerifyTOTPResponse>('/two_factor/verify/totp', {
-      data: {
-        totp,
-      },
+      params: { oauth_token: twoFactorScopedToken },
+      data: { totp },
     })
   }
 }
