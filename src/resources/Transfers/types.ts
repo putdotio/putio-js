@@ -1,4 +1,17 @@
 import { ISODateString } from '../../utils/types'
+import { IFile } from '../../resources/Files/types'
+
+export type NewTransferParams = {
+  url: string
+  save_parent_id?: IFile['id']
+  callback_url?: string
+}
+
+export type NewTransferError = {
+  url: NewTransferParams['url']
+  code?: number
+  error: string
+}
 
 type TransferType = 'URL' | 'TORRENT' | 'PLAYLIST' | 'LIVE_STREAM' | 'N/A'
 
