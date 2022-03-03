@@ -9,8 +9,8 @@ export type NewTransferParams = {
 
 export type NewTransferError = {
   url: NewTransferParams['url']
-  code?: number
-  error: string
+  status_code: number
+  error_type: string
 }
 
 type TransferType = 'URL' | 'TORRENT' | 'PLAYLIST' | 'LIVE_STREAM' | 'N/A'
