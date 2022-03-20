@@ -12,7 +12,7 @@ export default class Config {
   }
 
   public Write<Config>(config: Config) {
-    return this.client.put('/config', {
+    return this.client.put<{}>('/config', {
       data: { config },
     })
   }
@@ -25,7 +25,7 @@ export default class Config {
     key: Key,
     value: Config[Key],
   ) {
-    return this.client.put(`/config/${key}`, {
+    return this.client.put<{}>(`/config/${key}`, {
       data: { value },
     })
   }

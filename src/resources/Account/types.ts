@@ -95,13 +95,18 @@ export interface IAccountConfirmation {
   created_at: string
 }
 
-export type AccountClearOptions = {
-  files: boolean
-  finished_transfers: boolean
-  active_transfers: boolean
-  rss_feeds: boolean
-  rss_logs: boolean
-  history: boolean
-  trash: boolean
-  friends: boolean
-}
+export const ACCOUNT_CLEAR_OPTION_KEYS = [
+  'files',
+  'finished_transfers',
+  'active_transfers',
+  'rss_feeds',
+  'rss_logs',
+  'history',
+  'trash',
+  'friends',
+] as const
+
+export type AccountClearOptions = Record<
+  typeof ACCOUNT_CLEAR_OPTION_KEYS[number],
+  boolean
+>
