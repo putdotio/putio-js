@@ -18,6 +18,7 @@ export interface IUserSubscription {
   next_billing_date?: string
   next_retry_date?: string
   update_url?: string
+  need_payment_information_update?: boolean
 }
 
 export interface IUserPlan {
