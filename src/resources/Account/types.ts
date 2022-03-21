@@ -55,6 +55,7 @@ export type AccountInfoParams = {
 }
 export interface IAccountInfo {
   account_active: boolean
+  account_status: 'active' | 'inactive' | 'stranger'
   avatar_url: string
   can_create_sub_account: boolean
   created_at: string
