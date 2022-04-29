@@ -1,3 +1,5 @@
+import { ISODateString } from 'utils/types'
+
 export interface ILoginResponse {
   access_token: string
   user_id: number
@@ -10,9 +12,18 @@ export interface IValidateTokenResponse {
   user_id: number
 }
 
+export type TwoFactorRecoveryCodes = {
+  created_at: ISODateString
+  codes: Array<{
+    code: string
+    used_at: ISODateString | null
+  }>
+}
+
 export interface IGenerateTOTPResponse {
   secret: string
   uri: string
+  recovery_codes: TwoFactorRecoveryCodes
 }
 
 export interface IVerifyTOTPResponse {

@@ -8,13 +8,48 @@ import {
   IValidateTokenResponse,
   OAuthApp,
   OAuthAppSession,
+  TwoFactorRecoveryCodes,
 } from './types'
 
-export default class Auth {
+class TwoFactor {
   private client: PutioAPIClient
 
   constructor(client: PutioAPIClient) {
     this.client = client
+  }
+
+  public GenerateTOTP() {
+    return this.client.post<IGenerateTOTPResponse>('/two_factor/generate/totp')
+  }
+
+  public VerifyTOTP(twoFactorScopedToken: string, code: string) {
+    return this.client.post<IVerifyTOTPResponse>('/two_factor/verify/totp', {
+      params: { oauth_token: twoFactorScopedToken },
+      data: { code },
+    })
+  }
+
+  public GetRecoveryCodes() {
+    return this.client.get<{ recovery_codes: TwoFactorRecoveryCodes }>(
+      '/two_factor/recovery_codes',
+    )
+  }
+
+  public RegenerateRecoveryCodes() {
+    return this.client.post<{ recovery_codes: TwoFactorRecoveryCodes }>(
+      '/two_factor/recovery_codes/refresh',
+    )
+  }
+}
+
+export default class Auth {
+  private client: PutioAPIClient
+
+  public TwoFactor: TwoFactor
+
+  constructor(client: PutioAPIClient) {
+    this.client = client
+    this.TwoFactor = new TwoFactor(client)
   }
 
   public GetLoginURL({
@@ -153,17 +188,6 @@ export default class Auth {
   public ValidateToken(token: string) {
     return this.client.get<IValidateTokenResponse>('/oauth2/validate', {
       params: { oauth_token: token },
-    })
-  }
-
-  public GenerateTOTP() {
-    return this.client.post<IGenerateTOTPResponse>('/two_factor/generate/totp')
-  }
-
-  public VerifyTOTP(twoFactorScopedToken: string, totp: string) {
-    return this.client.post<IVerifyTOTPResponse>('/two_factor/verify/totp', {
-      params: { oauth_token: twoFactorScopedToken },
-      data: { totp },
     })
   }
 }
