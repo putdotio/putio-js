@@ -73,11 +73,9 @@ export interface IAccountInfo {
   is_admin: boolean
   is_eligible_for_friend_invitation: boolean
   is_invited_friend: boolean
-  is_sharing_enabled: boolean
   is_sub_account: boolean
   mail: string
   monthly_bandwidth_usage: number
-  oauth_token_id: number
   pas?: { user_hash: string }
   password_last_changed_at: string | null
   plan_expiration_date: string
