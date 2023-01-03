@@ -148,9 +148,12 @@ export default class Auth {
   }
 
   public GetCode(clientID: number | string, clientName?: string) {
-    return this.client.get<{ code: string }>('/oauth2/oob/code', {
-      params: { app_id: clientID, client_name: clientName },
-    })
+    return this.client.get<{ code: string; qr_code_url: string }>(
+      '/oauth2/oob/code',
+      {
+        params: { app_id: clientID, client_name: clientName },
+      },
+    )
   }
 
   public CheckCodeMatch(code: string) {
