@@ -53,7 +53,7 @@ type BaseTransfer = {
   uploaded: number
   up_speed: number
 
-  // not documented in swagger
+  // not documented on api.put.io
   callback_url: null | string // not used in clients
   client_ip: null | string
 
@@ -72,8 +72,9 @@ type BaseTransfer = {
   tracker: null | string // not used in clients
   tracker_message: null | string
 
-  // documented in swagger but doesn't come in response
-  peers: number
+  updated_at?: ISODateString // not used in clients
+
+  userfile_exists?: boolean
 }
 
 type FinishedTransfer = BaseTransfer & {
