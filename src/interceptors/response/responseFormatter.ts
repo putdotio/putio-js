@@ -31,7 +31,6 @@ export const createResponseFormatter: PutioAPIClientResponseInterceptorFactory =
         ? {
             ...errorData,
             ...data,
-            status_code: status,
           }
         : {
             ...errorData,
