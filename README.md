@@ -1,6 +1,6 @@
 # `@putdotio/api-client`
 
-[![Build Status](https://travis-ci.org/putdotio/putio.js.svg?branch=master)](https://travis-ci.org/putdotio/putio.js)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/putdotio/putio.js/push.yml?branch=master)](https://github.com/putdotio/putio.js/actions/workflows/push.yml)
 [![Coverage Status](https://coveralls.io/repos/github/putdotio/putio.js/badge.svg?branch=master)](https://coveralls.io/github/putdotio/putio.js?branch=master)
 ![npm (scoped)](https://img.shields.io/npm/v/@putdotio/api-client)
 ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@putdotio/api-client)
