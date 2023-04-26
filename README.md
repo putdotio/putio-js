@@ -67,10 +67,11 @@ MyApp.onLogout(() => {
 
 ### Methods
 
-| Name          | Parameters                          | Return Value            |
-| :------------ | :---------------------------------- | :---------------------- |
-| **configure** | `(options: IPutioAPIClientOptions)` | PutioAPIClient Instance |
-| **setToken**  | `(token: string)`                   | PutioAPIClient Instance |
+| Name           | Parameters                          | Return Value            |
+| :------------- | :---------------------------------- | :---------------------- |
+| **configure**  | `(options: IPutioAPIClientOptions)` | PutioAPIClient Instance |
+| **setToken**   | `(token: string)`                   | PutioAPIClient Instance |
+| **clearToken** |                                     | PutioAPIClient Instance |
 
 ### Events
 
