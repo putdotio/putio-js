@@ -31,11 +31,24 @@ export const createResponseFormatter: PutioAPIClientResponseInterceptorFactory =
         ? {
             ...errorData,
             ...data,
+            status_code: status,
           }
         : {
             ...errorData,
             status_code: status,
           }
+    } else if (
+      error.request instanceof XMLHttpRequest &&
+      error.request.readyState === 4
+    ) {
+      const { status, responseText } = error.request
+      const data = JSON.parse(responseText)
+
+      errorData = {
+        ...errorData,
+        ...data,
+        status_code: status,
+      }
     }
 
     const formattedError: IPutioAPIClientError = {
