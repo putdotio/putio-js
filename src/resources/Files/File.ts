@@ -56,8 +56,8 @@ export default class File {
     {
       token = '',
       subtitleLanguages = [],
-      maxSubtitleCount = -1,
-      playOriginal = false,
+      maxSubtitleCount,
+      playOriginal,
     }: {
       token?: string
       subtitleLanguages?: string[]
@@ -72,7 +72,12 @@ export default class File {
         oauth_token: token || this.client.token,
         subtitle_languages: subtitleLanguages,
         max_subtitle_count: maxSubtitleCount,
-        original: playOriginal ? 1 : 0,
+        original:
+          typeof playOriginal === 'boolean'
+            ? playOriginal
+              ? 1
+              : 0
+            : undefined,
       })
       .toString()
   }
