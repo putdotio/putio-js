@@ -318,15 +318,22 @@ export default class Files {
     fileName?: string
     parentId?: number
   }) {
-    const FormData = require('form-data')
     const form = new FormData()
     form.append('file', file)
-    form.append('filename', fileName)
-    form.append('parent_id', parentId)
+
+    if (fileName) {
+      form.append('filename', fileName)
+    }
+
+    if (parentId) {
+      form.append('parent_id', parentId.toString())
+    }
 
     return this.client.post('/files/upload', {
       data: form,
-      headers: form.getHeaders(),
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     })
   }
 }

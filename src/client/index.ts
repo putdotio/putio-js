@@ -3,14 +3,12 @@ import qs from 'qs'
 
 import {
   PutioAPIClientResponseInterceptorFactory,
-  PutioApiClientRequestInterceptorFactory,
   IPutioAPIClientOptions,
   IPutioAPIClientResponse,
 } from './types'
 
 import { DEFAULT_CLIENT_OPTIONS } from '../constants'
 
-import { createCorrelationIdSetter } from '../interceptors/request/correlationIdSetter'
 import { createClientIPChangeEmitter } from '../interceptors/response/clientIPChangeEmitter'
 import { createErrorEmitter } from '../interceptors/response/errorEmitter'
 import { createResponseFormatter } from '../interceptors/response/responseFormatter'
@@ -179,23 +177,6 @@ export class PutioAPIClient {
       paramsSerializer: params =>
         qs.stringify(params, { arrayFormat: 'comma' }),
     })
-
-    // apply request interceptors
-    const requestInterceptorFactories: PutioApiClientRequestInterceptorFactory[] = [
-      createCorrelationIdSetter,
-    ]
-
-    requestInterceptorFactories
-      .map(createInterceptor => createInterceptor(this.options))
-      .forEach(requestInterceptor => {
-        axiosInstance.interceptors.request.use(
-          requestInterceptor,
-          null,
-          // the 3rd argument is not reflected in the types, but it exists?
-          // @ts-ignore
-          { synchronous: true },
-        )
-      })
 
     // apply response interceptors
     const responseInterceptorFactories: PutioAPIClientResponseInterceptorFactory[] = [

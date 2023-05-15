@@ -1,23 +1,20 @@
 import { AxiosError, AxiosRequestConfig } from 'axios'
-import { CORRELATION_ID_HEADER_NAME, NIL_CORRELATION_ID } from '../constants'
 import {
   IPutioAPIClientError,
   IPutioAPIClientErrorData,
   IPutioAPIClientResponse,
 } from '../client/types'
 
-const mockRequestConfig: AxiosRequestConfig = {
-  headers: {
-    [CORRELATION_ID_HEADER_NAME]: NIL_CORRELATION_ID,
-  },
-}
+const mockRequestConfig: AxiosRequestConfig = {}
 
 export const mockPutioAPIClientResponse: IPutioAPIClientResponse<{
   foo: string
 }> = {
   config: mockRequestConfig,
   data: { foo: 'bar', status: 'OK' },
-  headers: {},
+  headers: {
+    'x-trace-id': 'MOCK_TRACE_ID',
+  },
   status: 200,
   statusText: 'ok',
 }

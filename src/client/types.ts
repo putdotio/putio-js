@@ -1,10 +1,9 @@
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 
 export interface IPutioAPIClientOptions {
   clientID?: number
   baseURL?: string
   webAppURL?: string
-  generateUUID?: () => string
 }
 
 export interface IPutioAPIClientResponse<T> extends AxiosResponse {
@@ -13,7 +12,7 @@ export interface IPutioAPIClientResponse<T> extends AxiosResponse {
 }
 
 export interface IPutioAPIClientErrorData {
-  correlation_id?: string
+  'x-trace-id'?: string
   error_id?: string
   error_uri?: string
   error_type: string
@@ -26,14 +25,6 @@ export interface IPutioAPIClientError
   data: IPutioAPIClientErrorData
   toJSON: () => IPutioAPIClientErrorData
 }
-
-export type PutioAPIClientRequestInterceptor = (
-  config: AxiosRequestConfig,
-) => AxiosRequestConfig
-
-export type PutioApiClientRequestInterceptorFactory = (
-  options: IPutioAPIClientOptions,
-) => PutioAPIClientRequestInterceptor
 
 export type PutioAPIClientResponseInterceptor = {
   onFulfilled: (

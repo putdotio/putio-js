@@ -18,16 +18,14 @@ describe('interceptors/response/responseFormatter', () => {
             "foo": "bar",
             "status": "OK",
           },
-          "config": Object {
-            "headers": Object {
-              "X-Putio-Correlation-Id": "00000000-0000-0000-0000-000000000000",
-            },
-          },
+          "config": Object {},
           "data": Object {
             "foo": "bar",
             "status": "OK",
           },
-          "headers": Object {},
+          "headers": Object {
+            "x-trace-id": "MOCK_TRACE_ID",
+          },
           "status": 200,
           "statusText": "ok",
         }
@@ -46,7 +44,9 @@ describe('interceptors/response/responseFormatter', () => {
             error_message: 'Putio API Error',
             status_code: 400,
           },
-          headers: {},
+          headers: {
+            'x-trace-id': 'MOCK_TRACE_ID',
+          },
           status: 400,
           statusText: 'Error!',
         },
@@ -55,10 +55,10 @@ describe('interceptors/response/responseFormatter', () => {
       responseFormatter.onRejected(error).catch(e =>
         expect(e).toMatchInlineSnapshot(`
           Object {
-            "correlation_id": "00000000-0000-0000-0000-000000000000",
             "error_message": "Putio API Error",
             "error_type": "API_ERROR",
             "status_code": 400,
+            "x-trace-id": "MOCK_TRACE_ID",
           }
         `),
       )
@@ -81,10 +81,10 @@ describe('interceptors/response/responseFormatter', () => {
       responseFormatter.onRejected(error).catch(e =>
         expect(e).toMatchInlineSnapshot(`
           Object {
-            "correlation_id": undefined,
             "error_message": "AXIOS_ERROR_MESSAGE",
             "error_type": "ERROR",
             "status_code": 502,
+            "x-trace-id": undefined,
           }
         `),
       )
@@ -94,10 +94,10 @@ describe('interceptors/response/responseFormatter', () => {
       responseFormatter.onRejected(mockPutioAPIClientError).catch(e =>
         expect(e).toMatchInlineSnapshot(`
           Object {
-            "correlation_id": undefined,
             "error_message": "AXIOS_ERROR_MESSAGE",
             "error_type": "ERROR",
             "status_code": 0,
+            "x-trace-id": undefined,
           }
         `),
       )
@@ -134,11 +134,11 @@ describe('interceptors/response/responseFormatter', () => {
       responseFormatter.onRejected(error).catch(e =>
         expect(e).toMatchInlineSnapshot(`
           Object {
-            "correlation_id": undefined,
             "error_message": "AXIOS_ERROR_MESSAGE",
             "error_type": "ERROR",
             "foo": "bar",
             "status_code": 400,
+            "x-trace-id": undefined,
           }
         `),
       )

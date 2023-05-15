@@ -4,7 +4,6 @@ import {
   IPutioAPIClientErrorData,
   PutioAPIClientResponseInterceptorFactory,
 } from '../../client/types'
-import { CORRELATION_ID_HEADER_NAME } from '../../constants'
 import { isPutioAPIErrorResponse } from '../../utils'
 
 export const createResponseFormatter: PutioAPIClientResponseInterceptorFactory = () => ({
@@ -19,7 +18,7 @@ export const createResponseFormatter: PutioAPIClientResponseInterceptorFactory =
     }
 
     let errorData: IPutioAPIClientErrorData = {
-      correlation_id: error.config.headers?.[CORRELATION_ID_HEADER_NAME],
+      'x-trace-id': error.response?.headers['x-trace-id'],
       error_message: error.message,
       error_type: 'ERROR',
       status_code: 0,
