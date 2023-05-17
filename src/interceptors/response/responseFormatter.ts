@@ -17,32 +17,31 @@ export const createResponseFormatter: PutioAPIClientResponseInterceptorFactory =
       return Promise.reject(error)
     }
 
-    let errorData: IPutioAPIClientErrorData = {
-      'x-trace-id': error.response?.headers['x-trace-id'],
-      error_message: error.message,
-      error_type: 'ERROR',
-      status_code: 0,
-    }
+    try {
+      let errorData: IPutioAPIClientErrorData = {
+        'x-trace-id': error.response?.headers['x-trace-id'],
+        error_message: error.message,
+        error_type: 'ERROR',
+        status_code: 0,
+      }
 
-    if (error.response && error.response.data) {
-      const { status, data } = error.response
-      errorData = isPutioAPIErrorResponse(data)
-        ? {
-            ...errorData,
-            ...data,
-            status_code: status,
-          }
-        : {
-            ...errorData,
-            status_code: status,
-          }
-    } else if (
-      error.request instanceof XMLHttpRequest &&
-      error.request.readyState === 4
-    ) {
-      const { status, responseText } = error.request
-
-      try {
+      if (error.response && error.response.data) {
+        const { status, data } = error.response
+        errorData = isPutioAPIErrorResponse(data)
+          ? {
+              ...errorData,
+              ...data,
+              status_code: status,
+            }
+          : {
+              ...errorData,
+              status_code: status,
+            }
+      } else if (
+        error.request instanceof XMLHttpRequest &&
+        error.request.readyState === 4
+      ) {
+        const { status, responseText } = error.request
         const data = JSON.parse(responseText)
 
         errorData = {
@@ -50,17 +49,17 @@ export const createResponseFormatter: PutioAPIClientResponseInterceptorFactory =
           ...data,
           status_code: status,
         }
-      } catch (parseError) {
-        return Promise.reject(error)
       }
-    }
 
-    const formattedError: IPutioAPIClientError = {
-      ...error,
-      data: errorData,
-      toJSON: () => errorData,
-    }
+      const formattedError: IPutioAPIClientError = {
+        ...error,
+        data: errorData,
+        toJSON: () => errorData,
+      }
 
-    return Promise.reject(formattedError)
+      return Promise.reject(formattedError)
+    } catch (e) {
+      return Promise.reject(error)
+    }
   },
 })
