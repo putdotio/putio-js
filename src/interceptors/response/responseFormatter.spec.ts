@@ -1,6 +1,7 @@
 import {
   mockPutioAPIClientError,
   mockPutioAPIClientResponse,
+  createMockXMLHttpRequest,
 } from '../../test-utils/mocks'
 import { IPutioAPIClientError } from '../../client/types'
 import { DEFAULT_CLIENT_OPTIONS } from '../../constants'
@@ -104,23 +105,6 @@ describe('interceptors/response/responseFormatter', () => {
     })
 
     it('sets error.data property corrrectly when the request doesnt have response object, but has a request object that is a valid XMLHttpRequest', () => {
-      function createMockXMLHttpRequest(
-        readyState: number,
-        status: number,
-        responseText: string,
-      ) {
-        const xhr = new XMLHttpRequest()
-        return new Proxy(xhr, {
-          get(target, prop) {
-            if (prop === 'readyState') return readyState
-            if (prop === 'status') return status
-            if (prop === 'responseText') return responseText
-            // @ts-ignore
-            return target[prop]
-          },
-        })
-      }
-
       const error: IPutioAPIClientError = {
         ...mockPutioAPIClientError,
         response: undefined,
@@ -139,6 +123,28 @@ describe('interceptors/response/responseFormatter', () => {
             "foo": "bar",
             "status_code": 400,
             "x-trace-id": undefined,
+          }
+        `),
+      )
+    })
+
+    it('sets error.data property corrrectly when the request doesnt have response object, but has a request object that is a valid XMLHttpRequest', () => {
+      const error: IPutioAPIClientError = {
+        ...mockPutioAPIClientError,
+        response: undefined,
+        request: createMockXMLHttpRequest(
+          4,
+          500,
+          'no meaningful response body',
+        ),
+      }
+
+      responseFormatter.onRejected(error).catch(e =>
+        expect(e).toMatchInlineSnapshot(`
+          Object {
+            "error_message": "MOCK_MESSAGE",
+            "error_type": "MOCK_ERROR",
+            "status_code": 0,
           }
         `),
       )

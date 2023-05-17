@@ -41,12 +41,17 @@ export const createResponseFormatter: PutioAPIClientResponseInterceptorFactory =
       error.request.readyState === 4
     ) {
       const { status, responseText } = error.request
-      const data = JSON.parse(responseText)
 
-      errorData = {
-        ...errorData,
-        ...data,
-        status_code: status,
+      try {
+        const data = JSON.parse(responseText)
+
+        errorData = {
+          ...errorData,
+          ...data,
+          status_code: status,
+        }
+      } catch (parseError) {
+        return Promise.reject(error)
       }
     }
 

@@ -64,3 +64,20 @@ export const createMockErrorResponse = (
     return this.data
   },
 })
+
+export function createMockXMLHttpRequest(
+  readyState: number,
+  status: number,
+  responseText: string,
+) {
+  const xhr = new XMLHttpRequest()
+  return new Proxy(xhr, {
+    get(target, prop) {
+      if (prop === 'readyState') return readyState
+      if (prop === 'status') return status
+      if (prop === 'responseText') return responseText
+      // @ts-ignore
+      return target[prop]
+    },
+  })
+}
