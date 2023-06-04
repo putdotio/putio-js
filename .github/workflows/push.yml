@@ -1,21 +1,37 @@
-name: push
-on:
-  push:
-    branches:
-      - master
-  pull_request:
+name: Lint, test, and build the package
+
+on: [push]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  build:
+    name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node: ['18.16.0']
+        os: [ubuntu-latest]
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Use Node ${{ matrix.node }}
+        uses: actions/setup-node@v3
         with:
-          node-version: '12.x'
-      - run: yarn install
-      - run: yarn lint
-      - run: yarn build
-      - run: yarn coveralls
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          node-version: ${{ matrix.node }}
+
+      - name: Install deps and build (with cache)
+        uses: bahmutov/npm-install@v1
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Test
+        run: yarn test --coverage
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+
+      - name: Build
+        run: yarn build
