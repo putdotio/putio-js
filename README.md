@@ -10,14 +10,14 @@
   </p>
 
   <p>
-    <a href="https://github.com/putdotio/putio.js/actions/workflows/push.yml"><img
-        src="https://img.shields.io/github/actions/workflow/status/putdotio/putio.js/push.yml?branch=master"
+    <a href="https://github.com/putdotio/putio-js/actions/workflows/push.yml"><img
+        src="https://img.shields.io/github/actions/workflow/status/putdotio/putio-js/push.yml?branch=master"
         alt="Build Status"></a>
-    <a href="https://coveralls.io/github/putdotio/putio.js?branch=master"><img
-        src="https://coveralls.io/repos/github/putdotio/putio.js/badge.svg?branch=master" alt="Coverage Status"></a>
+    <a href="https://coveralls.io/github/putdotio/putio-js?branch=master"><img
+        src="https://coveralls.io/repos/github/putdotio/putio-js/badge.svg?branch=master" alt="Coverage Status"></a>
     <img src="https://img.shields.io/npm/v/@putdotio/api-client" alt="npm (scoped)">
     <img src="https://img.shields.io/bundlephobia/minzip/@putdotio/api-client" alt="npm bundle size (scoped)">
-    <img src="https://img.shields.io/github/license/putdotio/putio.js" alt="GitHub">
+    <img src="https://img.shields.io/github/license/putdotio/putio-js" alt="GitHub">
   </p>
 </div>
 
@@ -89,5 +89,5 @@ MyApp.onLogout(() => {
 
 | Value                 | Payload                                                                                              | Description                             |
 | :-------------------- | :--------------------------------------------------------------------------------------------------- | :-------------------------------------- |
-| **ERROR**             | [IPutioAPIClientError](https://github.com/putdotio/putio.js/blob/master/src/client/types.ts#L22-L26) | Fired when an HTTP request fails        |
+| **ERROR**             | [IPutioAPIClientError](https://github.com/putdotio/putio-js/blob/master/src/client/types.ts#L22-L26) | Fired when an HTTP request fails        |
 | **CLIENT_IP_CHANGED** | `{ IP: string, newIP: string }`                                                                      | Fired when the IP of the client changes |
