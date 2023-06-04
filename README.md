@@ -1,12 +1,26 @@
-# `@putdotio/api-client`
+<div align="center">
+  <p>
+    <img src="https://static.put.io/avatar/putio-boncuk.png" width="72">
+  </p>
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/putdotio/putio.js/push.yml?branch=master)](https://github.com/putdotio/putio.js/actions/workflows/push.yml)
-[![Coverage Status](https://coveralls.io/repos/github/putdotio/putio.js/badge.svg?branch=master)](https://coveralls.io/github/putdotio/putio.js?branch=master)
-![npm (scoped)](https://img.shields.io/npm/v/@putdotio/api-client)
-![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@putdotio/api-client)
-![GitHub](https://img.shields.io/github/license/putdotio/putio.js)
+  <h1>putio-js</h1>
 
-JavaScript library for [Put.io API v2](https://api.put.io/v2/docs).
+  <p>
+    JavaScript library for <a href="https://api.put.io/v2/docs">put.io API v2</a>
+  </p>
+
+  <p>
+    <a href="https://github.com/putdotio/putio.js/actions/workflows/push.yml"><img
+        src="https://img.shields.io/github/actions/workflow/status/putdotio/putio.js/push.yml?branch=master"
+        alt="Build Status"></a>
+    <a href="https://coveralls.io/github/putdotio/putio.js?branch=master"><img
+        src="https://coveralls.io/repos/github/putdotio/putio.js/badge.svg?branch=master" alt="Coverage Status"></a>
+    <img src="https://img.shields.io/npm/v/@putdotio/api-client" alt="npm (scoped)">
+    <img src="https://img.shields.io/bundlephobia/minzip/@putdotio/api-client" alt="npm bundle size (scoped)">
+    <img src="https://img.shields.io/github/license/putdotio/putio.js" alt="GitHub">
+  </p>
+</div>
+
 
 ## Installation
 
@@ -16,13 +30,13 @@ yarn add @putdotio/api-client
 npm install @putdotio/api-client
 ```
 
-### ES Modules / TypeScript
+#### ES Modules / TypeScript
 
-```js
+```ts
 import PutioAPI from '@putdotio/api-client'
 ```
 
-### CommonJS
+#### CommonJS
 
 ```js
 const PutioAPI = require('@putdotio/api-client').default
@@ -30,7 +44,7 @@ const PutioAPI = require('@putdotio/api-client').default
 
 ## Usage
 
-```js
+```ts
 // you can pass the options in constructor
 const putioAPI = new PutioAPI({ clientID: 'OAUTH_CLIENT_ID' })
 
@@ -63,7 +77,6 @@ MyApp.onLogout(() => {
 | **clientID**     | number       | 1                                      | OAuth app client ID, defaults to [put.io web app](https://app.put.io)                       |
 | **baseURL**      | string       | [api.put.io/v2](https://api.put.io/v2) | Base URL of the API                                                                         |
 | **webAppURL**    | string       | [app.put.io](https://app.put.io)       | Base URL of the Put.io web app, used in the authentication flow                             |
-| **generateUUID** | () => string | -                                      | UUID generator function to be used for `correlationId` header, uses `uuid/v4` if not given. |
 
 ### Methods
 
