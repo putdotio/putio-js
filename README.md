@@ -1,6 +1,6 @@
 <div align="center">
   <p>
-    <img src="https://static.put.io/avatar/putio-boncuk.png" width="72">
+    <img src="https://static.put.io/images/putio-boncuk.png" width="72">
   </p>
 
   <h1>putio-js</h1>
