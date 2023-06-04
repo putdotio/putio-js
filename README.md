@@ -6,7 +6,7 @@
   <h1>putio-js</h1>
 
   <p>
-    JavaScript SDK for interacting with the <a href="https://api.put.io/v2/docs">put.io API v2.</a>
+    JavaScript SDK for interacting with the <a href="https://api.put.io/v2/docs">put.io API.</a>
   </p>
 
   <p>
