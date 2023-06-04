@@ -21,7 +21,6 @@
   </p>
 </div>
 
-
 ## Installation
 
 ```bash
@@ -72,11 +71,11 @@ MyApp.onLogout(() => {
 
 ### Options
 
-| Prop             | Type         | Default Value                          | Description                                                                                 |
-| :--------------- | :----------- | :------------------------------------- | :------------------------------------------------------------------------------------------ |
-| **clientID**     | number       | 1                                      | OAuth app client ID, defaults to [put.io web app](https://app.put.io)                       |
-| **baseURL**      | string       | [api.put.io/v2](https://api.put.io/v2) | Base URL of the API                                                                         |
-| **webAppURL**    | string       | [app.put.io](https://app.put.io)       | Base URL of the Put.io web app, used in the authentication flow                             |
+| Prop          | Type   | Default Value                          | Description                                                           |
+| :------------ | :----- | :------------------------------------- | :-------------------------------------------------------------------- |
+| **clientID**  | number | 1                                      | OAuth app client ID, defaults to [put.io web app](https://app.put.io) |
+| **baseURL**   | string | [api.put.io/v2](https://api.put.io/v2) | Base URL of the API                                                   |
+| **webAppURL** | string | [app.put.io](https://app.put.io)       | Base URL of the Put.io web app, used in the authentication flow       |
 
 ### Methods
 
