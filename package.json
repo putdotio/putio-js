@@ -66,5 +66,5 @@
     "tsc": "tsc --noEmit"
   },
   "typings": "dist/index.d.ts",
-  "version": "8.36.1"
+  "version": "8.37.0"
 }
