@@ -45,14 +45,6 @@ export type SaveAccountSettingsPayload =
       }
     }
 
-export type AccountInfoParams = {
-  download_token?: 0 | 1
-  sharing?: 0 | 1
-  features?: 0 | 1
-  intercom?: 0 | 1
-  pas?: 0 | 1
-  platform?: string
-}
 export interface IAccountInfo {
   account_active: boolean
   account_status: 'active' | 'inactive' | 'stranger'
@@ -87,6 +79,10 @@ export interface IAccountInfo {
   user_hash: string
   user_id: number
   username: string
+  warnings: {
+    callback_url_has_failed?: boolean
+    pushover_token_has_failed?: boolean
+  }
 }
 
 export interface IAccountConfirmation {
@@ -104,6 +100,15 @@ export const ACCOUNT_CLEAR_OPTION_KEYS = [
   'trash',
   'friends',
 ] as const
+
+export type AccountInfoParams = {
+  download_token?: 0 | 1
+  sharing?: 0 | 1
+  features?: 0 | 1
+  intercom?: 0 | 1
+  pas?: 0 | 1
+  platform?: string
+}
 
 export type AccountClearOptions = Record<
   typeof ACCOUNT_CLEAR_OPTION_KEYS[number],
