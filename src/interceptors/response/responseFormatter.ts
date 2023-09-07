@@ -23,6 +23,7 @@ export const createResponseFormatter: PutioAPIClientResponseInterceptorFactory =
         error_message: error.message,
         error_type: 'ERROR',
         status_code: 0,
+        extra: {},
       }
 
       if (error.response && error.response.data) {

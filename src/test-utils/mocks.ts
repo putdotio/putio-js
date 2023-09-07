@@ -38,6 +38,7 @@ export const mockPutioAPIClientError: IPutioAPIClientError = {
     error_type: 'MOCK_ERROR',
     error_message: 'MOCK_MESSAGE',
     status_code: 0,
+    extra: { foo: 'bar' },
   },
   toJSON() {
     return this.data

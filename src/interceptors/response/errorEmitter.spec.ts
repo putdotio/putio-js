@@ -30,6 +30,7 @@ describe('interceptors/response/errorEmitter', () => {
             status_code: 400,
             error_type: 'API_ERROR',
             error_message: 'Putio API Error',
+            extra: { foo: 'bar' },
           },
           headers: {},
           status: 400,

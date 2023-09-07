@@ -110,6 +110,7 @@ describe('interceptors/response/clientIPChangeEmitter', () => {
           error_type: 'API_ERROR',
           error_message: 'Putio API Error',
           status_code: 400,
+          extra: { foo: 'bar' },
         },
         headers: { 'putio-client-ip': '0.0.0.0' },
         status: 400,

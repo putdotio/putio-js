@@ -18,6 +18,7 @@ export interface IPutioAPIClientErrorData {
   error_type: string
   error_message: string
   status_code: number
+  extra: Record<string, unknown>
 }
 
 export interface IPutioAPIClientError

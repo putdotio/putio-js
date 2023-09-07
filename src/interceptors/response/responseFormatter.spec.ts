@@ -44,6 +44,7 @@ describe('interceptors/response/responseFormatter', () => {
             error_type: 'API_ERROR',
             error_message: 'Putio API Error',
             status_code: 400,
+            extra: { foo: 'bar' },
           },
           headers: {
             'x-trace-id': 'MOCK_TRACE_ID',
@@ -58,6 +59,9 @@ describe('interceptors/response/responseFormatter', () => {
           Object {
             "error_message": "Putio API Error",
             "error_type": "API_ERROR",
+            "extra": Object {
+              "foo": "bar",
+            },
             "status_code": 400,
             "x-trace-id": "MOCK_TRACE_ID",
           }
@@ -84,6 +88,7 @@ describe('interceptors/response/responseFormatter', () => {
           Object {
             "error_message": "AXIOS_ERROR_MESSAGE",
             "error_type": "ERROR",
+            "extra": Object {},
             "status_code": 502,
             "x-trace-id": undefined,
           }
@@ -97,6 +102,7 @@ describe('interceptors/response/responseFormatter', () => {
           Object {
             "error_message": "AXIOS_ERROR_MESSAGE",
             "error_type": "ERROR",
+            "extra": Object {},
             "status_code": 0,
             "x-trace-id": undefined,
           }
@@ -120,6 +126,7 @@ describe('interceptors/response/responseFormatter', () => {
           Object {
             "error_message": "AXIOS_ERROR_MESSAGE",
             "error_type": "ERROR",
+            "extra": Object {},
             "foo": "bar",
             "status_code": 400,
             "x-trace-id": undefined,
@@ -144,6 +151,9 @@ describe('interceptors/response/responseFormatter', () => {
           Object {
             "error_message": "MOCK_MESSAGE",
             "error_type": "MOCK_ERROR",
+            "extra": Object {
+              "foo": "bar",
+            },
             "status_code": 0,
           }
         `),
