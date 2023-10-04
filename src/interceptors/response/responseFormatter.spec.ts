@@ -2,6 +2,7 @@ import {
   mockPutioAPIClientError,
   mockPutioAPIClientResponse,
   createMockXMLHttpRequest,
+  mockAxiosError,
 } from '../../test-utils/mocks'
 import { IPutioAPIClientError } from '../../client/types'
 import { DEFAULT_CLIENT_OPTIONS } from '../../constants'
@@ -35,7 +36,38 @@ describe('interceptors/response/responseFormatter', () => {
   })
 
   describe('failed responses', () => {
-    it('sets error.data property correctly when the request failed with Put.io API signature', () => {
+    it('sets error.data property correctly when the request failed with client timeout error', () => {
+      const mockAxiosErrorWithTimeout = {
+        ...mockAxiosError,
+        code: 'ECONNABORTED',
+      }
+
+      const mockPutioAPIClientErrorWithTimeout = {
+        ...mockAxiosErrorWithTimeout,
+        ...mockPutioAPIClientError,
+      }
+
+      const error = {
+        ...mockPutioAPIClientErrorWithTimeout,
+        response: undefined,
+        request: undefined,
+        config: {},
+      }
+
+      responseFormatter.onRejected(error).catch(e => {
+        expect(e).toMatchInlineSnapshot(`
+          Object {
+            "error_message": "Request timed out",
+            "error_type": "ERROR",
+            "extra": Object {},
+            "status_code": 408,
+            "x-trace-id": undefined,
+          }
+        `)
+      })
+    })
+
+    it('sets error.data property correctly when the request failed with put.io API signature', () => {
       const error = {
         ...mockPutioAPIClientError,
         response: {
@@ -69,7 +101,7 @@ describe('interceptors/response/responseFormatter', () => {
       )
     })
 
-    it('sets error.data property correctly when the request failed with HTTP response but without Put.io API signature and no meaningful header config', () => {
+    it('sets error.data property correctly when the request failed with HTTP response but without put.io API signature and no meaningful header config', () => {
       const error: IPutioAPIClientError = {
         ...mockPutioAPIClientError,
         response: {
@@ -96,7 +128,7 @@ describe('interceptors/response/responseFormatter', () => {
       )
     })
 
-    it('sets error.data property correctly when the request failed without Put.io API signature', () => {
+    it('sets error.data property correctly when the request failed without put.io API signature', () => {
       responseFormatter.onRejected(mockPutioAPIClientError).catch(e =>
         expect(e).toMatchInlineSnapshot(`
           Object {
