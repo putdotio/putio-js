@@ -12,7 +12,7 @@ export const createResponseFormatter: PutioAPIClientResponseInterceptorFactory =
     body: response.data,
   }),
 
-  onRejected: (error: Error) => {
+  onRejected: (error: unknown) => {
     if (!axios.isAxiosError(error)) {
       return Promise.reject(error)
     }
@@ -24,6 +24,15 @@ export const createResponseFormatter: PutioAPIClientResponseInterceptorFactory =
         error_type: 'ERROR',
         status_code: 0,
         extra: {},
+      }
+
+      // ECONNABORTED is the code for a request that timed out in axios.
+      if (error.code === 'ECONNABORTED') {
+        errorData = {
+          ...errorData,
+          status_code: 408,
+          error_message: 'Request timed out',
+        }
       }
 
       if (error.response && error.response.data) {
