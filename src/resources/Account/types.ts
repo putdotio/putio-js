@@ -4,6 +4,7 @@ export interface IAccountSettings {
   dark_theme: boolean
   default_download_folder: number
   disable_subtitles: boolean
+  dont_autoselect_subtitles: boolean
   fluid_layout: boolean
   hide_subtitles: boolean
   history_enabled: boolean
