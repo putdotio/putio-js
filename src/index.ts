@@ -14,5 +14,5 @@ export * from './resources/Sharing/types'
 export * from './resources/Transfers/types'
 export * from './resources/User/types'
 
-export { isPutioAPIError } from './utils'
+export { isPutioAPIError, isPutioAPIErrorResponse } from './utils'
 export { PutioAPIClient as default } from './client'
