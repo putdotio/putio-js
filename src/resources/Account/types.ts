@@ -47,12 +47,9 @@ export type SaveAccountSettingsPayload =
     }
 
 export interface IAccountInfo {
-  account_active: boolean
   account_status: 'active' | 'inactive' | 'stranger'
   avatar_url: string
   can_create_sub_account: boolean
-  created_at: string
-  days_until_files_deletion: number
   disk: {
     avail: number
     used: number
@@ -62,20 +59,15 @@ export interface IAccountInfo {
   family_owner?: string
   features: Record<string, boolean>
   files_will_be_deleted_at: string | null
-  has_voucher: boolean
   is_admin: boolean
   is_eligible_for_friend_invitation: boolean
-  is_invited_friend: boolean
   is_sub_account: boolean
   mail: string
   monthly_bandwidth_usage: number
   pas?: { user_hash: string }
   password_last_changed_at: string | null
-  plan_expiration_date: string
   private_download_host_ip: string | null
   settings: IAccountSettings
-  simultaneous_download_limit: number
-  subtitle_languages: IAccountSettings['subtitle_languages']
   trash_size: number
   user_hash: string
   user_id: number
