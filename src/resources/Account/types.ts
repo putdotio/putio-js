@@ -100,6 +100,7 @@ export type AccountInfoParams = {
   features?: 0 | 1
   intercom?: 0 | 1
   pas?: 0 | 1
+  profitwell?: 0 | 1
   platform?: string
 }
 

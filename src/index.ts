@@ -1,5 +1,6 @@
 export * from './test-utils/mocks'
 export * from './client/types'
+export * from './constants'
 
 export * from './resources/Account/types'
 export * from './resources/Auth/types'
