@@ -67,15 +67,61 @@ export interface INanoPaymentRequestResponse {
   }
 }
 
+export interface IOpenNodeChargeResponse {
+  opennode: {
+    checkout_url: string
+  }
+}
+
 export type PaymentOption = {
   name: string
   disabled: boolean
   suitable_plan_types: (PlanType | 'trial')[]
   default?: boolean
-  discount_percent: Number
-  banned_countries: string[]
+  discount_percent: number
 }
 
 export interface IPaymentOptionsResponse {
   options: PaymentOption[]
+}
+
+type PaymentProvider_Paddle = {
+  plan_id: number
+  provider: 'Paddle'
+  type: 'credit-card'
+  vendor_id: number
+}
+
+type PaymentProvider_Fastspring = {
+  provider: 'Fastspring'
+  type: 'credit-card'
+  url: string
+}
+
+type PaymentProvider_OpenNode = {
+  provider: 'OpenNode'
+  type: 'cryptocurrency'
+}
+
+type PaymentProvider_AcceptNano = {
+  amount: string
+  api_host: string
+  currency: 'USD'
+  provider: 'AcceptNano'
+  state: string
+  type: 'nano'
+}
+
+export type PaymentProviderOption =
+  | PaymentProvider_AcceptNano
+  | PaymentProvider_Fastspring
+  | PaymentProvider_OpenNode
+  | PaymentProvider_Paddle
+
+export type PaymentProvider = PaymentProviderOption['provider']
+
+export type PaymentType = PaymentProviderOption['type']
+
+export interface IChangePlanResponse {
+  urls: PaymentProviderOption[]
 }

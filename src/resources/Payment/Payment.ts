@@ -3,7 +3,9 @@ import {
   IUserPaymentInfoResponse,
   IVoucherInfoResponse,
   INanoPaymentRequestResponse,
+  IOpenNodeChargeResponse,
   IPaymentOptionsResponse,
+  IChangePlanResponse,
 } from './types'
 
 export default class Payment {
@@ -54,7 +56,7 @@ export default class Payment {
     })
   }
 
-  public GetPlanChangeUrls({
+  public ChangePlan({
     planPath,
     paymentType,
     couponCode,
@@ -65,19 +67,18 @@ export default class Payment {
     couponCode?: string
     confirmationCode?: string
   }) {
-    return this.client.post(`/payment/change_plan/${planPath}`, {
-      data: {
-        payment_type: paymentType,
-        confirmation_code: confirmationCode,
+    return this.client.post<IChangePlanResponse>(
+      `/payment/change_plan/${planPath}`,
+      {
+        data: {
+          payment_type: paymentType,
+          confirmation_code: confirmationCode,
+        },
+        params: {
+          coupon_code: couponCode,
+        },
       },
-      params: {
-        coupon_code: couponCode,
-      },
-    })
-  }
-
-  public ChangePlan(args: any) {
-    return this.GetPlanChangeUrls(args)
+    )
   }
 
   public CreateNanoPaymentRequest({ planCode }: { planCode: string }) {
@@ -91,20 +92,15 @@ export default class Payment {
     )
   }
 
-  public CreateCoinbaseCharge(path: string) {
-    return this.client.post('/payment/methods/coinbase/charge', {
-      data: {
-        plan_fs_path: path,
+  public CreateOpenNodeCharge({ planPath }: { planPath: string }) {
+    return this.client.post<IOpenNodeChargeResponse>(
+      '/payment/methods/opennode/charge',
+      {
+        data: {
+          plan_fs_path: planPath,
+        },
       },
-    })
-  }
-
-  public CreateCoinbaseCheckout(path: string) {
-    return this.client.post('/payment/methods/coinbase/checkout', {
-      data: {
-        plan_fs_path: path,
-      },
-    })
+    )
   }
 
   public CancelSubscription() {
@@ -119,10 +115,6 @@ export default class Payment {
 
   public RedeemVoucher(code: string) {
     return this.client.post(`/payment/redeem_voucher/${code}`)
-  }
-
-  public VerifyFastspringPayment(reference: string) {
-    return this.client.get(`/payment/fs-confirm/${reference}`)
   }
 
   public Report(paymentIds = []) {
