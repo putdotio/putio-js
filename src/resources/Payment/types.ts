@@ -73,8 +73,51 @@ export interface IOpenNodeChargeResponse {
   }
 }
 
+type PaymentProviderPaddle = {
+  plan_id: number
+  provider: 'Paddle'
+  type: 'credit-card'
+  vendor_id: number
+}
+
+type PaymentProviderFastspring = {
+  provider: 'Fastspring'
+  type: 'credit-card'
+  url: string
+}
+
+type PaymentProviderOpenNode = {
+  provider: 'OpenNode'
+  type: 'cryptocurrency'
+  discount_percent: number
+}
+
+type PaymentProviderAcceptNano = {
+  amount: string
+  api_host: string
+  currency: 'USD'
+  provider: 'AcceptNano'
+  state: string
+  type: 'nano'
+  discount_percent: number
+}
+
+export type PaymentProvider =
+  | PaymentProviderAcceptNano
+  | PaymentProviderFastspring
+  | PaymentProviderOpenNode
+  | PaymentProviderPaddle
+
+export type PaymentProviderName = PaymentProvider['provider']
+
+export type PaymentType = PaymentProvider['type']
+
+export interface IChangePlanResponse {
+  urls: PaymentProvider[]
+}
+
 export type PaymentOption = {
-  name: string
+  name: PaymentType
   disabled: boolean
   suitable_plan_types: (PlanType | 'trial')[]
   default?: boolean
@@ -83,45 +126,4 @@ export type PaymentOption = {
 
 export interface IPaymentOptionsResponse {
   options: PaymentOption[]
-}
-
-type PaymentProvider_Paddle = {
-  plan_id: number
-  provider: 'Paddle'
-  type: 'credit-card'
-  vendor_id: number
-}
-
-type PaymentProvider_Fastspring = {
-  provider: 'Fastspring'
-  type: 'credit-card'
-  url: string
-}
-
-type PaymentProvider_OpenNode = {
-  provider: 'OpenNode'
-  type: 'cryptocurrency'
-}
-
-type PaymentProvider_AcceptNano = {
-  amount: string
-  api_host: string
-  currency: 'USD'
-  provider: 'AcceptNano'
-  state: string
-  type: 'nano'
-}
-
-export type PaymentProviderOption =
-  | PaymentProvider_AcceptNano
-  | PaymentProvider_Fastspring
-  | PaymentProvider_OpenNode
-  | PaymentProvider_Paddle
-
-export type PaymentProvider = PaymentProviderOption['provider']
-
-export type PaymentType = PaymentProviderOption['type']
-
-export interface IChangePlanResponse {
-  urls: PaymentProviderOption[]
 }
