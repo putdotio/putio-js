@@ -5,7 +5,9 @@ import {
   INanoPaymentRequestResponse,
   IOpenNodeChargeResponse,
   IPaymentOptionsResponse,
-  IChangePlanResponse,
+  IChangePlanGetResponse,
+  IChangePlanPostResponse,
+  IChangePlanRequestParams,
 } from './types'
 
 export default class Payment {
@@ -39,46 +41,35 @@ export default class Payment {
     return this.client.get('/payment/invites')
   }
 
-  public GetPlanChangeInfo({
-    planPath,
-    paymentType,
-    couponCode,
-  }: {
-    planPath: string
-    paymentType: string
-    couponCode?: string
-  }) {
-    return this.client.get(`/payment/change_plan/${planPath}`, {
-      params: {
-        coupon_code: couponCode,
-        payment_type: paymentType,
+  public ChangePlan(params: IChangePlanRequestParams) {
+    return {
+      get: () => {
+        return this.client.get<IChangePlanGetResponse>(
+          `/payment/change_plan/${params.plan_path}`,
+          {
+            params: {
+              payment_type: params.payment_type,
+              coupon_code: params.coupon_code,
+            },
+          },
+        )
       },
-    })
-  }
 
-  public ChangePlan({
-    planPath,
-    paymentType,
-    couponCode,
-    confirmationCode,
-  }: {
-    planPath: string
-    paymentType: string
-    couponCode?: string
-    confirmationCode?: string
-  }) {
-    return this.client.post<IChangePlanResponse>(
-      `/payment/change_plan/${planPath}`,
-      {
-        data: {
-          payment_type: paymentType,
-          confirmation_code: confirmationCode,
-        },
-        params: {
-          coupon_code: couponCode,
-        },
+      post: () => {
+        return this.client.post<IChangePlanPostResponse>(
+          `/payment/change_plan/${params.plan_path}`,
+          {
+            data: {
+              payment_type: params.payment_type,
+              confirmation_code: params.confirmation_code,
+            },
+            params: {
+              coupon_code: params.coupon_code,
+            },
+          },
+        )
       },
-    )
+    }
   }
 
   public CreateNanoPaymentRequest({ planCode }: { planCode: string }) {

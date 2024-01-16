@@ -112,13 +112,21 @@ export type PaymentProviderName = PaymentProvider['provider']
 
 export type PaymentType = PaymentProvider['type']
 
-export interface IChangePlanResponse {
+export interface IChangePlanRequestParams {
+  plan_path: string
+  payment_type: PaymentType
+  coupon_code?: string
+  confirmation_code?: string
+}
+
+export interface IChangePlanGetResponse {}
+
+export interface IChangePlanPostResponse {
   urls: PaymentProvider[]
 }
 
 export type PaymentOption = {
   name: PaymentType
-  disabled: boolean
   suitable_plan_types: (PlanType | 'trial')[]
   default?: boolean
   discount_percent: number
