@@ -56,7 +56,7 @@ export interface IVoucherInfoResponse {
     code: PlanCode
     group_code: PlanGroupCode
     hd_avail: PlanDiskSize
-    simulated_expiration: PlanExpirationDate
+    simulated_expiration?: PlanExpirationDate
   }
   new_remaining_days: number
 }
@@ -112,19 +112,6 @@ export type PaymentProviderName = PaymentProvider['provider']
 
 export type PaymentType = PaymentProvider['type']
 
-export interface IChangePlanRequestParams {
-  plan_path: string
-  payment_type: PaymentType
-  coupon_code?: string
-  confirmation_code?: string
-}
-
-export interface IChangePlanGetResponse {}
-
-export interface IChangePlanPostResponse {
-  urls: PaymentProvider[]
-}
-
 export type PaymentOption = {
   name: PaymentType
   suitable_plan_types: (PlanType | 'trial')[]
@@ -135,3 +122,74 @@ export type PaymentOption = {
 export interface IPaymentOptionsResponse {
   options: PaymentOption[]
 }
+
+export interface IChangePlanRequestParams {
+  plan_path: string
+  payment_type: PaymentType
+  coupon_code?: string
+  confirmation_code?: string
+}
+
+export interface IChangePlanGetResponse {
+  current_plan: {
+    plan_type?: PlanType
+    subscription_payment_provider?: PaymentProviderName
+  }
+  target_plan: {
+    price: number
+    plan_type: PlanType
+    period_days: number
+    plan_code: PlanCode
+    plan_name: PlanName
+    hd_avail: PlanDiskSize
+    simulated_expiration?: PlanExpirationDate
+    new_code: PlanCode
+    is_trial_subscription: boolean
+    subscription_trial_period?: number
+  }
+  Paddle: {
+    charge_amount: number
+    currency: string
+    next_billing_date: string
+  }
+  Fastspring: {
+    prorated_amount: number
+    refund_amount: number
+    charge_amount: number
+    currency: string
+  }
+  new_remaining_days: number
+  prorated: number
+  credit: number
+  charge_amount: boolean
+  currency: string
+  is_product_change: boolean
+  discount?: {
+    discount: number
+    type: 'percentage' | 'amount'
+  }
+}
+
+type ChangePlanURLsResponse = {
+  urls: PaymentProvider[]
+}
+
+type ChangePlanConfirmationResponse = {
+  confirmation: true
+}
+
+type ChangePlanSubscriptionUpgradeDowngradeResponse = {
+  charged_amount: string
+  next_payment: {
+    amount: string
+    billing_date: string
+  }
+}
+
+type ChangePlanEmptyResponse = {}
+
+export type IChangePlanPostResponse =
+  | ChangePlanURLsResponse
+  | ChangePlanConfirmationResponse
+  | ChangePlanSubscriptionUpgradeDowngradeResponse
+  | ChangePlanEmptyResponse

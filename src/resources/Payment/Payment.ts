@@ -43,7 +43,7 @@ export default class Payment {
 
   public ChangePlan(params: IChangePlanRequestParams) {
     return {
-      get: () => {
+      GET: () => {
         return this.client.get<IChangePlanGetResponse>(
           `/payment/change_plan/${params.plan_path}`,
           {
@@ -55,7 +55,7 @@ export default class Payment {
         )
       },
 
-      post: () => {
+      POST: () => {
         return this.client.post<IChangePlanPostResponse>(
           `/payment/change_plan/${params.plan_path}`,
           {
