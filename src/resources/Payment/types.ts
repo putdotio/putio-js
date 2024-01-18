@@ -181,9 +181,11 @@ type ChangePlanConfirmationResponse = {
 
 type ChangePlanSubscriptionUpgradeDowngradeResponse = {
   charged_amount: string
+  charged_currency: string
   next_payment: {
     amount: string
     billing_date: string
+    currency: string
   }
 }
 
