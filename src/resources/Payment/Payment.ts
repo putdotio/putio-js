@@ -41,35 +41,33 @@ export default class Payment {
     return this.client.get('/payment/invites')
   }
 
-  public ChangePlan(params: IChangePlanRequestParams) {
-    return {
-      GET: () => {
-        return this.client.get<IChangePlanGetResponse>(
-          `/payment/change_plan/${params.plan_path}`,
-          {
-            params: {
-              payment_type: params.payment_type,
-              coupon_code: params.coupon_code,
-            },
+  public ChangePlan = {
+    GET: (params: IChangePlanRequestParams) => {
+      return this.client.get<IChangePlanGetResponse>(
+        `/payment/change_plan/${params.plan_path}`,
+        {
+          params: {
+            payment_type: params.payment_type,
+            coupon_code: params.coupon_code,
           },
-        )
-      },
+        },
+      )
+    },
 
-      POST: () => {
-        return this.client.post<IChangePlanPostResponse>(
-          `/payment/change_plan/${params.plan_path}`,
-          {
-            data: {
-              payment_type: params.payment_type,
-              confirmation_code: params.confirmation_code,
-            },
-            params: {
-              coupon_code: params.coupon_code,
-            },
+    POST: (params: IChangePlanRequestParams) => {
+      return this.client.post<IChangePlanPostResponse>(
+        `/payment/change_plan/${params.plan_path}`,
+        {
+          data: {
+            payment_type: params.payment_type,
+            confirmation_code: params.confirmation_code,
           },
-        )
-      },
-    }
+          params: {
+            coupon_code: params.coupon_code,
+          },
+        },
+      )
+    },
   }
 
   public CreateNanoPaymentRequest({ planCode }: { planCode: string }) {

@@ -131,12 +131,13 @@ export interface IChangePlanRequestParams {
 }
 
 export interface IChangePlanGetResponse {
+  amount: string
   current_plan: {
     plan_type?: PlanType
     subscription_payment_provider?: PaymentProviderName
   }
   target_plan: {
-    price: number
+    price: string
     plan_type: PlanType
     period_days: number
     plan_code: PlanCode
@@ -148,19 +149,19 @@ export interface IChangePlanGetResponse {
     subscription_trial_period?: number
   }
   Paddle: {
-    charge_amount: number
+    charge_amount: string
     currency: string
     next_billing_date: string
   }
   Fastspring: {
-    prorated_amount: number
-    refund_amount: number
-    charge_amount: number
+    prorated_amount: string
+    refund_amount: string
+    charge_amount: string
     currency: string
   }
   new_remaining_days: number
-  prorated: number
-  credit: number
+  prorated: string
+  credit: string
   charge_amount: boolean
   currency: string
   is_product_change: boolean
