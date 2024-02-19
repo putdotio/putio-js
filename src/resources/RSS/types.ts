@@ -31,12 +31,22 @@ export type RSSFeedParams = Pick<
   dont_process_whole_feed: boolean
 }
 
-export type RSSFeedItem = {
+type RSSFeedItemCommon = {
   detected_date: string
   id: number
   publish_date: string
   title: string
-  is_failed: boolean
-  failure_reason: string | null
-  user_file_id: number | null
+  processed_at: string
 }
+
+export type RSSFeedItemSucceeded = RSSFeedItemCommon & {
+  is_failed: false
+  user_file_id: null | number
+}
+
+export type RSSFeedItemFailed = RSSFeedItemCommon & {
+  is_failed: true
+  failure_reason: string
+}
+
+export type RSSFeedItem = RSSFeedItemSucceeded | RSSFeedItemFailed
