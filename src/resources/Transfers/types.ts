@@ -21,6 +21,7 @@ type TransferStatus =
   | 'IN_QUEUE'
   | 'DOWNLOADING'
   | 'WAITING_FOR_COMPLETE_QUEUE'
+  | 'WAITING_FOR_DOWNLOADER'
   | 'COMPLETING'
   | 'STOPPING'
   | 'SEEDING'
