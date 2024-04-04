@@ -27,7 +27,6 @@ import DownloadLinks from '../resources/DownloadLinks/DownloadLinks'
 import Sharing from '../resources/Sharing/Sharing'
 import Config from '../resources/Config'
 import Events from '../resources/Events/Events'
-import Family from '../resources/Family'
 import File from '../resources/Files/File'
 import Files from '../resources/Files/Files'
 import FriendInvites from '../resources/FriendInvites/FriendInvites'
@@ -55,7 +54,6 @@ export class PutioAPIClient {
   public Sharing: Sharing
   public Config: Config
   public Events: Events
-  public Family: Family
   public Files: Files
   public File: File
   public Friends: Friends
@@ -84,7 +82,6 @@ export class PutioAPIClient {
     this.File = new File(this)
     this.Friends = new Friends(this)
     this.FriendInvites = new FriendInvites(this)
-    this.Family = new Family(this)
     this.OAuth = new OAuth(this)
     this.Payment = new Payment(this)
     this.RSS = new RSS(this)
