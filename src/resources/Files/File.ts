@@ -159,14 +159,6 @@ export default class File {
     })
   }
 
-  public CreatePublicLink(fileId: string) {
-    return this.client.post(`/files/${fileId}/share_public`)
-  }
-
-  public RevokePublicLink(id: number) {
-    return this.client.delete(`/files/public/list/${id}`)
-  }
-
   public FindNextFile(fileId: number, fileType: string) {
     return this.client.get(`/files/${fileId}/next-file`, {
       params: { file_type: fileType },
