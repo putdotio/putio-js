@@ -8,28 +8,6 @@ export default class File {
     this.client = client
   }
 
-  public Public(
-    oauthToken: string,
-    {
-      mp4StatusParent = 1,
-      videoMetadataParent = 1,
-      codecsParent = 1,
-      mediaInfoParent = 1,
-    } = {},
-  ) {
-    return this.client.get('/files/public', {
-      params: {
-        codecs_parent: codecsParent,
-        media_info_parent: mediaInfoParent,
-        mp4_status_parent: mp4StatusParent,
-        mp4_stream_url_parent: 1,
-        oauth_token: oauthToken,
-        stream_url_parent: 1,
-        video_metadata_parent: videoMetadataParent,
-      },
-    })
-  }
-
   public Download(fileId: number) {
     return this.client.get(`/files/${fileId}/download`)
   }
