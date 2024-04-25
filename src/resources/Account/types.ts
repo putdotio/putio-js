@@ -65,6 +65,7 @@ export interface IAccountInfo {
   mail: string
   monthly_bandwidth_usage: number
   pas?: { user_hash: string }
+  push_token?: string
   password_last_changed_at: string | null
   private_download_host_ip: string | null
   settings: IAccountSettings
@@ -96,6 +97,7 @@ export const ACCOUNT_CLEAR_OPTION_KEYS = [
 
 export type AccountInfoParams = {
   download_token?: 0 | 1
+  push_token?: 0 | 1
   sharing?: 0 | 1
   features?: 0 | 1
   intercom?: 0 | 1
